@@ -210,9 +210,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         Health -= dmg;
-
-        // TODO: sets the killer to the one who shot the bullet,
-        //		 not needed right now as we don't need this in LMS mode.
+        
         if (Health == 0)
         {
             if (GameManager.PlayerKilled != null)
@@ -220,9 +218,8 @@ public class PlayerController : MonoBehaviour
             // Desaturate
             StartCoroutine(FadeColor(2));
             _isRunning = false;
-            // TODO: Disable team indicator
             _teamC.DisableTeamIndication();
-
+            gameObject.layer = LayerMask.NameToLayer("PlayerDead");
         }
     }
 

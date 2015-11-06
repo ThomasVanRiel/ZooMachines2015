@@ -18,8 +18,8 @@ TagManager:
   - Tree
   - IgnorePlayer
   - BlockOnlyPlayer
-  - 
-  - 
+  - Floor
+  - PlayerDead
   - 
   - 
   - 

@@ -614,7 +614,7 @@ GameObject:
   - 33: {fileID: 3378296}
   - 65: {fileID: 6539694}
   - 23: {fileID: 2361606}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6532,6 +6532,9 @@ MonoBehaviour:
   - {fileID: 11425572, guid: 733bced9cbabbc144b4ed13588584f11, type: 2}
   PickupParticlesPrefab: {fileID: 197544, guid: 9a6f1a616e4e69149af6ca4475d32ab6,
     type: 2}
+  SingleUse: 0
+  Cooldown: 30
+  Model: {fileID: 0}
 --- !u!114 &11437670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6550,6 +6553,9 @@ MonoBehaviour:
   - {fileID: 11425572, guid: 733bced9cbabbc144b4ed13588584f11, type: 2}
   PickupParticlesPrefab: {fileID: 197544, guid: 9a6f1a616e4e69149af6ca4475d32ab6,
     type: 2}
+  SingleUse: 0
+  Cooldown: 30
+  Model: {fileID: 0}
 --- !u!114 &11472626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6568,6 +6574,9 @@ MonoBehaviour:
   - {fileID: 11425572, guid: 733bced9cbabbc144b4ed13588584f11, type: 2}
   PickupParticlesPrefab: {fileID: 197544, guid: 9a6f1a616e4e69149af6ca4475d32ab6,
     type: 2}
+  SingleUse: 0
+  Cooldown: 30
+  Model: {fileID: 0}
 --- !u!114 &11489938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6586,6 +6595,9 @@ MonoBehaviour:
   - {fileID: 11425572, guid: 733bced9cbabbc144b4ed13588584f11, type: 2}
   PickupParticlesPrefab: {fileID: 197544, guid: 9a6f1a616e4e69149af6ca4475d32ab6,
     type: 2}
+  SingleUse: 0
+  Cooldown: 30
+  Model: {fileID: 0}
 --- !u!114 &11491264
 MonoBehaviour:
   m_ObjectHideFlags: 1
