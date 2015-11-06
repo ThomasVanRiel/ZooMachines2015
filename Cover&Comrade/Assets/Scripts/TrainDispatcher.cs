@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TrainDispatcher : MonoBehaviour
 {
     public Train Train;
-    public Vector3 TrainDimentions = new Vector3(2.5f, 5f, 14f); 
+    public Vector3 TrainDimentions = new Vector3(2.5f, 5f, 14f);
     public int PoolSize = 1;
 
     public bool DispatchTrainAtStart = false;

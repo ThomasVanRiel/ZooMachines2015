@@ -30,6 +30,7 @@ public class PickupCrate : MonoBehaviour
             if (scr != null)
             {
                 scr.SetWeapon(GetRandomWeapon());
+                Destroy(gameObject);
             }
         }
     }

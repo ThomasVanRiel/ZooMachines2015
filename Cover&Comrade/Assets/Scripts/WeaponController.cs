@@ -20,11 +20,12 @@ public class WeaponController : MonoBehaviour
     {
         if (_equippedWeapon != null)
         {
-            Destroy(_equippedWeapon);
+            DestroyImmediate(_equippedWeapon);
         }
 
         _equippedWeapon = Instantiate(weaponToEquip, WeaponHold.position, WeaponHold.rotation) as Weapon;
         _equippedWeapon.transform.parent = WeaponHold;
+
     }
 
     public void OnTriggerHold()
