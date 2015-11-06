@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
-	public Transform[] spawnPositions;
+	public LevelController level;
 	public GameObject playerPrefab; // the player prefab to spawn
 
 	private GameMode _gameMode;
@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour {
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.CalculateAmountOfMice();; i++) {
-			Transform spawnPos = spawnPositions[nextSpawn++];
+			Transform spawnPos = level.spawnPositions[nextSpawn++];
 #else
-		foreach (Transform spawnPos in spawnPositions) {
+		foreach (Transform spawnPos in level.spawnPositions) {
 #endif
 			GameObject playerObject = GameObject.Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 			PlayerController player = playerObject.GetComponent<PlayerController>();
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 			players.Add(player);
 
 #if UNITY_EDITOR_WIN
-			if (nextSpawn > spawnPositions.Length) {
+			if (nextSpawn > level.spawnPositions.Length) {
 				nextSpawn = 0;
 			}
 #endif
