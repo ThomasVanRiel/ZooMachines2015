@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
 
 	public PlayerController SpawnPlayer(int playerID) {
 		Transform spawnPos = _level.spawnPositions[_nextSpawn++];
-		if (_nextSpawn > _level.spawnPositions.Length)
+		if (_nextSpawn >= _level.spawnPositions.Length)
 			_nextSpawn = 0;
 
 		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
