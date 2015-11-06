@@ -134,6 +134,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
+
     public void ClearBulletTrail()
     {
         if (gameObject.activeSelf && _tr != null)

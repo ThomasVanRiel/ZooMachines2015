@@ -19,7 +19,8 @@ public class CameraHandler : MonoBehaviour
 
     void Start()
     {
-        PlayerController[] ps = GameObject.FindObjectsOfType<PlayerController>();
+        //PlayerController[] ps = GameObject.FindObjectsOfType<PlayerController>();
+        var ps = GameObject.FindObjectOfType<GameManager>().Players();
         foreach (var item in ps)
         {
             PlayerList.Add(item);
@@ -87,4 +88,11 @@ public class CameraHandler : MonoBehaviour
         transform.rotation = Quaternion.Euler(newRotation);
 
     }
+
+    public void SetPlayerList(List<PlayerController> pl)
+    {
+        PlayerList = new List<PlayerController>();
+        PlayerList = pl;
+    }
+
 }
