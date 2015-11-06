@@ -10,11 +10,7 @@ public class LMSMode : GameMode {
 
 	public void PlayerKilled(PlayerController killer, PlayerController killed)
 	{
-        // TODO: Fix - Temp disabled when passing through null.
-	    if (killed == null || killer == null)
-	        return;
-
-		if (_players.Contains(killed))
+		if (killed != null && _players.Contains(killed))
 			_players.Remove(killed);
 		else
 			Debug.Log("killed player does not exist!");
