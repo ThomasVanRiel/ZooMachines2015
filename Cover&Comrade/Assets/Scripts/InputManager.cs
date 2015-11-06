@@ -9,31 +9,29 @@ using RawInputSharp;
 public class InputManager : MonoBehaviour
 {
 #if UNITY_EDITOR_WIN
-    RawMouseDriver.RawMouseDriver mousedriver;
-    private RawMouse[] mice;
+    private RawMouseDriver.RawMouseDriver _mousedriver;
+    private RawMouse[] _mice;
 
-    private Vector2[] move;
+    private Vector2[] _move;
     private const int NUM_MICE = 10;
 
     // Use this for initialization
     void Start()
     {
-        mousedriver = new RawMouseDriver.RawMouseDriver();
-        mice = new RawMouse[NUM_MICE];
-
-        move = new Vector2[NUM_MICE];
+        Refresh();
     }
 
     void Update()
     {
         // Loop through all the connected mice
-        for (int i = 0; i < mice.Length; i++)
+        for (int i = 0; i < _mice.Length; i++)
         {
             try
             {
-                mousedriver.GetMouse(i, ref mice[i]);
+                _mousedriver.GetMouse(i, ref _mice[i]);
                 // Cumulative movement
-                move[i] += new Vector2(mice[i].XDelta, -mice[i].YDelta);
+                _move[i] += new Vector2(_mice[i].XDelta, -_mice[i].YDelta);
+                //Debug.Log(_mice[i].Name);
             }
             catch { }
         }
@@ -42,17 +40,29 @@ public class InputManager : MonoBehaviour
     void OnGUI()
     {
         GUILayout.Label("Connected Mice:");
-        for (int i = 0; i < mice.Length; i++)
+        for (int i = 0; i < _mice.Length; i++)
         {
-            if (mice[i] != null)
-                GUILayout.Label("Mouse[" + i.ToString() + "] : " + move[i] + mice[i].Buttons[0] + mice[i].Buttons[1]);
+            if (_mice[i] != null)
+                GUILayout.Label("Mouse[" + i.ToString() + "] : " + _move[i] + _mice[i].Buttons[0] + _mice[i].Buttons[1]);
         }
     }
     
     void OnApplicationQuit()
     {
         // Clean up
-        mousedriver.Dispose();
+        _mousedriver.Dispose();
     }
 #endif
+
+    public void Refresh()
+    {
+#if UNITY_EDITOR_WIN
+        if (_mousedriver != null)
+            _mousedriver.Dispose();
+
+        _mousedriver = new RawMouseDriver.RawMouseDriver();
+        _mice = new RawMouse[NUM_MICE];
+        _move = new Vector2[NUM_MICE];
+#endif
+    }
 }
