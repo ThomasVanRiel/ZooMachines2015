@@ -249,6 +249,7 @@ MonoBehaviour:
   MyProjectile: {fileID: 11436408, guid: 535193be9796a3c42a46ce405ef9544a, type: 2}
   TimeBetweenShots: 100
   MuzzleVelocity: 35
+  DamagePerProjectile: 1
   BurstCount: 3
   Shell: {fileID: 460596, guid: aa30404f5c88b9840b53712226ef0e2c, type: 2}
   ShellEjection: {fileID: 451726}
