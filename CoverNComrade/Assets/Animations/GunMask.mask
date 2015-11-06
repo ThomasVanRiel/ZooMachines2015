@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1011 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: GunMask
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 1
+  - m_Path: Armature/hip
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/chest.001
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/chest.001/chest.001_end
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder/upper arm
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder/upper arm/lower arm
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder/upper arm/lower arm/lower arm_end
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder.001
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder.001/upper arm.001
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder.001/upper arm.001/lower arm.001
+    m_Weight: 1
+  - m_Path: Armature/hip/stomach/chest/shoulder.001/upper arm.001/lower arm.001/lower
+      arm.001_end
+    m_Weight: 1
+  - m_Path: Armature/hip/upper leg
+    m_Weight: 0
+  - m_Path: Armature/hip/upper leg/lower leg
+    m_Weight: 0
+  - m_Path: Armature/hip/upper leg/lower leg/lower leg_end
+    m_Weight: 0
+  - m_Path: Armature/hip/upper leg.001
+    m_Weight: 0
+  - m_Path: Armature/hip/upper leg.001/lower leg.001
+    m_Weight: 0
+  - m_Path: Armature/hip/upper leg.001/lower leg.001/lower leg.001_end
+    m_Weight: 0
+  - m_Path: M_Character
+    m_Weight: 1
