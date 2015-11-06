@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
-        _weaponController.PlayerColor = PlayerColor;
         _transf = transform;
         _mat = GetComponent<Renderer>().material;
 

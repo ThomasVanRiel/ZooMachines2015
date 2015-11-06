@@ -28,6 +28,7 @@ public class Weapon : MonoBehaviour
     private bool _triggerReleasedSinceLastShot = true;
     private int _shotsRemainingInBurst;
     private Color _trailColor = Color.white;
+    private WeaponController _wpc = null;
 
     void Start()
     {
@@ -110,20 +111,26 @@ public class Weapon : MonoBehaviour
         Projectile p = _poolList[_poolIndex++];
         _poolIndex = _poolIndex % PoolSize;
 
+        if (!p.gameObject.activeSelf)
+            p.gameObject.SetActive(true);
+
         p.transform.position = position;
         p.transform.rotation = rotation;
         p.SetDamage(DamagePerProjectile);
         p.SetSpeed(MuzzleVelocity);
 
-        TrailRenderer tr = p.GetComponent<TrailRenderer>();
-        p.TrailColor = _trailColor;
-        float t = tr.time;
-        tr.time = 0;
-        tr.time = t;
+        if (_wpc != null)
+            p.SetTrailColor(_wpc._teamController.TeamColor);
+        else
+            Debug.Log("WPC was NULL!");
+        p.ClearBulletTrail();
 
-        if (!p.gameObject.activeSelf)
-            p.gameObject.SetActive(true);
 
         return p;
+    }
+
+    public void SetWeaponControllerReference(WeaponController newWPC)
+    {
+       _wpc = newWPC;
     }
 }

@@ -28,7 +28,6 @@ public class TeamController : MonoBehaviour
 	void Update ()
     {
 	    float currentScroll = _input.GetMouseScroll();
-        Debug.Log(Mathf.Abs(_oldScrollValue - currentScroll));
 	    if (Mathf.Abs(_oldScrollValue - currentScroll) >= ScrollDifference)
 	    {
 	        if (_oldScrollValue > currentScroll)
