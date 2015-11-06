@@ -51,13 +51,13 @@ public class Weapon : MonoBehaviour
 				Projectile newProjectile = Instantiate(MyProjectile, ProjectileSpawn[i].position, ProjectileSpawn[i].rotation) as Projectile;
 				newProjectile.SetSpeed(MuzzleVelocity);
                 newProjectile.SetDamage(DamagePerProjectile);
+			
+				// Create bullet case ejection (for each bullet fired)
+				if (Shell != null)
+				{
+					Instantiate(Shell, ShellEjection.position, ShellEjection.rotation);
+				}
 			}
-
-			// Create bullet case ejection
-			if (Shell != null)
-			{
-                Instantiate(Shell, ShellEjection.position, ShellEjection.rotation);
-            }
 		}
 	}
 
