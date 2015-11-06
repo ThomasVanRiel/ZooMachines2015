@@ -11,6 +11,7 @@ GameObject:
   - 223: {fileID: 22312668}
   - 114: {fileID: 11454544}
   - 114: {fileID: 11435780}
+  - 114: {fileID: 11491822}
   m_Layer: 5
   m_Name: CursorUI
   m_TagString: Untagged
@@ -129,6 +130,17 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
   m_ForceModuleActive: 0
+--- !u!114 &11491822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 165234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54cd6ba505dc5f14d896befd45ba1972, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!223 &22312668
 Canvas:
   m_ObjectHideFlags: 1
