@@ -132,6 +132,6 @@ public class Projectile : MonoBehaviour
         _tr.time = 0;
         yield return null;
         _tr.time = t;
-        Debug.Log("Trail reset!");
+        //Debug.Log("Trail reset!");
     }
 }

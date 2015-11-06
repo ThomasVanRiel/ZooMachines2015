@@ -4,6 +4,7 @@ using System.Collections;
 public class PickupCrate : MonoBehaviour
 {
     public Weapon[] Weapons;
+    public GameObject PickupParticlesPrefab;
 
     void Start()
     {
@@ -30,6 +31,9 @@ public class PickupCrate : MonoBehaviour
             if (scr != null)
             {
                 scr.SetWeapon(GetRandomWeapon());
+                GameObject p = Instantiate(PickupParticlesPrefab, scr.transform.position + new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+                p.transform.SetParent(scr.transform);
+                Destroy(p, 4);
                 Destroy(gameObject);
             }
         }

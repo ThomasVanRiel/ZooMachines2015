@@ -313,7 +313,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: -9.10262012, y: 0, z: -20.9439259}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421316}
@@ -939,6 +939,8 @@ MonoBehaviour:
   - {fileID: 11448892, guid: a8d4951d382d4b94e9a42f3838a101e4, type: 2}
   - {fileID: 11455316, guid: 24fa3e30f2239eb49b505b25c806a217, type: 2}
   - {fileID: 11425572, guid: 733bced9cbabbc144b4ed13588584f11, type: 2}
+  PickupParticlesPrefab: {fileID: 197544, guid: 9a6f1a616e4e69149af6ca4475d32ab6,
+    type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
