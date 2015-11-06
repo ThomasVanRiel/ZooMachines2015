@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		}
 
-		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
+		GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		_level = levelObject.GetComponent<LevelController>();
 		_gameMode.Setup(this, InputManager.AmountOfMice);
 	}
