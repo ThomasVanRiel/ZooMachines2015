@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
 
         _tr = GetComponent<TrailRenderer>();
 
-        Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.1f, CollisionMask);
+        Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.2f, CollisionMask);
         if (initialCollisions.Length > 0)
         {
             OnHitObject(initialCollisions[0], transform.position);
@@ -100,6 +100,13 @@ public class Projectile : MonoBehaviour
             OnHitObject(hit.collider, hit.point);
         }
 
+        Collider[] c = Physics.OverlapSphere(transform.position, 0.5f, CollisionMask, QueryTriggerInteraction.UseGlobal);
+        if (c.Length > 0)
+            foreach (var item in c)
+            {
+                OnHitObject(item, item.gameObject.transform.position);
+            }
+
     }
 
     void CheckBounceCollisions(float moveDistance)
@@ -130,15 +137,25 @@ public class Projectile : MonoBehaviour
         // Damage object HERE
         if (c != null)
         {
+            // IF PLAYER
             var scr = c.gameObject.GetComponent<PlayerController>();
             if (scr != null && scr.Health > 0 && scr.gameObject.GetComponent<TeamController>().CurrentTeam != _team)
             {
                 GameObject p = Instantiate(PlayerShotParticlesPrefab, transform.position, transform.rotation) as GameObject;
-                p.transform.localScale = new Vector3(3, 3, 3);
                 Destroy(p, 3);
                 scr.TakeDamage(_damage, _owner);
 
                 Destroy(gameObject);
+                return;
+            }
+
+            // IF TREE
+            var tree = c.gameObject.GetComponent<Rigidbody>();
+            if (tree != null)
+            {
+                Vector3 dir = (tree.transform.position - gameObject.transform.position).normalized;
+                tree.AddForce(dir * Random.Range(2, 6), ForceMode.Impulse);
+                tree.AddTorque(Vector3.up * Random.Range(-3, 4));
             }
         }
     }

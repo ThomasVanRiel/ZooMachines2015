@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   BounceMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1304,7 +1304,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: CollisionMask.m_Bits
-      value: 256
+      value: 1280
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
