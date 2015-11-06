@@ -327,6 +327,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06859a415fad78a4f90e85d77e3f77dd, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &974715601 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 192172, guid: b29c6c2755aef3d41bfc4601fcdc67a0, type: 2}
+  m_PrefabInternal: {fileID: 167217042}
 --- !u!1001 &1224146346
 Prefab:
   m_ObjectHideFlags: 0
@@ -468,6 +472,10 @@ Prefab:
       propertyPath: CursorUI
       value: 
       objectReference: {fileID: 1224146347}
+    - target: {fileID: 11426922, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
+      propertyPath: LevelPrefab
+      value: 
+      objectReference: {fileID: 974715601}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
   m_IsPrefabParent: 0
