@@ -8,6 +8,7 @@ public interface IInputReceiver
     Vector3 GetMousePosition();
     float GetMouseX();
     float GetMouseY();
+    float GetMouseScroll();
     bool GetMouseButton(int button);
     bool GetMouseButtonDown(int button);
     bool GetMouseButtonUp(int button);

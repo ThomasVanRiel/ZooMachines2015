@@ -26,6 +26,11 @@ public class MouseInputReceiver : MonoBehaviour, IInputReceiver
         return InputManager.GetMouseY(PlayerID);
     }
 
+    public float GetMouseScroll()
+    {
+        return InputManager.GetMouseScroll(PlayerID);
+    }
+
     public bool GetMouseButton(int button)
     {
         return InputManager.GetMouseButton(button, PlayerID);
