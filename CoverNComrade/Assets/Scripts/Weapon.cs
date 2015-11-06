@@ -63,7 +63,7 @@ public class Weapon : MonoBehaviour
             for (int i = 0; i < ProjectileSpawn.Length; ++i)
             {
                 _nextShotTime = Time.time + TimeBetweenShots / 1000;
-                PrepareProjectile(ProjectileSpawn[i].position, ProjectileSpawn[i].rotation);
+                PrepareProjectile(ProjectileSpawn[i].position, _wpc.transform.rotation);
                 //Projectile newProjectile = Instantiate(MyProjectile, ProjectileSpawn[i].position, ProjectileSpawn[i].rotation) as Projectile;
                 //newProjectile.SetSpeed(MuzzleVelocity);
                 //newProjectile.SetDamage(DamagePerProjectile);

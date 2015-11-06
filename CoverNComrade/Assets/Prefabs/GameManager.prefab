@@ -34,7 +34,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &180366
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +100,8 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 0}
   InfoUI: {fileID: 118030}
+  Level: {fileID: 0}
+  ModeChoice: 0
 --- !u!114 &11428790
 MonoBehaviour:
   m_ObjectHideFlags: 1
