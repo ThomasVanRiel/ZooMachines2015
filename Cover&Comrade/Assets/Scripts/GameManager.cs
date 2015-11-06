@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 		// TODO: in case number of mice is higher than the number of spawns,
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
-		for (int i = 0; i < InputManager.CalculateAmountOfMice();; i++) {
+		for (int i = 0; i < InputManager.AmountOfMice; i++) {
 			Transform spawnPos = level.spawnPositions[nextSpawn++];
 #else
 		foreach (Transform spawnPos in level.spawnPositions) {
