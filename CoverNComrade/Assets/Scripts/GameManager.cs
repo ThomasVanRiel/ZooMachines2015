@@ -1,5 +1,7 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 
 public class GameManager : MonoBehaviour {
 	public LevelController Level;
@@ -12,11 +14,33 @@ public class GameManager : MonoBehaviour {
 	public static PlayerKilledDelegate playerKilled;
 
 	void Start () {
-		List<PlayerController> players = new List<PlayerController>();
+		StartCoroutine(Setup());
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (_gameMode != null && _gameMode.IsGameOver()) {
+			Debug.Log("Game is over!");
+			Debug.LogFormat("Winner is {0}", _gameMode.Winner());
 
+			// TODO: ends the game here and display the winner
+		}
+	}
+
+	void Destroy() {
+		playerKilled -= _gameMode.PlayerKilled;
+	}
+
+	IEnumerator Setup() {
+		while (InputManager.AmountOfMice == 0) {
+			Debug.LogWarning("no mouse detected, waiting");
+			yield return new WaitForSeconds(0.5f);
+		}
+		
+		List<PlayerController> players = new List<PlayerController>();
 		int mouseID = 0;
 #if UNITY_EDITOR_WIN
-		// TODO: in case number of mice is higher than the number of spawns,
+		// TODO: in case there are more mice is than spawn points,
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.AmountOfMice; i++) {
@@ -37,23 +61,11 @@ public class GameManager : MonoBehaviour {
 				nextSpawn = 0;
 			}
 #endif
+			
+			yield return null;
 		}
 
 		_gameMode = new LMSMode(players);
 		playerKilled += _gameMode.PlayerKilled;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (_gameMode != null && _gameMode.IsGameOver()) {
-			Debug.Log("Game is over!");
-			Debug.LogFormat("Winner is {0}", _gameMode.Winner());
-
-			// TODO: ends the game here and display the winner
-		}
-	}
-
-	void Destroy() {
-		playerKilled -= _gameMode.PlayerKilled;
 	}
 }

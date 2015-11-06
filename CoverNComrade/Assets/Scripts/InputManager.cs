@@ -88,6 +88,11 @@ public class InputManager : MonoBehaviour
         // Clean up
         _mousedriver.Dispose();
     }
+#else
+	void Update() {
+		if (AmountOfMice == 0)
+			CalculateAmountOfMice();
+	}
 #endif
 
 
