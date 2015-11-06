@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
 	public Projectile MyProjectile;
 	public float TimeBetweenShots = 100;
 	public float MuzzleVelocity = 35;
+    public int DamagePerProjectile = 1;
 
     [Tooltip("The number of projectiles fired when in burst mode")]
 	public int BurstCount = 3;	// number of projectiles fired when in burst mode
@@ -49,6 +50,7 @@ public class Weapon : MonoBehaviour
 				_nextShotTime = Time.time + TimeBetweenShots / 1000;
 				Projectile newProjectile = Instantiate(MyProjectile, ProjectileSpawn[i].position, ProjectileSpawn[i].rotation) as Projectile;
 				newProjectile.SetSpeed(MuzzleVelocity);
+                newProjectile.SetDamage(DamagePerProjectile);
 			}
 
 			// Create bullet case ejection

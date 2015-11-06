@@ -98,14 +98,12 @@ public class InputManager : MonoBehaviour
             _mouseDown[b] = new bool[NUM_MICE];
             _mouseUp[b] = new bool[NUM_MICE];
         }
-        
-#else
-        AmountOfMice = 1;
 #endif
     }
 
     private int CalculateAmountOfMice()
     {
+#if UNITY_EDITOR_WIN
         AmountOfMice = 0;
         for (int i = 0; i < _mice.Length; i++)
         {
@@ -118,6 +116,9 @@ public class InputManager : MonoBehaviour
             catch { }
         }
 
+#else
+        AmountOfMice = 1;
+#endif
         return AmountOfMice;
     }
 
@@ -245,6 +246,9 @@ public class InputManager : MonoBehaviour
 
     private static bool IsValidMouse(int id)
     {
+        if (AmountOfMice == 0)
+            return false;
+
         if (id >= AmountOfMice)
         {
             Debug.LogWarning("InputManager.IsValidMouse() - mouse " + id + " is not a recognised id.");
