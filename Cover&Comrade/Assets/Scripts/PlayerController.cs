@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public const int PlayerMaxHealth = 3;
 
     // Player's current health.
-    private int _health;
+    private int _health = 1;
     public int Health
     {
         get
@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        ProcessShooting();
+		if (_weaponController != null)
+			ProcessShooting();
     }
 
     // Move moves the player to the given controller
