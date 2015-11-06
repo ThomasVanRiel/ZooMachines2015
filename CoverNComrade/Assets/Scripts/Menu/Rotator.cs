@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Rotator : MonoBehaviour {
 
+    public float RotationPerSec = 90.0f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -10,6 +12,6 @@ public class Rotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        transform.Rotate(Vector3.up, RotationPerSec * Time.deltaTime);
 	}
 }
