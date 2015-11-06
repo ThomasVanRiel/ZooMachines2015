@@ -166,6 +166,7 @@ MonoBehaviour:
   BurstCount: 3
   Shell: {fileID: 460596, guid: aa30404f5c88b9840b53712226ef0e2c, type: 2}
   ShellEjection: {fileID: 401558}
+  PoolSize: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -176,6 +177,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: TimeBetweenShots
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BurstCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
