@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(IInputReceiver))]
 public class PlayerController : MonoBehaviour {
 
 	// PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
 	public const int PlayerMaxHealth = 3;
 
-    public int MouseID;
-
 	// Player's current health.
 	private int _health;
-	public int health {
+	public int Health {
 		get {
 			return _health;
 		}
@@ -23,35 +23,41 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	public float velocity = 1.0f;
+	public float Velocity = 1.0f;
 	
 	private Rigidbody _rb;
 
+    private IInputReceiver _input;
+
 	// TODO: Equip a WeaponController to the player controller
 	// TODO: Input for the player controller
+    // TODO: Subscribe to GameManager player die event
 
-	public void Start() {
-		this._rb = GetComponent<Rigidbody>();
+	public void Start()
+    {
+		_rb = GetComponent<Rigidbody>();
+	    _input = GetComponent<IInputReceiver>();
 	}
 	
-	public void FixedUpdate() {
-		// TODO: makes the player move following the player's mouse cursor
-		float moveX = Input.GetAxisRaw("Horizontal");
-		float moveY = Input.GetAxisRaw("Vertical");
+	public void FixedUpdate()
+    {
+		float moveX = _input.GetMouseX();
+		float moveY = _input.GetMouseY();
 
 		this.Move(new Vector3(moveX, 0, moveY));
 	}
 
-	public void Update() {
-		// TODO: gets the input from the player's mouse and makes the appropriate action
-		if (Input.GetKey(KeyCode.Space))
-			this.Shoot();
+	public void Update()
+    {
+		if (_input.GetMouseButtonDown(0))
+			Shoot();
 	}
 
 	// Move moves the player to the given controller
-	public void Move(Vector3 dir) {
+	public void Move(Vector3 dir)
+    {
 		// TODO: makes the player move
-		this._rb.velocity = dir * this.velocity * Time.fixedDeltaTime;
+		_rb.velocity = dir * Velocity * Time.fixedDeltaTime;
 	}
 
 	// Shoot makes the player shoot to the current direction he's facing
@@ -61,12 +67,14 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// TakeDamage makes the player takes a given amount of damage
-	public void TakeDamage(int dmg) {
-		this.health -= dmg;
+	public void TakeDamage(int dmg)
+    {
+		Health -= dmg;
 	}
 
 	// IsAlive returns whether or not the player is still alive.
-	public bool IsAlive() {
-		return this.health > 0;
+	public bool IsAlive()
+    {
+		return Health > 0;
 	}
 }
