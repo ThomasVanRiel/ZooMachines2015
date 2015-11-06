@@ -61,7 +61,7 @@ public class CameraHandler : MonoBehaviour
         }
 
         bool cq = (largestDist < Offset) ? true : false;
-        float newOffset = Offset + ((largestDist - Offset) * ((cq) ? 0.8f : 0.35f));
+        float newOffset = Offset + ((largestDist - Offset) * ((cq) ? 0.6f : 0.5f));
 
         _dof.focalLength = Mathf.Abs(Offset - 1);
 

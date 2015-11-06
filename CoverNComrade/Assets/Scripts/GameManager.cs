@@ -10,21 +10,23 @@ public class GameManager : MonoBehaviour {
 	public GameObject CursorUI;
 	public GameObject InfoUI;
 
+	private CameraHandler _cam;
 	private LevelController _level;
-	private PlayerController[] _players;
+	private Dictionary<PlayerController, int> _players;
 	private GameMode _gameMode;
+	private int _nextSpawn;
 
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
 	public static PlayerKilledDelegate PlayerKilled;
-
-	public PlayerController[] Players() {
-		return _players;
-	}
 
 	void Start () {
 		InfoUI.SetActive(false);
 		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
 		_level = levelObject.GetComponent<LevelController>();
+		_cam = Camera.main.GetComponent<CameraHandler>();
+		_gameMode = new LMSMode();
+		_players = new Dictionary<PlayerController, int> ();
+		PlayerKilled += _gameMode.PlayerKilled;
 
 		StartCoroutine(Setup());
 	}
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
 			InfoUI.SetActive(true);
-			InfoUI.GetComponent<Text>().text = string.Format("{0} won", _gameMode.Winner());
+			InfoUI.GetComponent<Text>().text = string.Format("Player {0} won", _gameMode.Winner() + 1);
 		}
 	}
 
@@ -46,43 +48,29 @@ public class GameManager : MonoBehaviour {
 			Debug.LogWarning("no mouse detected, waiting");
 			yield return new WaitForSeconds(0.5f);
 		}
-		
-		List<PlayerController> players = new List<PlayerController>();
-		int mouseID = 0;
-#if UNITY_EDITOR_WIN
-		// TODO: in case there are more mice is than spawn points,
-		//		 we need to properly place the new player.
-		int nextSpawn = 0;
-		for (int i = 0; i < InputManager.AmountOfMice; i++) {
-			Transform spawnPos = _level.spawnPositions[nextSpawn++];
-			mouseID = i;
-#else
-		foreach (Transform spawnPos in _level.spawnPositions) {
-#endif
-			GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
-			PlayerController player = playerObject.GetComponent<PlayerController>();
-			playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
-			playerObject.GetComponent<MouseInputReceiver>().ID = mouseID;
-			playerObject.name = string.Format("Player {0}", mouseID + 1);
 
-			players.Add(player);
+		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
+		_level = levelObject.GetComponent<LevelController>();
+		_gameMode.Setup(this, InputManager.AmountOfMice);
+	}
 
-#if UNITY_EDITOR_WIN
-			if (nextSpawn > _level.spawnPositions.Length) {
-				nextSpawn = 0;
-			}
-#endif
-			
-			yield return null;
+	public PlayerController SpawnPlayer(int id) {
+		Transform spawnPos = _level.spawnPositions[_nextSpawn++];
+		if (_nextSpawn > _level.spawnPositions.Length)
+			_nextSpawn = 0;
+
+		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
+		PlayerController player = playerObject.GetComponent<PlayerController>();
+		playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
+		playerObject.GetComponent<MouseInputReceiver>().ID = id;
+		playerObject.name = string.Format("Player {0}", id + 1);
+
+		_players[player] = id;
+
+		if (_cam != null) {
+			_cam.SetPlayerList(new List<PlayerController>(_players.Keys));
 		}
 
-        // give playerlist to the camera, so it can follow all players
-        CameraHandler cam = Camera.main.gameObject.GetComponent<CameraHandler>();
-	    if (cam != null)
-            cam.SetPlayerList(players);
-		_players = players.ToArray();
-
-		_gameMode = new LMSMode(players);
-		PlayerKilled += _gameMode.PlayerKilled;
+		return player;
 	}
 }

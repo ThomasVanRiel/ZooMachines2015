@@ -94,15 +94,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 75
+      value: 74.5
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 131
+      value: 246.300003
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -54
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -122,6 +122,22 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482574, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100868, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172254, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018240, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: orthographic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -431,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea319e0f72a76490b86f47414f4da9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPrefab: {fileID: 131704, guid: 091c0e9c672cd844398aed1ed6c169ff, type: 2}
+  LevelPrefab: {fileID: 105598, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 2068349251}
   InfoUI: {fileID: 359247823}

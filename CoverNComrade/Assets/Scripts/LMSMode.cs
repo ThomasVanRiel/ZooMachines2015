@@ -2,28 +2,36 @@
 using System.Collections.Generic;
 
 public class LMSMode : GameMode {
-	private List<PlayerController> _players;
+	private Dictionary<PlayerController, int> _players;
 
-	public LMSMode(List<PlayerController> players) {
-		_players = players;
+	public void Setup(GameManager gm, int nbPlayers) {
+		_players = new Dictionary<PlayerController, int>();
+
+		for (int i = 0; i < nbPlayers; i++) {
+			_players.Add(gm.SpawnPlayer(i), i);
+		}
 	}
 
-	public void PlayerKilled(PlayerController killer, PlayerController killed)
-	{
-		if (killed != null && _players.Contains(killed))
+	public void PlayerKilled(PlayerController killer, PlayerController killed) {
+		if (killed != null && _players.ContainsKey(killed))
 			_players.Remove(killed);
 		else
 			Debug.Log("killed player does not exist!");
 	}
 
 	public bool IsGameOver() {
-		return _players.Count == 1;
+		if (_players != null) {
+			return _players.Count == 1;
+		}
+
+		return false;
 	}
 
-	public PlayerController Winner() {
+	public int Winner() {
 		if (_players.Count == 1) {
-			return _players[0];
+			List<int> ids = new List<int>(_players.Values);
+			return ids[0];
 		}
-		return null;
+		return -1;
 	}
 }
