@@ -35,6 +35,11 @@ public class KeyboardInputReceiver : MonoBehaviour, IInputReceiver
         return Input.mousePosition.y;
     }
 
+    public float GetMouseScroll()
+    {
+        return 0.0f;
+    }
+
     public bool GetMouseButton(int button)
     {
         if (button == 0 && Button0Keys.ContainsKey(PlayerID))

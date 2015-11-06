@@ -10,7 +10,17 @@ public class PlayerController : MonoBehaviour
     // PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
     public const int PlayerMaxHealth = 3;
 
-    public Color PlayerColor = Color.red;
+    private Color _playerColor = Color.red;
+
+    public Color PlayerColor
+    {
+        get { return _playerColor; }
+        set
+        {
+            _playerColor = value;
+            _mat.color = _playerColor;
+        }
+    }
     public float CursorStopDistance = 1;
 
     // Player's current health.
@@ -38,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private IInputReceiver _input;
     private WeaponController _weaponController;
     private Transform _transf;
+    private Material _mat;
 
     public void Start()
     {
@@ -46,13 +57,18 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
         _transf = transform;
+        _mat = GetComponent<Renderer>().material;
 
         // Colorize
-        GetComponent<Renderer>().material.color = PlayerColor;
+        _mat.color = PlayerColor;
     }
 
     public void FixedUpdate()
-    { 
+    {
+        // Don't do anything if dead.
+        if (Health <= 0)
+            return;
+
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
         RaycastHit hit;
@@ -70,7 +86,11 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-		if (_weaponController != null)
+        // Don't do anything if dead.
+        if (Health <= 0)
+            return;
+
+        if (_weaponController != null)
 			ProcessShooting();
     }
 
@@ -100,12 +120,18 @@ public class PlayerController : MonoBehaviour
     // TakeDamage makes the player takes a given amount of damage
     public void TakeDamage(int dmg)
     {
+        // Don't do anything if dead.
+        if (Health <= 0)
+            return;
+
         Health -= dmg;
 
 		// TODO: sets the killer to the one who shot the bullet,
 		//		 not needed right now as we don't need this in LMS mode.
-		if (Health == 0 && GameManager.playerKilled != null) {
-			GameManager.playerKilled(null, this);
+		if (Health == 0) {
+            if (GameManager.playerKilled != null)
+    			GameManager.playerKilled(null, this);
+		    StartCoroutine(FadeColor(2));
 		}
     }
 
@@ -113,5 +139,22 @@ public class PlayerController : MonoBehaviour
     public bool IsAlive()
     {
         return Health > 0;
+    }
+
+    IEnumerator FadeColor(float t)
+    {
+        // Convert to HSB
+        HSBColor newColor = new HSBColor(PlayerColor);
+        float timeRemaining = t;
+        while (timeRemaining > 0)
+        {
+            // Desaturate
+            newColor.s = timeRemaining/t;
+            PlayerColor = HSBColor.ToColor(newColor);
+            // Decrease time
+            timeRemaining -= Time.fixedDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        PlayerColor = Color.white;
     }
 }
