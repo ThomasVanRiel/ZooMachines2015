@@ -67,18 +67,18 @@ public class GameManager : MonoBehaviour {
 
 			players.Add(player);
 
-            // give playerlist to the camera, so it can follow all players
-            Camera.main.gameObject.GetComponent<CameraHandler>().SetPlayerList(players);
-
 #if UNITY_EDITOR_WIN
 			if (nextSpawn > _level.spawnPositions.Length) {
 				nextSpawn = 0;
 			}
 #endif
-			_players = players.ToArray();
 			
 			yield return null;
 		}
+		
+		// give playerlist to the camera, so it can follow all players
+		Camera.main.gameObject.GetComponent<CameraHandler>().SetPlayerList(players);
+		_players = players.ToArray();
 
 		_gameMode = new LMSMode(players);
 		PlayerKilled += _gameMode.PlayerKilled;
