@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 	private GameMode _gameMode;
 
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
-	public static PlayerKilledDelegate playerKilled;
+	public static PlayerKilledDelegate PlayerKilled;
 
 	public PlayerController[] Players() {
 		return _players;
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void Destroy() {
-		playerKilled -= _gameMode.PlayerKilled;
+		PlayerKilled -= _gameMode.PlayerKilled;
 	}
 
 	IEnumerator Setup() {
@@ -81,6 +81,6 @@ public class GameManager : MonoBehaviour {
 		}
 
 		_gameMode = new LMSMode(players);
-		playerKilled += _gameMode.PlayerKilled;
+		PlayerKilled += _gameMode.PlayerKilled;
 	}
 }
