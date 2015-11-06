@@ -38,8 +38,6 @@ public class PlayerController : MonoBehaviour
     private IInputReceiver _input;
     private WeaponController _weaponController;
     private Transform _transf;
-    
-    // TODO: Subscribe to GameManager player die event
 
     public void Start()
     {

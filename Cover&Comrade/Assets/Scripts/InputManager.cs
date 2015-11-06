@@ -90,6 +90,11 @@ public class InputManager : MonoBehaviour
     }
 #endif
 
+
+    /// <summary>
+    /// Refreshes the mouse driver.
+    /// Might need to be called when a new mouse is connected.
+    /// </summary>
     public void Refresh()
     {
 #if UNITY_EDITOR_WIN
@@ -143,7 +148,7 @@ public class InputManager : MonoBehaviour
     /// Get position of requested mouse.
     /// </summary>
     /// <param name="id">Mouse id</param>
-    /// <returns>X position of requested mouse.</returns>
+    /// <returns>Position of requested mouse.</returns>
     public static Vector3 GetMousePosition(int id)
     {
 #if UNITY_EDITOR
@@ -200,7 +205,7 @@ public class InputManager : MonoBehaviour
     /// Get scroll position of requested mouse.
     /// </summary>
     /// <param name="id">Mouse id</param>
-    /// <returns>scroll position of requested mouse.</returns>
+    /// <returns>Scroll position of requested mouse.</returns>
     public static float GetMouseScroll(int id)
     {
 #if UNITY_EDITOR
@@ -215,6 +220,12 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+    /// <summary>
+    /// Checks if a button is continuously pressed on the requested mouse.
+    /// </summary>
+    /// <param name="button">Button id (0 is right, 1 is left)</param>
+    /// <param name="id">Mouse id</param>
+    /// <returns>True if button is pressed.</returns>
     public static bool GetMouseButton(int button, int id)
     {
 #if UNITY_EDITOR
@@ -235,6 +246,13 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+
+    /// <summary>
+    /// Checks if a button is pressed in this tick on the requested mouse.
+    /// </summary>
+    /// <param name="button">Button id (0 is right, 1 is left)</param>
+    /// <param name="id">Mouse id</param>
+    /// <returns>True if button is pressed.</returns>
     public static bool GetMouseButtonDown(int button, int id)
     {
 #if UNITY_EDITOR
@@ -255,6 +273,13 @@ public class InputManager : MonoBehaviour
 #endif
     }
 
+
+    /// <summary>
+    /// Checks if a button is released in this tick on the requested mouse.
+    /// </summary>
+    /// <param name="button">Button id (0 is right, 1 is left)</param>
+    /// <param name="id">Mouse id</param>
+    /// <returns>True if button is pressed.</returns>
     public static bool GetMouseButtonUp(int button, int id)
     {
 #if UNITY_EDITOR
