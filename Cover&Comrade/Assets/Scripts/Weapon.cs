@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour
 			{
 				_nextShotTime = Time.time + TimeBetweenShots / 1000;
 				Projectile newProjectile = Instantiate(MyProjectile, ProjectileSpawn[i].position, ProjectileSpawn[i].rotation) as Projectile;
-				//newProjectile.SetSpeed(MuzzleVelocity);
+				newProjectile.SetSpeed(MuzzleVelocity);
 			}
 
 			// Create bullet case ejection
