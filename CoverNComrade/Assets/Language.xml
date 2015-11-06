@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Localization>
+	<Language language="English">
+		<MainMenu>
+	  		<MainMenu_QuickPlay>Quick Play</MainMenu_QuickPlay>
+	  		<MainMenu_Play>Play</MainMenu_Play>
+	  		<MainMenu_Settings>Settings</MainMenu_Settings>
+	  		<MainMenu_Quit>Quit</MainMenu_Quit>
+		</MainMenu>
+		<PlayMenu>
+			<PlayMenu_Title>Play</PlayMenu_Title>
+			<GameModes>
+				<LastManStanding>
+					<LastManStanding_Title>Last man standing</LastManStanding_Title>
+					<LastManStanding_Info>The only way to win is to kill all other players, there are no respawns on death.</LastManStanding_Info>
+				</LastManStanding>
+				<MostKills>
+					<MostKills_Title>Most Kills</MostKills_Title>
+					<MostKills_Info>Placeholder text!</MostKills_Info>
+				</MostKills>
+				<LeastDeaths>
+					<LeastDeaths_Title>Least Deaths</LeastDeaths_Title>
+					<LeastDeaths_Info>Placeholder text!</LeastDeaths_Info>
+				</LeastDeaths>
+				<BattleRoyale>
+					<BattleRoyale_Title>Battle Royale</BattleRoyale_Title>
+					<BattleRoyale_Info>Placeholder text!</BattleRoyale_Info>
+				</BattleRoyale>
+				<KingOfTheHill>
+					<KingOfTheHill_Title>King of the Hill</KingOfTheHill_Title>
+					<KingOfTheHill_Info>Placeholder text!</KingOfTheHill_Info>
+				</KingOfTheHill>
+				<Team>
+					<Team_Title>Team</Team_Title>
+					<Team_Info>Placeholder text!</Team_Info>
+				</Team>
+				<Boss>
+					<Boss_Title>Boss</Boss_Title>
+					<Boss_Info>Placeholder text!</Boss_Info>
+				</Boss>
+				<ControlPoint>
+					<ControlPoint_Title>Controlpoints</ControlPoint_Title>
+					<ControlPoint_Info>Placeholder text!</ControlPoint_Info>
+				</ControlPoint>
+			</GameModes>
+			<PlayMenu_StartGame>Start game</PlayMenu_StartGame>
+			<Levels>
+	
+			</Levels>
+		</PlayMenu>
+		<SettingsMenu>
+			<SettingsMenu_Title>Settings</SettingsMenu_Title>
+			<Settings>
+				<Settings_MusicVolume>Music Volume</Settings_MusicVolume>
+				<Settings_EffectsVolume>Effects Volume</Settings_EffectsVolume>
+				<Settings_Language>Language</Settings_Language>
+				<Settings_MinorSettings>
+					<Settings_Vignette>Vignette</Settings_Vignette>
+					<Settings_Bloom>Bloom</Settings_Bloom>
+					<Settings_AA>Anti-aliasing</Settings_AA>
+				</Settings_MinorSettings>
+			</Settings>
+		</SettingsMenu>
+	</Language>
+	<Language language="Nederlands">
+		<MainMenu>
+	  		<MainMenu_QuickPlay>Snel Spelen</MainMenu_QuickPlay>
+	  		<MainMenu_Play>Spelen</MainMenu_Play>
+	  		<MainMenu_Settings>Instellingen</MainMenu_Settings>
+	  		<MainMenu_Quit>Afsluiten</MainMenu_Quit>
+		</MainMenu>
+		<PlayMenu>
+			<PlayMenu_Title>Spelen</PlayMenu_Title>
+			<GameModes>
+				<LastManStanding>
+					<LastManStanding_Title>Laatst in leven</LastManStanding_Title>
+					<LastManStanding_Info>The only way to win is to kill all other players, there are no respawns on death.</LastManStanding_Info>
+				</LastManStanding>
+				<MostKills>
+					<MostKills_Title>Meeste gemoord</MostKills_Title>
+					<MostKills_Info>Placeholder text!</MostKills_Info>
+				</MostKills>
+				<LeastDeaths>
+					<LeastDeaths_Title>Minst gestorven</LeastDeaths_Title>
+					<LeastDeaths_Info>Placeholder text!</LeastDeaths_Info>
+				</LeastDeaths>
+				<BattleRoyale>
+					<BattleRoyale_Title>Battle Royale</BattleRoyale_Title>
+					<BattleRoyale_Info>Placeholder text!</BattleRoyale_Info>
+				</BattleRoyale>
+				<KingOfTheHill>
+					<KingOfTheHill_Title>Koning van de Heuvel</KingOfTheHill_Title>
+					<KingOfTheHill_Info>Placeholder text!</KingOfTheHill_Info>
+				</KingOfTheHill>
+				<Team>
+					<Team_Title>Partij</Team_Title>
+					<Team_Info>Placeholder text!</Team_Info>
+				</Team>
+				<Boss>
+					<Boss_Title>Baas</Boss_Title>
+					<Boss_Info>Placeholder text!</Boss_Info>
+				</Boss>
+				<ControlPoint>
+					<ControlPoint_Title>Controlepunten</ControlPoint_Title>
+					<ControlPoint_Info>Placeholder text!</ControlPoint_Info>
+				</ControlPoint>
+			</GameModes>
+			<PlayMenu_StartGame>Start spel</PlayMenu_StartGame>
+			<Levels>
+	
+			</Levels>
+		</PlayMenu>
+		<SettingsMenu>
+			<SettingsMenu_Title>Instellingen</SettingsMenu_Title>
+			<Settings>
+				<Settings_MusicVolume>Muziek Volume</Settings_MusicVolume>
+				<Settings_EffectsVolume>Effecten Volume</Settings_EffectsVolume>
+				<Settings_Language>Taal</Settings_Language>
+				<Settings_MinorSettings>
+					<Settings_Vignette>Vignette</Settings_Vignette>
+					<Settings_Bloom>Bloom</Settings_Bloom>
+					<Settings_AA>Anti-aliasing</Settings_AA>
+				</Settings_MinorSettings>
+			</Settings>
+		</SettingsMenu>
+	</Language>
+</Localization>
