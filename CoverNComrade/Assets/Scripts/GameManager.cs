@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 	public LevelController Level;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
+	public GameObject InfoUI;
 
 	private GameMode _gameMode;
 
@@ -14,16 +16,15 @@ public class GameManager : MonoBehaviour {
 	public static PlayerKilledDelegate playerKilled;
 
 	void Start () {
+		InfoUI.SetActive(false);
 		StartCoroutine(Setup());
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
-			Debug.Log("Game is over!");
-			Debug.LogFormat("Winner is {0}", _gameMode.Winner());
-
-			// TODO: ends the game here and display the winner
+			InfoUI.SetActive(true);
+			InfoUI.GetComponent<Text>().text = string.Format("{0} is the last man standing", _gameMode.Winner());
 		}
 	}
 
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour {
 			PlayerController player = playerObject.GetComponent<PlayerController>();
 			playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
 			playerObject.GetComponent<MouseInputReceiver>().ID = mouseID;
+			playerObject.name = string.Format("Player {0}", mouseID + 1);
 			
 			players.Add(player);
 
