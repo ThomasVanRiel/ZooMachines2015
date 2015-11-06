@@ -8,6 +8,7 @@ using RawInputSharp;
 
 public class InputManager : MonoBehaviour
 {
+    public bool DebugView = true;
 
     public static int AmountOfMice { get; set; }
 
@@ -67,8 +68,12 @@ public class InputManager : MonoBehaviour
             CalculateAmountOfMice();
     }
 
+#if UNITY_EDITOR
     void OnGUI()
     {
+        if (!DebugView)
+            return;
+
         GUILayout.Label("Connected Mice:");
         for (int i = 0; i < _mice.Length; i++)
         {
@@ -76,7 +81,8 @@ public class InputManager : MonoBehaviour
                 GUILayout.Label("Mouse[" + i.ToString() + "] : " + _move[i] + _mice[i].Buttons[0] + _mice[i].Buttons[1]);
         }
     }
-    
+#endif
+
     void OnApplicationQuit()
     {
         // Clean up

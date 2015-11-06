@@ -21,7 +21,7 @@ public class CursorDisplay : MonoBehaviour
 
         // Cursor
         GameObject cursor = Instantiate(CursorPrefab);
-        cursor.transform.parent = CursorUI.transform;
+        cursor.transform.SetParent(CursorUI.transform);
         cursor.GetComponent<Image>().color = _controller.PlayerColor;
         _cursor = cursor.GetComponent<RectTransform>();
 
