@@ -14,20 +14,19 @@ public class Projectile : MonoBehaviour
     private float _lifeTime = 300;
     private float _skinWidth = 0.01f;
     //private float _altitude = 1.5f;
+    private TrailRenderer _tr = null;
 
     void Start()
     {
-        DestroyObject(gameObject, _lifeTime);
-
         //_altitude = transform.position.y;
+
+        _tr = GetComponent<TrailRenderer>();
 
         Collider[] initialCollisions = Physics.OverlapSphere(transform.position, 0.1f, CollisionMask);
         if (initialCollisions.Length > 0)
         {
             OnHitObject(initialCollisions[0], transform.position);
         }
-
-        GetComponent<TrailRenderer>().material.color = TrailColor; //.SetColor("_TintColor", TrailColor);
     }
 
     void Update()
@@ -47,6 +46,15 @@ public class Projectile : MonoBehaviour
     public void SetDamage(int newDamage)
     {
         _damage = newDamage;
+    }
+
+    public void SetTrailColor(Color newColor)
+    {
+        TrailColor = newColor;
+        if (_tr == null)
+            _tr = GetComponent<TrailRenderer>();
+        if (_tr != null)
+            _tr.material.color = TrailColor;
     }
 
     void CheckCollisions(float moveDistance)
@@ -86,5 +94,20 @@ public class Projectile : MonoBehaviour
                 scr.TakeDamage(_damage);
             }
         }
+    }
+
+    public void ClearBulletTrail()
+    {
+        if (gameObject.activeSelf && _tr != null)
+            StartCoroutine(ClearTrailRenderer());
+    }
+
+    IEnumerator ClearTrailRenderer()
+    {
+        var t = _tr.time;
+        _tr.time = 0;
+        yield return null;
+        _tr.time = t;
+        Debug.Log("Trail reset!");
     }
 }
