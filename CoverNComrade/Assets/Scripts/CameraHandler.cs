@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityStandardAssets.ImageEffects;
 
 [ExecuteInEditMode]
+[RequireComponent(typeof(DepthOfField))]
 public class CameraHandler : MonoBehaviour
 {
     public Vector3 Rotation = new Vector3(60, 315, 0);
     public float Offset = 25;
 
     private List<PlayerController> PlayerList = new List<PlayerController>();
+    private Vector3 _lastPosition = Vector3.zero;
 
     private DepthOfField _dof;
 
@@ -63,7 +65,10 @@ public class CameraHandler : MonoBehaviour
 
         _dof.focalLength = Mathf.Abs(Offset - 1);
 
-        transform.position = avrPos + (transform.forward * (-1) * newOffset);
+
+        _lastPosition = transform.position;
+        Vector3 newPosition = avrPos + (transform.forward * (-1) * newOffset);
+        transform.position = Vector3.Lerp(_lastPosition, newPosition, Time.deltaTime);
 
 
         // set camera rotation
@@ -75,7 +80,6 @@ public class CameraHandler : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Euler(newRotation);
-
     }
 
     public void SetPlayerList(List<PlayerController> pl)

@@ -131,7 +131,7 @@ public class Projectile : MonoBehaviour
         if (c != null)
         {
             var scr = c.gameObject.GetComponent<PlayerController>();
-            if (scr != null && scr.Health > 0)
+            if (scr != null && scr.Health > 0 && scr.gameObject.GetComponent<TeamController>().CurrentTeam != _team)
             {
                 GameObject p = Instantiate(PlayerShotParticlesPrefab, transform.position, transform.rotation) as GameObject;
                 Destroy(p, 3);

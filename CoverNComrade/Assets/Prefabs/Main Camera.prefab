@@ -15,6 +15,7 @@ GameObject:
   - 114: {fileID: 11482574}
   - 114: {fileID: 11407534}
   - 114: {fileID: 11454908}
+  - 114: {fileID: 11497580}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -29,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100868}
   m_LocalRotation: {x: -.461939752, y: .331413627, z: -.191341743, w: -.800103128}
-  m_LocalPosition: {x: 8.83883667, y: 21.6506348, z: -8.83883381}
+  m_LocalPosition: {x: 9.61999989, y: 23.5699997, z: -9.61999989}
   m_LocalScale: {x: 1, y: 1.30624986, z: 1.3062501}
   m_Children: []
   m_Father: {fileID: 0}
@@ -42,8 +43,8 @@ Camera:
   m_GameObject: {fileID: 100868}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: .945098042, g: .945098042, b: .945098042, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -117,16 +118,16 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100868}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd6d4281e5d7cd44d8c6e38bc2c1b8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
-  intensity: 2
-  chromaticAberration: 1.01999998
+  intensity: 1.82000005
+  chromaticAberration: 1.32000005
   axialAberration: .5
-  blur: -.230000004
+  blur: .219999999
   blurSpread: .75
   luminanceDependency: .25
   blurDistance: 2.5
@@ -147,6 +148,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rotation: {x: 60, y: 315, z: 0}
   Offset: 25
+--- !u!114 &11497580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fceaeb339b971b429c4cc600acabd13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweakMode: 0
+  screenBlendMode: 1
+  hdr: 0
+  sepBlurSpread: 2
+  quality: 0
+  bloomIntensity: .5
+  bloomThreshold: .5
+  bloomThresholdColor: {r: 1, g: 1, b: 1, a: 1}
+  bloomBlurIterations: 1
+  hollywoodFlareBlurIterations: 2
+  flareRotation: 0
+  lensflareMode: 1
+  hollyStretchWidth: 2.5
+  lensflareIntensity: 0
+  lensflareThreshold: .300000012
+  lensFlareSaturation: .75
+  flareColorA: {r: .400000006, g: .400000006, b: .800000012, a: .75}
+  flareColorB: {r: .400000006, g: .800000012, b: .800000012, a: .75}
+  flareColorC: {r: .800000012, g: .400000006, b: .800000012, a: .75}
+  flareColorD: {r: .800000012, g: .400000006, b: 0, a: .75}
+  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
+    type: 3}
+  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
+  screenBlendShader: {fileID: 4800000, guid: 7856cbff0a0ca45c787d5431eb805bb0, type: 3}
+  blurAndFlaresShader: {fileID: 4800000, guid: be6e39cf196f146d5be72fbefb18ed75, type: 3}
+  brightPassFilterShader: {fileID: 4800000, guid: 0aeaa4cb29f5d4e9c8455f04c8575c8c,
+    type: 3}
 --- !u!124 &12449864
 Behaviour:
   m_ObjectHideFlags: 1

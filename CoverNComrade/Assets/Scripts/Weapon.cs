@@ -120,7 +120,10 @@ public class Weapon : MonoBehaviour
         p.SetSpeed(MuzzleVelocity);
 
         if (_wpc != null)
+        {
             p.SetTrailColor(_wpc._teamController.TeamColor);
+            p.SetTeam(_wpc._teamController.CurrentTeam);
+        }
         else
             Debug.Log("WPC was NULL!");
         p.ClearBulletTrail();
