@@ -196,7 +196,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   TrailColor: {r: 1, g: 0, b: 0, a: 1}
+  ParticleHueOffset: .100000001
   TrailParticles: {fileID: 19803200}
+  BounceParticlesPrefab: {fileID: 103590, guid: bf17b6ec329c8e14eb58a0d23039bc6b,
+    type: 2}
 --- !u!198 &19803200
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1359,7 +1362,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 1
+      value: .200000003
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: VelocityModule.enabled
@@ -1397,6 +1400,14 @@ Prefab:
       propertyPath: TrailParticles
       value: 
       objectReference: {fileID: 19803200}
+    - target: {fileID: 0}
+      propertyPath: BounceParticlesPrefab
+      value: 
+      objectReference: {fileID: 103590, guid: bf17b6ec329c8e14eb58a0d23039bc6b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: ParticleHueOffset
+      value: .100000001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122068}
