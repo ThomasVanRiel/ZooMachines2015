@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public Renderer MeshRender;
     private Material _mat;
     private Animator _animator;
+    private TeamController _teamC;
 
     public void Start()
     {
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         _transf = transform;
         _mat = MeshRender.material;
         _animator = GetComponentInChildren<Animator>();
+        _teamC = GetComponent<TeamController>();
 
         // Colorize
         _mat.color = PlayerColor;
@@ -219,6 +221,8 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(FadeColor(2));
             _isRunning = false;
             // TODO: Disable team indicator
+            _teamC.DisableTeamIndication();
+
         }
     }
 

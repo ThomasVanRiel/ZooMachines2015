@@ -51,4 +51,9 @@ public class TeamController : MonoBehaviour
         TeamColor = HSBColor.ToColor(new HSBColor((float) CurrentTeam/AmountOfTeams, 1, 1));
         TeamColorRenderer.material.color = TeamColor;
     }
+
+    public void DisableTeamIndication()
+    {
+        TeamColorRenderer.gameObject.SetActive(false);
+    }
 }
