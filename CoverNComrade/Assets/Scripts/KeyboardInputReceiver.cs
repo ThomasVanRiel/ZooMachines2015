@@ -25,6 +25,11 @@ public class KeyboardInputReceiver : MonoBehaviour, IInputReceiver
         return Input.mousePosition;
     }
 
+    public void SetMousePositionOffset(Vector2 offset)
+    {
+        // No implementation
+    }
+
     public float GetMouseX()
     {
         return Input.mousePosition.x;

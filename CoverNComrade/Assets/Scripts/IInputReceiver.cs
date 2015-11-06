@@ -6,6 +6,7 @@ public interface IInputReceiver
     int PlayerID { get; set; }
 
     Vector3 GetMousePosition();
+    void SetMousePositionOffset(Vector2 offset);
     float GetMouseX();
     float GetMouseY();
     float GetMouseScroll();

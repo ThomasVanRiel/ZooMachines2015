@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     private bool[][] _prevMouse;
     private static bool[][] _mouseDown;
     private static bool[][] _mouseUp;
+    private static Vector2[] _offset;
 
     // Use this for initialization
     void Start()
@@ -42,14 +43,16 @@ public class InputManager : MonoBehaviour
 
                 // Cumulative movement
                 _move[i] += new Vector2(_mice[i].XDelta, -_mice[i].YDelta);
-                if (_move[i].x < 0)
-                    _move[i].x = 0;
-                if (_move[i].y < 0)
-                    _move[i].y = 0;
-                if (_move[i].x > Camera.main.pixelWidth)
-                    _move[i].x = Camera.main.pixelWidth;
-                if (_move[i].y > Camera.main.pixelHeight)
-                    _move[i].y = Camera.main.pixelHeight;
+
+                // Limit to offsetted screen boundaries
+                if (_move[i].x < -_offset[i].x)
+                    _move[i].x = -_offset[i].x;
+                if (_move[i].y < -_offset[i].y)
+                    _move[i].y = -_offset[i].y;
+                if (_move[i].x > Camera.main.pixelWidth - _offset[i].x)
+                    _move[i].x = Camera.main.pixelWidth - _offset[i].x;
+                if (_move[i].y > Camera.main.pixelHeight - _offset[i].y)
+                    _move[i].y = Camera.main.pixelHeight - _offset[i].y;
 
                 // Cumulative scroll
                 _scroll[i] += _mice[i].ZDelta;
@@ -114,6 +117,7 @@ public class InputManager : MonoBehaviour
         // Values
         _mice = new RawMouse[NUM_MICE];
         _move = new Vector2[NUM_MICE];
+        _offset = new Vector2[NUM_MICE];
         _scroll = new float[NUM_MICE];
         for (int i = 0; i < NUM_MICE; ++i)
         {
@@ -169,7 +173,7 @@ public class InputManager : MonoBehaviour
             return Vector3.zero;
 #endif
 #if UNITY_EDITOR_WIN
-        return new Vector3(_move[id].x, _move[id].y, 0);
+        return new Vector3(_move[id].x + _offset[id].x, _move[id].y + _offset[id].y, 0);
 #else
         return Input.mousePosition;
 #endif
@@ -188,7 +192,7 @@ public class InputManager : MonoBehaviour
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
-        return _move[id].x;
+        return _move[id].x + _offset[id].x;
 #else
         return Input.GetAxis("Mouse X");
 #endif
@@ -207,7 +211,7 @@ public class InputManager : MonoBehaviour
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
-        return _move[id].y;
+        return _move[id].y + _offset[id].y;
 #else
         return Input.GetAxis("Mouse Y");
 #endif
@@ -314,6 +318,18 @@ public class InputManager : MonoBehaviour
     }
 #endregion
 
+    public static void SetMouseOffset(Vector2 offset, int id)
+    {
+
+#if UNITY_EDITOR
+        // Check if id is recognised
+        if (!IsValidMouse(id))
+            return;
+#endif
+#if UNITY_EDITOR_WIN
+        _offset[id] = offset;
+#endif
+    }
 
     private static bool IsValidMouse(int id)
     {
