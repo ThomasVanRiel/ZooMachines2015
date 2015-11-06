@@ -10,7 +10,12 @@ public class PlayerController : MonoBehaviour
     // PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
     public const int PlayerMaxHealth = 3;
 
+    private bool _isRunning = false;
+
     private Color _playerColor = Color.red;
+
+    private Vector3 _prevForward;
+    private float _prevLeftRightDirection = 0;
 
     public Color PlayerColor
     {
@@ -48,7 +53,9 @@ public class PlayerController : MonoBehaviour
     private IInputReceiver _input;
     private WeaponController _weaponController;
     private Transform _transf;
+    public Renderer MeshRender;
     private Material _mat;
+    private Animator _animator;
 
     public void Start()
     {
@@ -57,10 +64,14 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
         _transf = transform;
-        _mat = GetComponent<Renderer>().material;
+        _mat = MeshRender.material;
+        _animator = GetComponentInChildren<Animator>();
 
         // Colorize
         _mat.color = PlayerColor;
+
+        // 
+        _prevForward = _transf.forward;
     }
 
     public void FixedUpdate()
@@ -68,24 +79,15 @@ public class PlayerController : MonoBehaviour
         // Don't do anything if dead.
         if (Health <= 0)
             return;
-
-        // Setup Raycast
-        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Move
-            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
-            if (dir.magnitude > CursorStopDistance)
-                Move(dir);
-            else
-                _rb.velocity = Vector3.zero;
-        }
+        
+        ProcessMovement();
 
     }
 
     public void Update()
     {
+        ProcessAnimations();
+
         // Don't do anything if dead.
         if (Health <= 0)
             return;
@@ -102,6 +104,28 @@ public class PlayerController : MonoBehaviour
         _transf.forward = dir;
     }
 
+    void ProcessMovement()
+    {
+        // Setup Raycast
+        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Move
+            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
+            if (dir.magnitude > CursorStopDistance)
+            {
+                Move(dir);
+                _isRunning = true;
+            }
+            else
+            {
+                _rb.velocity = Vector3.zero;
+                _isRunning = false;
+            }
+        }
+    }
+
     // ProcessShooting makes the player shoot to the current direction he's facing
     public void ProcessShooting()
     {
@@ -109,6 +133,26 @@ public class PlayerController : MonoBehaviour
             _weaponController.OnTriggerHold();
         else if (_input.GetMouseButtonUp(0))
             _weaponController.OnTriggerRelease();
+    }
+
+    void ProcessAnimations()
+    {
+        // Pre calc
+        float angleA = Mathf.Atan2(_prevForward.x, transform.forward.z) * Mathf.Rad2Deg;
+        float angleB = Mathf.Atan2(transform.forward.x, _prevForward.z) * Mathf.Rad2Deg;
+        var angleDiff = Mathf.DeltaAngle(angleA, angleB);
+
+        angleDiff = Mathf.Lerp(_prevLeftRightDirection, angleDiff, .01f);
+
+
+        _animator.SetFloat("Speed", _isRunning ? 1 : 0);
+        _animator.SetBool("IsRunning", _isRunning);
+        _animator.SetFloat("LeftRightDirection", Mathf.Sign(angleDiff));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _animator.SetTrigger("Shoot");
+        }
+
     }
 
     // SetWeapon gives the player a new weapon and removes the old one
