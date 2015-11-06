@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviour
     //private float _altitude = 1.5f;
     private TrailRenderer _tr = null;
     private PlayerController _owner = null;
+    private int _team = 0;
 
     void Start()
     {
@@ -63,6 +64,11 @@ public class Projectile : MonoBehaviour
     public PlayerController GetOwnder()
     {
         return _owner;
+    }
+
+    public void SetTeam(int newTeam)
+    {
+        _team = newTeam;
     }
 
     public void SetTrailColor(Color newColor)
@@ -133,6 +139,7 @@ public class Projectile : MonoBehaviour
             }
         }
     }
+
 
     public void ClearBulletTrail()
     {

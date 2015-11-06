@@ -129,8 +129,8 @@ public class PlayerController : MonoBehaviour
 		// TODO: sets the killer to the one who shot the bullet,
 		//		 not needed right now as we don't need this in LMS mode.
 		if (Health == 0) {
-            if (GameManager.playerKilled != null)
-    			GameManager.playerKilled(enemy, this);
+            if (GameManager.PlayerKilled != null)
+    			GameManager.PlayerKilled(enemy, this);
             // Desaturate
 		    StartCoroutine(FadeColor(2));
             // TODO: Disable team indicator

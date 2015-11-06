@@ -17,15 +17,6 @@ public class CameraHandler : MonoBehaviour
         _dof = GetComponent<DepthOfField>();
     }
 
-    void Start()
-    {
-        PlayerController[] ps = GameObject.FindObjectsOfType<PlayerController>();
-        foreach (var item in ps)
-        {
-            PlayerList.Add(item);
-        }
-    }
-
     void Update()
     {
 
@@ -64,8 +55,7 @@ public class CameraHandler : MonoBehaviour
                     }
                 }
             }
-            if (dist > 0)
-                largestDist = dist;
+            largestDist = Mathf.Clamp(dist, 10, float.MaxValue); ;
         }
 
         bool cq = (largestDist < Offset) ? true : false;
@@ -87,4 +77,11 @@ public class CameraHandler : MonoBehaviour
         transform.rotation = Quaternion.Euler(newRotation);
 
     }
+
+    public void SetPlayerList(List<PlayerController> pl)
+    {
+        PlayerList = new List<PlayerController>();
+        PlayerList = pl;
+    }
+
 }
