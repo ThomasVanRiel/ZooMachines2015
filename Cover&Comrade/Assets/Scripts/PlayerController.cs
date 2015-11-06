@@ -42,10 +42,14 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
+        // Components
         _rb = GetComponent<Rigidbody>();
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
         _transf = transform;
+
+        // Colorize
+        GetComponent<Renderer>().material.color = PlayerColor;
     }
 
     public void FixedUpdate()
@@ -57,7 +61,6 @@ public class PlayerController : MonoBehaviour
         {
             // Move
             Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
-            //Debug.Log(dir);
             Move(dir);
         }
 
@@ -72,7 +75,9 @@ public class PlayerController : MonoBehaviour
     // Move moves the player to the given controller
     public void Move(Vector3 dir)
     {
-        _rb.velocity = dir.normalized * Velocity * Time.fixedDeltaTime;
+        dir.Normalize();
+        _rb.velocity = dir * Velocity * Time.fixedDeltaTime;
+        _transf.forward = dir;
     }
 
     // ProcessShoting makes the player shoot to the current direction he's facing
