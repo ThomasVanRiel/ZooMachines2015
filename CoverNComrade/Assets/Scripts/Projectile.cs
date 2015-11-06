@@ -134,8 +134,11 @@ public class Projectile : MonoBehaviour
             if (scr != null && scr.Health > 0 && scr.gameObject.GetComponent<TeamController>().CurrentTeam != _team)
             {
                 GameObject p = Instantiate(PlayerShotParticlesPrefab, transform.position, transform.rotation) as GameObject;
+                p.transform.localScale = new Vector3(3, 3, 3);
                 Destroy(p, 3);
                 scr.TakeDamage(_damage, _owner);
+
+                Destroy(gameObject);
             }
         }
     }

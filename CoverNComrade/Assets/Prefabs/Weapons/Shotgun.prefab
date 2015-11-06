@@ -430,7 +430,7 @@ MonoBehaviour:
   - {fileID: 463482}
   MyProjectile: {fileID: 11436408, guid: 535193be9796a3c42a46ce405ef9544a, type: 2}
   TimeBetweenShots: 1000
-  MuzzleVelocity: 35
+  MuzzleVelocity: 8
   DamagePerProjectile: 1
   BurstCount: 2
   Shell: {fileID: 460596, guid: aa30404f5c88b9840b53712226ef0e2c, type: 2}
@@ -446,6 +446,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: PoolSize
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: MuzzleVelocity
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
