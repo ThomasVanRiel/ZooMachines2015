@@ -103,6 +103,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         Health -= dmg;
+
+		// TODO: sets the killer to the one who shot the bullet,
+		//		 not needed right now as we don't need this in LMS mode.
+		if (Health == 0) {
+			GameManager.playerKilled(null, this);
+		}
     }
 
     // IsAlive returns whether or not the player is still alive.
