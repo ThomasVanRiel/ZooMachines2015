@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     public LayerMask BounceMask;
     public Color TrailColor = Color.white;
 
+    public ParticleSystem TrailParticles;
+
     private float _speed = 10;
     private int _damage = 1;
 
@@ -55,6 +57,8 @@ public class Projectile : MonoBehaviour
             _tr = GetComponent<TrailRenderer>();
         if (_tr != null)
             _tr.material.color = TrailColor;
+
+        TrailParticles.startColor = TrailColor;
     }
 
     void CheckCollisions(float moveDistance)
