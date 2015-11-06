@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.AmountOfMice; i++) {
-			Transform spawnPos = level.spawnPositions[nextSpawn++];
+			Transform spawnPos = Level.spawnPositions[nextSpawn++];
 			mouseID = i;
 #else
 		foreach (Transform spawnPos in Level.spawnPositions) {
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
 			players.Add(player);
 
 #if UNITY_EDITOR_WIN
-			if (nextSpawn > level.spawnPositions.Length) {
+			if (nextSpawn > Level.spawnPositions.Length) {
 				nextSpawn = 0;
 			}
 #endif
