@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 461982}
   - 114: {fileID: 11497318}
   m_Layer: 0
-  m_Name: DefaultGun
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
