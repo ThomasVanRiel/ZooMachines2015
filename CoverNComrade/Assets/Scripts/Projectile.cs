@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
 
     public ParticleSystem TrailParticles;
     public GameObject BounceParticlesPrefab;
+    public GameObject PlayerShotParticlesPrefab;
 
     private float _speed = 10;
     private int _damage = 1;
@@ -115,6 +116,8 @@ public class Projectile : MonoBehaviour
             var scr = c.gameObject.GetComponent<PlayerController>();
             if (scr != null)
             {
+                GameObject p = Instantiate(PlayerShotParticlesPrefab, transform.position, transform.rotation) as GameObject;
+                Destroy(p, 3);
                 scr.TakeDamage(_damage);
             }
         }
