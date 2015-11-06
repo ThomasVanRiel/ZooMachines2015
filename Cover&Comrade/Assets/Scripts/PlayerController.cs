@@ -9,15 +9,17 @@ public class PlayerController : MonoBehaviour {
     public int MouseID;
 
 	// Player's current health.
+	private int _health;
 	public int health {
 		get {
-			return this.health;
+			return _health;
 		}
 
 		private set {
-			this.health = value;
-			if (this.health < 0) this.health = 0;
-			else if (this.health > PlayerMaxHealth) this.health = PlayerMaxHealth;
+			_health = value;
+
+			if (_health < 0) _health = 0;
+			else if (_health > PlayerMaxHealth) _health = PlayerMaxHealth;
 		}
 	}
 
@@ -49,7 +51,6 @@ public class PlayerController : MonoBehaviour {
 	// Move moves the player to the given controller
 	public void Move(Vector3 dir) {
 		// TODO: makes the player move
-		Debug.LogFormat("{0}", dir);
 		this._rb.velocity = dir * this.velocity * Time.fixedDeltaTime;
 	}
 
