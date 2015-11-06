@@ -13,13 +13,25 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		List<PlayerController> players = new List<PlayerController>();
 
-		// TODO: instantiate properly each player with an independent input controller
-		//		 depending on the number of mice the input manager can return
+#if UNITY_EDITOR_WIN
+		// TODO: in case number of mice is higher than the number of spawns,
+		//		 we need to properly place the new player.
+		int nextSpawn = 0;
+		for (int i = 0; i < InputManager.CalculateAmountOfMice();; i++) {
+			Transform spawnPos = spawnPositions[nextSpawn++];
+#else
 		foreach (Transform spawnPos in spawnPositions) {
+#endif
 			GameObject playerObject = GameObject.Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 			PlayerController player = playerObject.GetComponent<PlayerController>();
-
+			
 			players.Add(player);
+
+#if UNITY_EDITOR_WIN
+			if (nextSpawn > spawnPositions.Length) {
+				nextSpawn = 0;
+			}
+#endif
 		}
 
 		_gameMode = new LMSMode(players);

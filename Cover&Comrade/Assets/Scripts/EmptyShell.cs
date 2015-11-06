@@ -5,7 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class EmptyShell : MonoBehaviour
 {
-    public float ForceMin;
+    public float ForceMin; 
     public float ForceMax;
 
     private float _lifeTime = 4;
