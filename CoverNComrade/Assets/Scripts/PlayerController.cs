@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public float Velocity = 1.0f;
+    private bool _hasSetColor = false;
 
     // Components
     private Rigidbody _rb;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
         // 
         _prevForward = _transf.forward;
+        
     }
 
     public void FixedUpdate()
@@ -91,6 +93,16 @@ public class PlayerController : MonoBehaviour
         // Don't do anything if dead.
         if (Health <= 0)
             return;
+
+        if (!_hasSetColor)
+        {
+            // Set Color dynamically
+            if (InputManager.AmountOfMice > 0)
+            {
+                PlayerColor = HSBColor.ToColor(new HSBColor((float)_input.PlayerID / InputManager.AmountOfMice, 1, 1));
+            }
+            _hasSetColor = true;
+        }
 
         if (_weaponController != null)
             ProcessShooting();

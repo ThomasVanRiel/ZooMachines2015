@@ -9,6 +9,8 @@ public class CursorDisplay : MonoBehaviour
     public GameObject CursorUI;
     private RectTransform _cursor;
 
+    private bool _hasSpawnedCursor = false;
+
     // Components
     private IInputReceiver _input;
     private PlayerController _controller;
@@ -19,16 +21,21 @@ public class CursorDisplay : MonoBehaviour
         _input = GetComponent<IInputReceiver>();
         _controller = GetComponent<PlayerController>();
 
-        // Cursor
-        GameObject cursor = Instantiate(CursorPrefab);
-        cursor.transform.SetParent(CursorUI.transform);
-        cursor.GetComponent<Image>().color = _controller.PlayerColor;
-        _cursor = cursor.GetComponent<RectTransform>();
 
     }
 
     void Update()
     {
+        if (!_hasSpawnedCursor)
+        {
+            // Cursor
+            GameObject cursor = Instantiate(CursorPrefab);
+            cursor.transform.SetParent(CursorUI.transform);
+            cursor.GetComponent<Image>().color = _controller.PlayerColor;
+            _cursor = cursor.GetComponent<RectTransform>();
+            _hasSpawnedCursor = true;
+        }
+
         // Update position
         _cursor.anchoredPosition = new Vector2(_input.GetMouseX(), _input.GetMouseY());
     }
