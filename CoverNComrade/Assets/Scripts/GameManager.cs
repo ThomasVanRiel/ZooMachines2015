@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour {
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
+	public LevelController Level;
 	public GameModeChoice ModeChoice = GameModeChoice.LastManStanding;
 
 	private CameraHandler _cam;
-	private LevelController _level;
 	private Dictionary<PlayerController, int> _players;
 	private GameMode _gameMode;
 	private int _nextSpawn;
@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
 		InfoUI.SetActive(false);
-		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
-		_level = levelObject.GetComponent<LevelController>();
 		_cam = Camera.main.GetComponent<CameraHandler>();
 
 		switch(ModeChoice) {
@@ -69,18 +67,16 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		}
 
-		GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		_level = levelObject.GetComponent<LevelController>();
 #if UNITY_EDITOR_WIN
 		_gameMode.Setup(this, InputManager.AmountOfMice);
 #else
-		_gameMode.Setup(this, _level.spawnPositions.Length);
+		_gameMode.Setup(this, Level.spawnPositions.Length);
 #endif
 	}
 
 	public PlayerController SpawnPlayer(int playerID) {
-		Transform spawnPos = _level.spawnPositions[_nextSpawn++];
-		if (_nextSpawn >= _level.spawnPositions.Length)
+		Transform spawnPos = Level.spawnPositions[_nextSpawn++];
+		if (_nextSpawn >= Level.spawnPositions.Length)
 			_nextSpawn = 0;
 
 		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
