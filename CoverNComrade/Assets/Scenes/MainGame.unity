@@ -94,31 +94,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.83883667
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 21.6506348
+      value: 131
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -8.83883381
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -.461939752
+      value: .353553414
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .331413627
+      value: -.612372458
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -.191341743
+      value: .353553414
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -.800103128
+      value: .612372458
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
       propertyPath: m_RootOrder
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea319e0f72a76490b86f47414f4da9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPrefab: {fileID: 192172, guid: b29c6c2755aef3d41bfc4601fcdc67a0, type: 2}
+  LevelPrefab: {fileID: 131704, guid: 091c0e9c672cd844398aed1ed6c169ff, type: 2}
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 2068349251}
   InfoUI: {fileID: 359247823}
