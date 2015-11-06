@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // TakeDamage makes the player takes a given amount of damage
-    public void TakeDamage(int dmg)
+    public void TakeDamage(int dmg, PlayerController enemy = null)
     {
         // Don't do anything if dead.
         if (Health <= 0)
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 		//		 not needed right now as we don't need this in LMS mode.
 		if (Health == 0) {
             if (GameManager.playerKilled != null)
-    			GameManager.playerKilled(null, this);
+    			GameManager.playerKilled(enemy, this);
             // Desaturate
 		    StartCoroutine(FadeColor(2));
             // TODO: Disable team indicator
