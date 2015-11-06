@@ -5,10 +5,16 @@ using System.Threading;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+	public enum GameModeChoice {
+		LastManStanding,
+		DeathMatch
+	};
+
 	public GameObject LevelPrefab;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
+	public GameModeChoice ModeChoice = GameModeChoice.LastManStanding;
 
 	private CameraHandler _cam;
 	private LevelController _level;
@@ -24,7 +30,19 @@ public class GameManager : MonoBehaviour {
 		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
 		_level = levelObject.GetComponent<LevelController>();
 		_cam = Camera.main.GetComponent<CameraHandler>();
-		_gameMode = new LMSMode();
+
+		switch(ModeChoice) {
+		case GameModeChoice.LastManStanding:
+			_gameMode = new LMSMode();
+			break;
+		case GameModeChoice.DeathMatch:
+			_gameMode = new DMMode(10);
+			break;
+		default:
+			Debug.LogErrorFormat("Selected game mode does not exist! Doing LMS.");
+			_gameMode = new LMSMode();
+			break;
+		}
 		_players = new Dictionary<PlayerController, int> ();
 		PlayerKilled += _gameMode.PlayerKilled;
 

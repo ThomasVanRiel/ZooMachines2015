@@ -351,56 +351,6 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!1001 &740792490
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 129.750397
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 31.0028152
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -23.5566978
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541140, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_Size.y
-      value: 6.84241104
-      objectReference: {fileID: 0}
-    - target: {fileID: 6541140, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-      propertyPath: m_Center.y
-      value: .921206474
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1132004043
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +410,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!1 &1366944603
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +439,7 @@ Transform:
   m_Children:
   - {fileID: 591375153}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &1366944605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +455,7 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 2068349251}
   InfoUI: {fileID: 359247823}
+  ModeChoice: 0
 --- !u!1001 &1378817695
 Prefab:
   m_ObjectHideFlags: 0

@@ -78,7 +78,10 @@ public class InputManager : MonoBehaviour
         for (int i = 0; i < _mice.Length; i++)
         {
             if (_mice[i] != null)
+            {
                 GUILayout.Label("Mouse[" + i.ToString() + "] : " + _move[i] + _mice[i].Buttons[0] + _mice[i].Buttons[1]);
+                //Debug.Log(_mice[i].Name);
+            }
         }
     }
 #endif

@@ -16,7 +16,7 @@ public class LMSMode : GameMode {
 		if (killed != null && _players.ContainsKey(killed))
 			_players.Remove(killed);
 		else
-			Debug.Log("killed player does not exist!");
+			Debug.Log("[LMS] killed player does not exist!");
 	}
 
 	public bool IsGameOver() {
