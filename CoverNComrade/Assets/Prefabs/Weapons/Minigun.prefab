@@ -798,13 +798,13 @@ MonoBehaviour:
   ProjectileSpawn:
   - {fileID: 489210}
   MyProjectile: {fileID: 11436408, guid: 535193be9796a3c42a46ce405ef9544a, type: 2}
-  TimeBetweenShots: 50
-  MuzzleVelocity: 100
+  TimeBetweenShots: 300
+  MuzzleVelocity: 13
   DamagePerProjectile: 1
-  BurstCount: 10
+  BurstCount: 5
   Shell: {fileID: 460596, guid: aa30404f5c88b9840b53712226ef0e2c, type: 2}
   ShellEjection: {fileID: 454808}
-  PoolSize: 100
+  PoolSize: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -814,11 +814,19 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: MuzzleVelocity
-      value: 100
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: PoolSize
-      value: 100
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: TimeBetweenShots
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: BurstCount
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

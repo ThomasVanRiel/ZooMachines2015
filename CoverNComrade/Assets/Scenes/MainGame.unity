@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -351,6 +351,56 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!1001 &740792490
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 129.750397
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 31.0028152
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -23.5566978
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453002, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541140, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_Size.y
+      value: 6.84241104
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541140, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+      propertyPath: m_Center.y
+      value: .921206474
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1132004043
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,15 +426,15 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: 1, g: .745638967, b: .514705896, a: 1}
+  m_Color: {r: 1, g: .951724112, b: .79411763, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
-    m_Strength: 1
+    m_Strength: .5
     m_Bias: .0500000007
     m_NormalBias: .400000006
   m_Cookie: {fileID: 0}
@@ -395,7 +445,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
@@ -410,7 +460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!1 &1366944603
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +489,7 @@ Transform:
   m_Children:
   - {fileID: 591375153}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &1366944605
 MonoBehaviour:
   m_ObjectHideFlags: 0
