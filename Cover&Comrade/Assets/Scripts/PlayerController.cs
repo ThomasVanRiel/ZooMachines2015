@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
 		// TODO: sets the killer to the one who shot the bullet,
 		//		 not needed right now as we don't need this in LMS mode.
-		if (Health == 0) {
+		if (Health == 0 && GameManager.playerKilled != null) {
 			GameManager.playerKilled(null, this);
 		}
     }
