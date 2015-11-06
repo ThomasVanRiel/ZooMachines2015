@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d92654229849c883d5db8cfaf5931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerColor: {r: 1, g: 0, b: 0, a: 1}
   Velocity: 1
 --- !u!1001 &100100000
 Prefab:

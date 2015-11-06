@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     // PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
     public const int PlayerMaxHealth = 3;
 
+    public Color PlayerColor = Color.red;
+
     // Player's current health.
     private int _health;
     public int Health
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
     // Move moves the player to the given controller
     public void Move(Vector3 dir)
     {
-        _rb.velocity = dir * Velocity * Time.fixedDeltaTime;
+        _rb.velocity = dir.normalized * Velocity * Time.fixedDeltaTime;
     }
 
     // ProcessShoting makes the player shoot to the current direction he's facing

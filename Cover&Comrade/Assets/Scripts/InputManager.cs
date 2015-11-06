@@ -41,6 +41,15 @@ public class InputManager : MonoBehaviour
 
                 // Cumulative movement
                 _move[i] += new Vector2(_mice[i].XDelta, -_mice[i].YDelta);
+                if (_move[i].x < 0)
+                    _move[i].x = 0;
+                if (_move[i].y < 0)
+                    _move[i].y = 0;
+                if (_move[i].x > Camera.main.pixelWidth)
+                    _move[i].x = Camera.main.pixelWidth;
+                if (_move[i].y > Camera.main.pixelHeight)
+                    _move[i].y = Camera.main.pixelHeight;
+
                 // Cumulative scroll
                 _scroll[i] += _mice[i].ZDelta;
 
