@@ -24,32 +24,32 @@ public class CameraHandler : MonoBehaviour
 
         // set camera location and offset
         Vector3 avrPos = Vector3.zero;
-        int liveCount = 0;
+        List<PlayerController> livePlayers = new List<PlayerController>();
         if (PlayerList.Count > 0)
         {
             foreach (var item in PlayerList)
             {
                 if (item.Health > 0)
                 {
-                    ++liveCount;
                     avrPos += item.transform.position;
+                    livePlayers.Add(item);
                 }
             }
-            avrPos = avrPos / liveCount;
+            avrPos = avrPos / livePlayers.Count;
         }
 
         // calc distance between furthest players
         float largestDist = 25;
-        if (liveCount >= 2)
+        if (livePlayers.Count >= 2)
         {
             float dist = 0;
-            for (int x = 0; x < PlayerList.Count; ++x)
+            for (int x = 0; x < livePlayers.Count; ++x)
             {
-                for (int y = 0; y < PlayerList.Count; ++y)
+                for (int y = 0; y < livePlayers.Count; ++y)
                 {
                     if (x != y)
                     {
-                        float temp = Vector3.Distance(PlayerList[x].transform.position, PlayerList[y].transform.position);
+                        float temp = Vector3.Distance(livePlayers[x].transform.position, livePlayers[y].transform.position);
                         if (temp > dist)
                         {
                             dist = temp;
@@ -61,7 +61,7 @@ public class CameraHandler : MonoBehaviour
         }
 
         bool cq = (largestDist < Offset) ? true : false;
-        float newOffset = Offset + ((largestDist - Offset) * ((cq) ? 0.3f : 0.85f));
+        float newOffset = Offset + ((largestDist - Offset) * ((cq) ? 0.3f : 0.50f));
 
         _dof.focalLength = Mathf.Abs(Offset - 1);
 
