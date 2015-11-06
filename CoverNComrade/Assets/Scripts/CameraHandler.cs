@@ -73,6 +73,7 @@ public class CameraHandler : MonoBehaviour
 
         _dof.focalLength = Mathf.Abs(Offset - 1);
 
+        transform.position = avrPos + (transform.forward * (-1) * newOffset);
 
 
         // set camera rotation
@@ -85,8 +86,5 @@ public class CameraHandler : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(newRotation);
 
-
-
-        transform.position = avrPos + (transform.forward * (-1) * newOffset);
     }
 }

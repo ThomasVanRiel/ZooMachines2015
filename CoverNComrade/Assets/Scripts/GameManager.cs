@@ -5,18 +5,27 @@ using System.Threading;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-	public LevelController Level;
+	public GameObject LevelPrefab;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
 
+	private LevelController _level;
+	private PlayerController[] _players;
 	private GameMode _gameMode;
 
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
 	public static PlayerKilledDelegate playerKilled;
 
+	public PlayerController[] Players() {
+		return _players;
+	}
+
 	void Start () {
 		InfoUI.SetActive(false);
+		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
+		_level = levelObject.GetComponent<LevelController>();
+
 		StartCoroutine(Setup());
 	}
 	
@@ -24,7 +33,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
 			InfoUI.SetActive(true);
-			InfoUI.GetComponent<Text>().text = string.Format("{0} is the last man standing", _gameMode.Winner());
+			InfoUI.GetComponent<Text>().text = string.Format("{0} won", _gameMode.Winner());
 		}
 	}
 
@@ -45,24 +54,25 @@ public class GameManager : MonoBehaviour {
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.AmountOfMice; i++) {
-			Transform spawnPos = Level.spawnPositions[nextSpawn++];
+			Transform spawnPos = _level.spawnPositions[nextSpawn++];
 			mouseID = i;
 #else
-		foreach (Transform spawnPos in Level.spawnPositions) {
+		foreach (Transform spawnPos in _level.spawnPositions) {
 #endif
 			GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 			PlayerController player = playerObject.GetComponent<PlayerController>();
 			playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
 			playerObject.GetComponent<MouseInputReceiver>().ID = mouseID;
 			playerObject.name = string.Format("Player {0}", mouseID + 1);
-			
+
 			players.Add(player);
 
 #if UNITY_EDITOR_WIN
-			if (nextSpawn > Level.spawnPositions.Length) {
+			if (nextSpawn > _level.spawnPositions.Length) {
 				nextSpawn = 0;
 			}
 #endif
+			_players = players.ToArray();
 			
 			yield return null;
 		}

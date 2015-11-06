@@ -21,6 +21,7 @@ public class Projectile : MonoBehaviour
     private float _skinWidth = 0.01f;
     //private float _altitude = 1.5f;
     private TrailRenderer _tr = null;
+    private PlayerController _owner = null;
 
     void Start()
     {
@@ -52,6 +53,16 @@ public class Projectile : MonoBehaviour
     public void SetDamage(int newDamage)
     {
         _damage = newDamage;
+    }
+
+    public void SetOwner(PlayerController newOwner)
+    {
+        _owner = newOwner;
+    }
+
+    public PlayerController GetOwnder()
+    {
+        return _owner;
     }
 
     public void SetTrailColor(Color newColor)
@@ -114,11 +125,11 @@ public class Projectile : MonoBehaviour
         if (c != null)
         {
             var scr = c.gameObject.GetComponent<PlayerController>();
-            if (scr != null)
+            if (scr != null && scr.Health > 0)
             {
                 GameObject p = Instantiate(PlayerShotParticlesPrefab, transform.position, transform.rotation) as GameObject;
                 Destroy(p, 3);
-                scr.TakeDamage(_damage);
+                scr.TakeDamage(_damage, _owner);
             }
         }
     }
