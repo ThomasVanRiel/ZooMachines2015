@@ -75,7 +75,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -263,97 +263,97 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: hip
-      position: {x: -.0248876382, y: .0167988595, z: 4.73813534}
+      position: {x: -.000248876371, y: .00016798859, z: .0473813526}
       rotation: {x: .707106829, y: 0, z: 0, w: .707106709}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: stomach
-      position: {x: -0, y: 1.11285973, z: 0}
+      position: {x: -0, y: .011128597, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: chest
-      position: {x: -0, y: 1.11285973, z: 0}
+      position: {x: -0, y: .011128597, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: shoulder
-      position: {x: -0, y: 1.11286068, z: 0}
+      position: {x: -0, y: .0111286063, z: 0}
       rotation: {x: .552634895, y: -.44112888, z: -.552634776, w: -.441128969}
       scale: {x: .99999994, y: .999999881, z: .999999881}
       transformModified: 1
     - name: upper arm
-      position: {x: 1.59847779e-09, y: 1.36760056, z: -3.04249852e-08}
+      position: {x: 1.59847777e-11, y: .0136760054, z: -3.04249848e-10}
       rotation: {x: .0985093564, y: 4.49162982e-08, z: 1.99559604e-08, w: .995136142}
       scale: {x: 1, y: .99999994, z: .99999994}
       transformModified: 1
     - name: lower arm
-      position: {x: 3.04032355e-10, y: 2.31942415, z: 6.76545966e-08}
+      position: {x: 3.04032342e-12, y: .0231942404, z: 6.7654593e-10}
       rotation: {x: .00212173769, y: -5.31051185e-08, z: 2.7199748e-10, w: .999997735}
       scale: {x: 1, y: .99999994, z: .99999994}
       transformModified: 1
     - name: lower arm_end
-      position: {x: -0, y: 2.07665849, z: 0}
+      position: {x: -0, y: .0207665842, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: chest.001
-      position: {x: -0, y: 1.43598461, z: 0}
+      position: {x: -0, y: .0143598458, z: 0}
       rotation: {x: -.0026695258, y: .707109749, z: .00266958517, w: .707093775}
       scale: {x: 1, y: .999999821, z: .99999994}
       transformModified: 1
     - name: chest.001_end
-      position: {x: -0, y: 1.36345112, z: 0}
+      position: {x: -0, y: .0136345113, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: shoulder.001
-      position: {x: .0185275078, y: 1.11286068, z: 0}
+      position: {x: .000185275072, y: .0111286063, z: 0}
       rotation: {x: .552634895, y: .44112885, z: -.552634895, w: .44112888}
       scale: {x: 1.00000012, y: 1.00000012, z: 1}
       transformModified: 1
     - name: upper arm.001
-      position: {x: -2.12433093e-09, y: 1.3676002, z: 5.77474886e-08}
+      position: {x: -2.12433092e-11, y: .0136760017, z: 5.77474846e-10}
       rotation: {x: -.0985094085, y: -2.49516262e-07, z: 5.67239624e-08, w: .995136142}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: lower arm.001
-      position: {x: 1.41147627e-09, y: 2.31942368, z: -9.93095526e-08}
+      position: {x: 1.41147623e-11, y: .0231942367, z: -9.93095495e-10}
       rotation: {x: -.00212173699, y: -4.25586506e-07, z: 2.53938093e-09, w: .999997735}
       scale: {x: 1, y: .999999821, z: .999999821}
       transformModified: 1
     - name: lower arm.001_end
-      position: {x: -0, y: 2.07665849, z: 0}
+      position: {x: -0, y: .0207665842, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: upper leg
-      position: {x: -.937899888, y: -.300080299, z: 9.31322575e-09}
+      position: {x: -.00937899854, y: -.00300080283, z: 9.31322519e-11}
       rotation: {x: .707105577, y: .00131562434, z: -.707105517, w: .00131562445}
       scale: {x: 1.00000703, y: 1.00000012, z: 1}
       transformModified: 1
     - name: lower leg
-      position: {x: 2.50249954e-09, y: 2.2911706, z: -8.71390426e-08}
+      position: {x: 2.50249942e-11, y: .0229117051, z: -8.71390404e-10}
       rotation: {x: -.0285025313, y: .70495069, z: .0339349136, w: .707870424}
       scale: {x: 1, y: 1, z: 1.00000012}
       transformModified: 1
     - name: lower leg_end
-      position: {x: -0, y: 2.05338502, z: 0}
+      position: {x: -0, y: .0205338504, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1
     - name: upper leg.001
-      position: {x: .956427574, y: -.300080299, z: 0}
+      position: {x: .00956427585, y: -.00300080283, z: 0}
       rotation: {x: .707105696, y: -.00131587707, z: -.707105458, w: -.00131587742}
       scale: {x: 1.00000703, y: 1.00000012, z: .99999994}
       transformModified: 1
     - name: lower leg.001
-      position: {x: 2.85679325e-09, y: 2.2911706, z: 3.84741128e-11}
+      position: {x: 2.8567931e-11, y: .0229117051, z: 3.84741121e-13}
       rotation: {x: -.0338171013, y: .704948723, z: .0286427028, w: .707872391}
       scale: {x: 1, y: 1, z: 1.00000012}
       transformModified: 1
     - name: lower leg.001_end
-      position: {x: -0, y: 2.05338502, z: 0}
+      position: {x: -0, y: .0205338504, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
       transformModified: 1

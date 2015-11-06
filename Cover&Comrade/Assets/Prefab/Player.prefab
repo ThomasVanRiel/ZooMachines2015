@@ -9,11 +9,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 466748}
   - 33: {fileID: 3328772}
-  - 136: {fileID: 13633480}
   - 23: {fileID: 2353918}
-  - 136: {fileID: 13651308}
   - 54: {fileID: 5454242}
   - 114: {fileID: 11433472}
+  - 136: {fileID: 13652470}
+  - 114: {fileID: 11422894}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 183096}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: b939fcc715c69514099ff7755e5d5885, type: 3}
 --- !u!54 &5454242
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -79,6 +79,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &11422894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b921193f735254b46a8d1a328bd626f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11433472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,9 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d92654229849c883d5db8cfaf5931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseID: 0
-  velocity: 1
---- !u!136 &13633480
+  Velocity: 1
+--- !u!136 &13652470
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -101,23 +111,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
+  m_Radius: .300000012
+  m_Height: 2.20522499
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &13651308
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 183096}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.1026125, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
