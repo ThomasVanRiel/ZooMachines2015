@@ -8,16 +8,16 @@ public class EmptyShell : MonoBehaviour
     public float ForceMin;
     public float ForceMax;
 
-    private Rigidbody _rigid = null;
-    private float _lifeTime = 5;
-    private float _fadeTime = 3;
+    private float _lifeTime = 4;
+    private float _fadeTime = 2;
 
     void Start()
     {
         float force = Random.Range(ForceMin, ForceMax);
-        _rigid = GetComponent<Rigidbody>();
-        _rigid.AddForce(transform.right * force);
-        _rigid.AddTorque(Random.insideUnitSphere * force);
+
+        Rigidbody rigid = GetComponent<Rigidbody>();
+        rigid.AddForce(transform.right * force);
+        rigid.AddTorque(Random.insideUnitSphere * force);
 
         StartCoroutine(Fade());
     }
