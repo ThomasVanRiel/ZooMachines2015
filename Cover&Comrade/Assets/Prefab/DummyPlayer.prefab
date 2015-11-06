@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2361082}
   - 54: {fileID: 5493354}
   - 114: {fileID: 11461310}
+  - 114: {fileID: 11425958}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -42,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.11083364, y: 6.48788071e-18, z: -2.92188168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 491702}
@@ -118,6 +119,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11425958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1006a981a6ed6954f98f7754d3e437ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11461310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,8 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d92654229849c883d5db8cfaf5931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MouseID: 0
-  velocity: 1
+  Velocity: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
