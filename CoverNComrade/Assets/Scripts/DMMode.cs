@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class DMMode : MonoBehaviour, GameMode {
+public class DMMode : GameMode {
 	private int _killsToWin;
 	private float _timeToRespawn;
 	private Dictionary<PlayerController, int> _players;
@@ -27,12 +27,12 @@ public class DMMode : MonoBehaviour, GameMode {
 	}
 
 	public void PlayerKilled(PlayerController killer, PlayerController killed) {
-		if (!_players.ContainsKey(killer)) {
+		if (killer == null || !_players.ContainsKey(killer)) {
 			Debug.LogWarningFormat("[DM] Killer {0} is unknown to this game", killer);
 			return;
 		}
 
-		if (!_players.ContainsKey(killed)) {
+		if (killed == null || !_players.ContainsKey(killed)) {
 			Debug.LogWarningFormat("[DM] Killed {0} is unknown to this game", killed);
 			return;
 		}
@@ -56,7 +56,8 @@ public class DMMode : MonoBehaviour, GameMode {
 			_winner = killerID;
 
 		_players.Remove(killed);
-		StartCoroutine(RespawnPlayerIn(killedID, _timeToRespawn));
+		GameManager.Command cmd = () => { return RespawnPlayerIn(killedID, _timeToRespawn); };
+		_gm.Execute(cmd);
 	}
 
 	// Returns whether or not the game is over
@@ -72,7 +73,7 @@ public class DMMode : MonoBehaviour, GameMode {
 	private IEnumerator RespawnPlayerIn(int id, float t) {
 		yield return new WaitForSeconds(t);
 
-		Debug.LogFormat("Respawning player {0} after {1}", id, t);
+		Debug.LogFormat("Respawning player {0} after {1}", id);
 		_players[_gm.SpawnPlayer(id)] = id;
 	}
 }

@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
 	public static PlayerKilledDelegate PlayerKilled;
 
+	public delegate IEnumerator Command();
+
 	void Start () {
 		InfoUI.SetActive(false);
 		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
@@ -69,10 +71,14 @@ public class GameManager : MonoBehaviour {
 
 		GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		_level = levelObject.GetComponent<LevelController>();
+#if UNITY_EDITOR_WIN
 		_gameMode.Setup(this, InputManager.AmountOfMice);
+#else
+		_gameMode.Setup(this, _level.spawnPositions.Length);
+#endif
 	}
 
-	public PlayerController SpawnPlayer(int id) {
+	public PlayerController SpawnPlayer(int playerID) {
 		Transform spawnPos = _level.spawnPositions[_nextSpawn++];
 		if (_nextSpawn > _level.spawnPositions.Length)
 			_nextSpawn = 0;
@@ -80,15 +86,19 @@ public class GameManager : MonoBehaviour {
 		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 		PlayerController player = playerObject.GetComponent<PlayerController>();
 		playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
-		playerObject.GetComponent<MouseInputReceiver>().ID = id;
-		playerObject.name = string.Format("Player {0}", id + 1);
+		playerObject.GetComponent<MouseInputReceiver>().PlayerID = playerID;
+		playerObject.name = string.Format("Player {0}", playerID + 1);
 
-		_players[player] = id;
+		_players[player] = playerID;
 
 		if (_cam != null) {
 			_cam.SetPlayerList(new List<PlayerController>(_players.Keys));
 		}
 
 		return player;
+	}
+
+	public void Execute(Command cmd) {
+		StartCoroutine(cmd());
 	}
 }
