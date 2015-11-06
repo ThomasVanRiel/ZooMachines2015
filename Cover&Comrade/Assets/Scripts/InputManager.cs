@@ -9,7 +9,7 @@ using RawInputSharp;
 public class InputManager : MonoBehaviour
 {
 
-    private static int _amountOfMice;
+    public static int AmountOfMice { get; set; }
 
 #if UNITY_EDITOR_WIN
     private RawMouseDriver.RawMouseDriver _mousedriver;
@@ -54,7 +54,7 @@ public class InputManager : MonoBehaviour
             }
             catch { }
         }
-        if (_amountOfMice == 0)
+        if (AmountOfMice == 0)
             CalculateAmountOfMice();
     }
 
@@ -106,19 +106,19 @@ public class InputManager : MonoBehaviour
 
     private int CalculateAmountOfMice()
     {
-        _amountOfMice = 0;
+        AmountOfMice = 0;
         for (int i = 0; i < _mice.Length; i++)
         {
             try
             {
                 // Get mouse
                 if (_mice[i] != null)
-                    ++_amountOfMice;
+                    ++AmountOfMice;
             }
             catch { }
         }
 
-        return _amountOfMice;
+        return AmountOfMice;
     }
 
     #region Getters
@@ -245,7 +245,7 @@ public class InputManager : MonoBehaviour
 
     private static bool IsValidMouse(int id)
     {
-        if (id >= _amountOfMice)
+        if (id >= AmountOfMice)
         {
             Debug.LogWarning("InputManager.IsValidMouse() - mouse " + id + " is not a recognised id.");
             return false;
