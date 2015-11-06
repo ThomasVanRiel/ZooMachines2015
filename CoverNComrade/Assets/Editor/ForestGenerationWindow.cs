@@ -76,6 +76,8 @@ public class ForestGenerationWindow : EditorWindow {
             GameObject obj = (Instantiate(_prefab, pos, rot) as GameObject);
             obj.name = _prefab.name + "_" + _index++;
             obj.transform.parent = _triangle.transform;
+            float scale = Random.Range(1.0f, 2.0f);
+            obj.transform.localScale = new Vector3(scale, scale, scale);
             Undo.RegisterCreatedObjectUndo(obj, "instantiated prefab");
         }
 
