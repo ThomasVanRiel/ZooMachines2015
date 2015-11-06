@@ -100,10 +100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d211814c6f1a74283263d222a40fb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWalkSpeed: 10
-  MaxRunSpeed: 20
-  RotationSpeed: 120
-  AccelerationSpeed: 5
+  MaxWalkSpeed: 5
+  MaxRunSpeed: 10
+  RotationSpeed: 180
+  AccelerationSpeed: 100
   IsRunning: 0
 --- !u!143 &808736341
 CharacterController:
