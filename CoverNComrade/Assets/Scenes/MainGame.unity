@@ -431,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea319e0f72a76490b86f47414f4da9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPrefab: {fileID: 131704, guid: 091c0e9c672cd844398aed1ed6c169ff, type: 2}
+  LevelPrefab: {fileID: 105598, guid: eb6fc7aa46d0d8a4090663d13a288526, type: 2}
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 2068349251}
   InfoUI: {fileID: 359247823}
