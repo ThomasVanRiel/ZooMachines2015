@@ -5,18 +5,27 @@ using System.Threading;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
-	public LevelController Level;
+	public GameObject LevelPrefab;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
 
+	private LevelController _level;
+	private PlayerController[] _players;
 	private GameMode _gameMode;
 
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
 	public static PlayerKilledDelegate playerKilled;
 
+	public PlayerController[] Players() {
+		return _players;
+	}
+
 	void Start () {
 		InfoUI.SetActive(false);
+		GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
+		_level = levelObject.GetComponent<LevelController>();
+
 		StartCoroutine(Setup());
 	}
 	
@@ -48,7 +57,7 @@ public class GameManager : MonoBehaviour {
 			Transform spawnPos = Level.spawnPositions[nextSpawn++];
 			mouseID = i;
 #else
-		foreach (Transform spawnPos in Level.spawnPositions) {
+		foreach (Transform spawnPos in _level.spawnPositions) {
 #endif
 			GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 			PlayerController player = playerObject.GetComponent<PlayerController>();
@@ -63,6 +72,7 @@ public class GameManager : MonoBehaviour {
 				nextSpawn = 0;
 			}
 #endif
+			_players = players.ToArray();
 			
 			yield return null;
 		}
