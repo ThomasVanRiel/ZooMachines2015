@@ -5,6 +5,10 @@ public class MouseInputReceiver : MonoBehaviour, IInputReceiver
 {
     public int PlayerID { get; set; }
 
+    public Vector3 GetMousePosition()
+    {
+        return InputManager.GetMousePosition(PlayerID);
+    }
     public float GetMouseX()
     {
         return InputManager.GetMouseX(PlayerID);

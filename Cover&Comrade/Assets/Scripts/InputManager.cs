@@ -125,6 +125,25 @@ public class InputManager : MonoBehaviour
     #region Getters
 
     /// <summary>
+    /// Get position of requested mouse.
+    /// </summary>
+    /// <param name="id">Mouse id</param>
+    /// <returns>X position of requested mouse.</returns>
+    public static Vector3 GetMousePosition(int id)
+    {
+#if UNITY_EDITOR
+        // Check if id is recognised
+        if (!IsValidMouse(id))
+            return Vector3.zero;
+#endif
+#if UNITY_EDITOR_WIN
+        return new Vector3(_move[id].x, _move[id].y, 0);
+#else
+        return Input.mousePosition;
+#endif
+    }
+
+    /// <summary>
     /// Get X position of requested mouse.
     /// </summary>
     /// <param name="id">Mouse id</param>
@@ -133,7 +152,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -152,7 +171,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -171,7 +190,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -190,7 +209,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButton() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 
@@ -210,7 +229,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButtonDown() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 
@@ -230,7 +249,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButtonDown() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 

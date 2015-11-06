@@ -20,14 +20,19 @@ public class KeyboardInputReceiver : MonoBehaviour, IInputReceiver
     {
     };
 
+    public Vector3 GetMousePosition()
+    {
+        return Input.mousePosition;
+    }
+
     public float GetMouseX()
     {
-        return Input.GetAxis("Mouse X");
+        return Input.mousePosition.x;
     }
 
     public float GetMouseY()
     {
-        return Input.GetAxis("Mouse Y");
+        return Input.mousePosition.y;
     }
 
     public bool GetMouseButton(int button)

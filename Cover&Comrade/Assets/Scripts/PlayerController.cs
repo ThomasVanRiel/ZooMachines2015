@@ -30,14 +30,12 @@ public class PlayerController : MonoBehaviour
 
     public float Velocity = 1.0f;
 
+    // Components
     private Rigidbody _rb;
-
     private IInputReceiver _input;
-
     private WeaponController _weaponController;
-
-    // TODO: Equip a WeaponController to the player controller
-    // TODO: Input for the player controller
+    private Transform _transf;
+    
     // TODO: Subscribe to GameManager player die event
 
     public void Start()
@@ -45,14 +43,22 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
+        _transf = transform;
     }
 
     public void FixedUpdate()
-    {
-        float moveX = _input.GetMouseX();
-        float moveY = _input.GetMouseY();
+    { 
+        // Setup Raycast
+        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Move
+            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
+            //Debug.Log(dir);
+            Move(dir);
+        }
 
-        this.Move(new Vector3(moveX, 0, moveY));
     }
 
     public void Update()
@@ -63,14 +69,12 @@ public class PlayerController : MonoBehaviour
     // Move moves the player to the given controller
     public void Move(Vector3 dir)
     {
-        // TODO: makes the player move
         _rb.velocity = dir * Velocity * Time.fixedDeltaTime;
     }
 
     // ProcessShoting makes the player shoot to the current direction he's facing
     public void ProcessShooting()
     {
-        //Debug.Log("SHOOTING");
         if (_input.GetMouseButton(0))
             _weaponController.OnTriggerHold();
         else if (_input.GetMouseButtonUp(0))
