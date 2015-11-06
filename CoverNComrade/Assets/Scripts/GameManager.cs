@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
-	public LevelController level;
-	public GameObject playerPrefab; // the player prefab to spawn
+	public LevelController Level;
+	public GameObject PlayerPrefab; // the player prefab to spawn
+	public GameObject CursorUI;
 
 	private GameMode _gameMode;
 
@@ -13,17 +14,21 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		List<PlayerController> players = new List<PlayerController>();
 
+		int mouseID = 0;
 #if UNITY_EDITOR_WIN
 		// TODO: in case number of mice is higher than the number of spawns,
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.AmountOfMice; i++) {
 			Transform spawnPos = level.spawnPositions[nextSpawn++];
+			mouseID = i;
 #else
-		foreach (Transform spawnPos in level.spawnPositions) {
+		foreach (Transform spawnPos in Level.spawnPositions) {
 #endif
-			GameObject playerObject = GameObject.Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
+			GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
 			PlayerController player = playerObject.GetComponent<PlayerController>();
+			playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
+			playerObject.GetComponent<MouseInputReceiver>().ID = mouseID;
 			
 			players.Add(player);
 
@@ -40,7 +45,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (_gameMode.IsGameOver()) {
+		if (_gameMode != null && _gameMode.IsGameOver()) {
 			Debug.Log("Game is over!");
 			Debug.LogFormat("Winner is {0}", _gameMode.Winner());
 
