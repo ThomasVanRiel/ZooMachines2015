@@ -8,7 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 429896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GunStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 114: {fileID: 11422894}
   - 114: {fileID: 11446680}
   - 114: {fileID: 11489720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerColor: {r: 1, g: 0, b: 0, a: 1}
+  CursorStopDistance: 1
   Velocity: 500
 --- !u!114 &11446680
 MonoBehaviour:

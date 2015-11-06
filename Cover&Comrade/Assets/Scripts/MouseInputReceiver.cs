@@ -3,7 +3,14 @@ using System.Collections;
 
 public class MouseInputReceiver : MonoBehaviour, IInputReceiver
 {
+    public int ID = 0;
+
     public int PlayerID { get; set; }
+
+    void Start()
+    {
+        PlayerID = ID;
+    }
 
     public Vector3 GetMousePosition()
     {
