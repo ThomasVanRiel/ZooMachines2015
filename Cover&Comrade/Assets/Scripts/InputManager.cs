@@ -98,14 +98,12 @@ public class InputManager : MonoBehaviour
             _mouseDown[b] = new bool[NUM_MICE];
             _mouseUp[b] = new bool[NUM_MICE];
         }
-        
-#else
-        AmountOfMice = 1;
 #endif
     }
 
     private int CalculateAmountOfMice()
     {
+#if UNITY_EDITOR_WIN
         AmountOfMice = 0;
         for (int i = 0; i < _mice.Length; i++)
         {
@@ -118,10 +116,32 @@ public class InputManager : MonoBehaviour
             catch { }
         }
 
+#else
+        AmountOfMice = 1;
+#endif
         return AmountOfMice;
     }
 
     #region Getters
+
+    /// <summary>
+    /// Get position of requested mouse.
+    /// </summary>
+    /// <param name="id">Mouse id</param>
+    /// <returns>X position of requested mouse.</returns>
+    public static Vector3 GetMousePosition(int id)
+    {
+#if UNITY_EDITOR
+        // Check if id is recognised
+        if (!IsValidMouse(id))
+            return Vector3.zero;
+#endif
+#if UNITY_EDITOR_WIN
+        return new Vector3(_move[id].x, _move[id].y, 0);
+#else
+        return Input.mousePosition;
+#endif
+    }
 
     /// <summary>
     /// Get X position of requested mouse.
@@ -132,7 +152,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -151,7 +171,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -170,7 +190,7 @@ public class InputManager : MonoBehaviour
     {
 #if UNITY_EDITOR
         // Check if id is recognised
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return 0.0f;
 #endif
 #if UNITY_EDITOR_WIN
@@ -189,7 +209,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButton() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 
@@ -209,7 +229,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButtonDown() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 
@@ -229,7 +249,7 @@ public class InputManager : MonoBehaviour
             Debug.LogWarning("InputManager.GetMouseButtonDown() - mouse button " + button + " is not recognised.");
             return false;
         }
-        if (IsValidMouse(id))
+        if (!IsValidMouse(id))
             return false;
 #endif
 
@@ -245,6 +265,9 @@ public class InputManager : MonoBehaviour
 
     private static bool IsValidMouse(int id)
     {
+        if (AmountOfMice == 0)
+            return false;
+
         if (id >= AmountOfMice)
         {
             Debug.LogWarning("InputManager.IsValidMouse() - mouse " + id + " is not a recognised id.");

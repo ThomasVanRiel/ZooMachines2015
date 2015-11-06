@@ -5,6 +5,7 @@ public interface IInputReceiver
 {
     int PlayerID { get; set; }
 
+    Vector3 GetMousePosition();
     float GetMouseX();
     float GetMouseY();
     bool GetMouseButton(int button);
