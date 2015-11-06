@@ -27,37 +27,31 @@ public class DMMode : GameMode {
 	}
 
 	public void PlayerKilled(PlayerController killer, PlayerController killed) {
-		if (killer == null || !_players.ContainsKey(killer)) {
-			Debug.LogWarningFormat("[DM] Killer {0} is unknown to this game", killer);
-			return;
+		if (killer != null && _players.ContainsKey(killer)) {
+			int killerID = _players[killer];
+
+			if (killer == killed) {
+				// if it was suicide
+				_scores[killerID] -= 1;
+				Debug.LogFormat("Player {0} lost one point for killing himself!", killerID);
+			} else {
+				// otherwise, give it one point
+				_scores[killerID] += 1;
+				Debug.LogFormat("Player {0} got one point!", killerID);
+			}
+
+			// determine if the killer is the winner, and there are still no winner
+			if (_scores[killerID] >= _killsToWin && _winner != -1)
+				_winner = killerID;
 		}
 
-		if (killed == null || !_players.ContainsKey(killed)) {
-			Debug.LogWarningFormat("[DM] Killed {0} is unknown to this game", killed);
-			return;
+		if (killed != null && _players.ContainsKey(killed)) {
+			int killedID = _players[killed];
+
+			_players.Remove(killed);
+			GameManager.Command cmd = () => { return RespawnPlayerIn(killedID, _timeToRespawn); };
+			_gm.Execute(cmd);
 		}
-
-		// Get the killer player
-		int killerID = _players[killer];
-		int killedID = _players[killed];
-	
-		if (killerID == killedID) {
-			// if it was suicide
-			_scores[killerID] -= 1;
-			Debug.LogFormat("Player {0} lost one point for killing himself!", killedID);
-		} else {
-			// otherwise, give it one point
-			_scores[killerID] += 1;
-			Debug.LogFormat("Player {0} got one point for killing player {1}!", killerID, killedID);
-		}
-
-		// determine if the killer is the winner, and there are still no winner
-		if (_scores[killerID] >= _killsToWin && _winner != -1)
-			_winner = killerID;
-
-		_players.Remove(killed);
-		GameManager.Command cmd = () => { return RespawnPlayerIn(killedID, _timeToRespawn); };
-		_gm.Execute(cmd);
 	}
 
 	// Returns whether or not the game is over
