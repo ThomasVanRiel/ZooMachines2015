@@ -99,7 +99,7 @@ MonoBehaviour:
   LevelPrefab: {fileID: 0}
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 0}
-  InfoUI: {fileID: 107070}
+  InfoUI: {fileID: 118030}
 --- !u!114 &11428790
 MonoBehaviour:
   m_ObjectHideFlags: 1

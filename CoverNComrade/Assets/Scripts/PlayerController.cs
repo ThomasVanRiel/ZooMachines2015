@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         // Don't do anything if dead.
         if (Health <= 0)
             return;
-        
+
         ProcessMovement();
 
     }
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         if (_weaponController != null)
-			ProcessShooting();
+            ProcessShooting();
     }
 
     // Move moves the player to the given controller
@@ -138,17 +138,41 @@ public class PlayerController : MonoBehaviour
     void ProcessAnimations()
     {
         // Pre calc
-        float angleA = Mathf.Atan2(_prevForward.x, transform.forward.z) * Mathf.Rad2Deg;
-        float angleB = Mathf.Atan2(transform.forward.x, _prevForward.z) * Mathf.Rad2Deg;
-        var angleDiff = Mathf.DeltaAngle(angleA, angleB);
+        float leftRightDirection = 0;
+        if (_isRunning)
+        {
+            var angleDiff = Mathf.Atan2(
+                Vector3.Dot(Vector3.up, Vector3.Cross(_prevForward, transform.forward)),
+                Vector3.Dot(_prevForward, transform.forward)) * Mathf.Rad2Deg;
 
-        angleDiff = Mathf.Lerp(_prevLeftRightDirection, angleDiff, .01f);
+            if (Mathf.Abs(angleDiff) < .001f)
+                angleDiff = 0;
+            else
+                angleDiff = Mathf.Sign(angleDiff);
+
+            float diff = 0.1f;
+
+            if (angleDiff > _prevLeftRightDirection)
+            {
+                leftRightDirection = _prevLeftRightDirection + diff * Time.deltaTime;
+                if (leftRightDirection > angleDiff)
+                    leftRightDirection = angleDiff;
+            }
+            if (angleDiff < _prevLeftRightDirection)
+            {
+                leftRightDirection = _prevLeftRightDirection - diff * Time.deltaTime;
+                if (leftRightDirection < angleDiff)
+                    leftRightDirection = angleDiff;
+            }
+
+        }
         
-
+        _prevLeftRightDirection = leftRightDirection;
+        _prevForward = transform.forward;
 
         _animator.SetFloat("Speed", _isRunning ? 1 : 0);
         _animator.SetBool("IsRunning", _isRunning);
-        _animator.SetFloat("LeftRightDirection", Mathf.Sign(angleDiff));
+        _animator.SetFloat("LeftRightDirection", Mathf.Sign(leftRightDirection));
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _animator.SetTrigger("Shoot");
@@ -171,16 +195,17 @@ public class PlayerController : MonoBehaviour
 
         Health -= dmg;
 
-		// TODO: sets the killer to the one who shot the bullet,
-		//		 not needed right now as we don't need this in LMS mode.
-		if (Health == 0) {
+        // TODO: sets the killer to the one who shot the bullet,
+        //		 not needed right now as we don't need this in LMS mode.
+        if (Health == 0)
+        {
             if (GameManager.PlayerKilled != null)
-    			GameManager.PlayerKilled(enemy, this);
+                GameManager.PlayerKilled(enemy, this);
             // Desaturate
-		    StartCoroutine(FadeColor(2));
-		    _isRunning = false;
-		    // TODO: Disable team indicator
-		}
+            StartCoroutine(FadeColor(2));
+            _isRunning = false;
+            // TODO: Disable team indicator
+        }
     }
 
     // IsAlive returns whether or not the player is still alive.
@@ -197,7 +222,7 @@ public class PlayerController : MonoBehaviour
         while (timeRemaining > 0)
         {
             // Desaturate
-            newColor.s = timeRemaining/t;
+            newColor.s = timeRemaining / t;
             PlayerColor = HSBColor.ToColor(newColor);
             // Decrease time
             timeRemaining -= Time.fixedDeltaTime;

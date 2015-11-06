@@ -75,9 +75,11 @@ public class GameManager : MonoBehaviour {
 			
 			yield return null;
 		}
-		
-		// give playerlist to the camera, so it can follow all players
-		Camera.main.gameObject.GetComponent<CameraHandler>().SetPlayerList(players);
+
+        // give playerlist to the camera, so it can follow all players
+        CameraHandler cam = Camera.main.gameObject.GetComponent<CameraHandler>();
+	    if (cam != null)
+            cam.SetPlayerList(players);
 		_players = players.ToArray();
 
 		_gameMode = new LMSMode(players);
