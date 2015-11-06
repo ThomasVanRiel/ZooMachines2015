@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouesInputReceiver : MonoBehaviour, IInputReceiver
+public class MouseInputReceiver : MonoBehaviour, IInputReceiver
 {
     public int PlayerID { get; set; }
 
