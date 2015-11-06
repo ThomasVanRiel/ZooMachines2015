@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.9332242, y: 1.23800004, z: 9.32379246}
+  m_LocalPosition: {x: 3.36500001, y: .122162126, z: -8.45800018}
   m_LocalScale: {x: .803923011, y: .803923011, z: .803923011}
   m_Children:
   - {fileID: 445330}
@@ -72,9 +72,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125602}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0828775838, y: .0828775838, z: .177524537}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: -9.26779986e-09, z: 0}
+  m_LocalScale: {x: .452423602, y: .452423692, z: .452423692}
   m_Children: []
   m_Father: {fileID: 418152}
   m_RootOrder: 0
@@ -120,7 +120,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125602}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &6533872
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -158,7 +158,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Time: .300000012
-  m_StartWidth: .100000001
+  m_StartWidth: .300000012
   m_EndWidth: .00100000005
   m_Colors:
     m_Color[0]:
@@ -252,7 +252,7 @@ ParticleSystem:
         m_PostInfinity: 2
       minMaxState: 0
     startSpeed:
-      scalar: 1
+      scalar: 2.41000009
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -446,7 +446,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: 0
     inheritVelocity: 0
-    maxNumParticles: 250
+    maxNumParticles: 500
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -465,7 +465,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 250
+      scalar: 500
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1279,11 +1279,11 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_MaxParticleSize: .100000001
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
-  m_LengthScale: 2
+  m_LengthScale: 5.21999979
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
@@ -1360,7 +1360,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: EmissionModule.rate.scalar
-      value: 250
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startSpeed.scalar
@@ -1384,7 +1384,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.maxNumParticles
-      value: 250
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: TrailColor.r
@@ -1414,6 +1414,14 @@ Prefab:
       propertyPath: PlayerShotParticlesPrefab
       value: 
       objectReference: {fileID: 142772, guid: 84c3aff5ad8a7444fbd5456104cf33b8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LengthScale
+      value: 5.21999979
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 122068}
