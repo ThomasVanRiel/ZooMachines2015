@@ -131,7 +131,9 @@ public class PlayerController : MonoBehaviour
 		if (Health == 0) {
             if (GameManager.playerKilled != null)
     			GameManager.playerKilled(null, this);
+            // Desaturate
 		    StartCoroutine(FadeColor(2));
+            // TODO: Disable team indicator
 		}
     }
 
