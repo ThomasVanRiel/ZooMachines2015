@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
 			InfoUI.SetActive(true);
-			InfoUI.GetComponent<Text>().text = string.Format("{0} won", _gameMode.Winner());
+			InfoUI.GetComponent<Text>().text = string.Format("Player {0} won", _gameMode.Winner() + 1);
 		}
 	}
 
