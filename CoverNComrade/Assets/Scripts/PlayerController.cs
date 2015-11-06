@@ -100,7 +100,9 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3 dir)
     {
         dir.Normalize();
-        _rb.velocity = dir * Velocity * Time.fixedDeltaTime;
+        Vector3 vel = dir * Velocity * Time.fixedDeltaTime;
+        vel.y = _rb.velocity.y;
+        _rb.velocity = vel;
         _transf.forward = dir;
     }
 
