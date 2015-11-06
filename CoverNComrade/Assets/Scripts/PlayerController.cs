@@ -10,7 +10,12 @@ public class PlayerController : MonoBehaviour
     // PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
     public const int PlayerMaxHealth = 3;
 
+    private bool _isRunning = false;
+
     private Color _playerColor = Color.red;
+
+    private Vector3 _prevForward;
+    private float _prevLeftRightDirection = 0;
 
     public Color PlayerColor
     {
@@ -48,7 +53,9 @@ public class PlayerController : MonoBehaviour
     private IInputReceiver _input;
     private WeaponController _weaponController;
     private Transform _transf;
+    public Renderer MeshRender;
     private Material _mat;
+    private Animator _animator;
 
     public void Start()
     {
@@ -57,10 +64,14 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
         _transf = transform;
-        _mat = GetComponent<Renderer>().material;
+        _mat = MeshRender.material;
+        _animator = GetComponentInChildren<Animator>();
 
         // Colorize
         _mat.color = PlayerColor;
+
+        // 
+        _prevForward = _transf.forward;
     }
 
     public void FixedUpdate()
@@ -69,29 +80,20 @@ public class PlayerController : MonoBehaviour
         if (Health <= 0)
             return;
 
-        // Setup Raycast
-        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            // Move
-            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
-            if (dir.magnitude > CursorStopDistance)
-                Move(dir);
-            else
-                _rb.velocity = Vector3.zero;
-        }
+        ProcessMovement();
 
     }
 
     public void Update()
     {
+        ProcessAnimations();
+
         // Don't do anything if dead.
         if (Health <= 0)
             return;
 
         if (_weaponController != null)
-			ProcessShooting();
+            ProcessShooting();
     }
 
     // Move moves the player to the given controller
@@ -102,6 +104,28 @@ public class PlayerController : MonoBehaviour
         _transf.forward = dir;
     }
 
+    void ProcessMovement()
+    {
+        // Setup Raycast
+        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Move
+            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
+            if (dir.magnitude > CursorStopDistance)
+            {
+                Move(dir);
+                _isRunning = true;
+            }
+            else
+            {
+                _rb.velocity = Vector3.zero;
+                _isRunning = false;
+            }
+        }
+    }
+
     // ProcessShooting makes the player shoot to the current direction he's facing
     public void ProcessShooting()
     {
@@ -109,6 +133,51 @@ public class PlayerController : MonoBehaviour
             _weaponController.OnTriggerHold();
         else if (_input.GetMouseButtonUp(0))
             _weaponController.OnTriggerRelease();
+    }
+
+    void ProcessAnimations()
+    {
+        // Pre calc
+        float leftRightDirection = 0;
+        if (_isRunning)
+        {
+            var angleDiff = Mathf.Atan2(
+                Vector3.Dot(Vector3.up, Vector3.Cross(_prevForward, transform.forward)),
+                Vector3.Dot(_prevForward, transform.forward)) * Mathf.Rad2Deg;
+
+            if (Mathf.Abs(angleDiff) < .001f)
+                angleDiff = 0;
+            else
+                angleDiff = Mathf.Sign(angleDiff);
+
+            float diff = 0.1f;
+
+            if (angleDiff > _prevLeftRightDirection)
+            {
+                leftRightDirection = _prevLeftRightDirection + diff * Time.deltaTime;
+                if (leftRightDirection > angleDiff)
+                    leftRightDirection = angleDiff;
+            }
+            if (angleDiff < _prevLeftRightDirection)
+            {
+                leftRightDirection = _prevLeftRightDirection - diff * Time.deltaTime;
+                if (leftRightDirection < angleDiff)
+                    leftRightDirection = angleDiff;
+            }
+
+        }
+        
+        _prevLeftRightDirection = leftRightDirection;
+        _prevForward = transform.forward;
+
+        _animator.SetFloat("Speed", _isRunning ? 1 : 0);
+        _animator.SetBool("IsRunning", _isRunning);
+        _animator.SetFloat("LeftRightDirection", Mathf.Sign(leftRightDirection));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _animator.SetTrigger("Shoot");
+        }
+
     }
 
     // SetWeapon gives the player a new weapon and removes the old one
@@ -126,15 +195,17 @@ public class PlayerController : MonoBehaviour
 
         Health -= dmg;
 
-		// TODO: sets the killer to the one who shot the bullet,
-		//		 not needed right now as we don't need this in LMS mode.
-		if (Health == 0) {
+        // TODO: sets the killer to the one who shot the bullet,
+        //		 not needed right now as we don't need this in LMS mode.
+        if (Health == 0)
+        {
             if (GameManager.PlayerKilled != null)
-    			GameManager.PlayerKilled(enemy, this);
+                GameManager.PlayerKilled(enemy, this);
             // Desaturate
-		    StartCoroutine(FadeColor(2));
+            StartCoroutine(FadeColor(2));
+            _isRunning = false;
             // TODO: Disable team indicator
-		}
+        }
     }
 
     // IsAlive returns whether or not the player is still alive.
@@ -151,7 +222,7 @@ public class PlayerController : MonoBehaviour
         while (timeRemaining > 0)
         {
             // Desaturate
-            newColor.s = timeRemaining/t;
+            newColor.s = timeRemaining / t;
             PlayerColor = HSBColor.ToColor(newColor);
             // Decrease time
             timeRemaining -= Time.fixedDeltaTime;
