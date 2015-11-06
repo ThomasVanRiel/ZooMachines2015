@@ -7,6 +7,11 @@ public class Projectile : MonoBehaviour
     public LayerMask CollisionMask;
     public LayerMask BounceMask;
     public Color TrailColor = Color.white;
+    public float ParticleHueOffset = .05f;
+    private Color _particleColor = Color.white;
+
+    public ParticleSystem TrailParticles;
+    public GameObject BounceParticlesPrefab;
 
     private float _speed = 10;
     private int _damage = 1;
@@ -55,6 +60,15 @@ public class Projectile : MonoBehaviour
             _tr = GetComponent<TrailRenderer>();
         if (_tr != null)
             _tr.material.color = TrailColor;
+
+        HSBColor partColor = new HSBColor(TrailColor);
+        float hue = partColor.h;
+        hue += ParticleHueOffset;
+        if (hue > 1)
+            hue -= 1;
+        partColor.h = hue;
+        _particleColor = HSBColor.ToColor(partColor);
+        TrailParticles.startColor = _particleColor;
     }
 
     void CheckCollisions(float moveDistance)
@@ -80,6 +94,16 @@ public class Projectile : MonoBehaviour
             Vector3 reflectDir = Vector3.Reflect(ray.direction, hit.normal);
             float rot = 90 - Mathf.Atan2(reflectDir.z, reflectDir.x) * Mathf.Rad2Deg;
             transform.eulerAngles = new Vector3(0, rot, 0);
+
+            // Add bounce particles
+            Vector3 forw = Vector3.Cross(hit.normal, Vector3.up);
+            Quaternion particlesRot = Quaternion.LookRotation(hit.normal, forw);
+            if (Vector3.Cross(hit.normal, ray.direction).y > 0)
+                particlesRot *= Quaternion.Euler(0, 0, 180);
+
+            GameObject p = Instantiate(BounceParticlesPrefab, transform.position, particlesRot) as GameObject;
+            p.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = _particleColor;
+            Destroy(p, 2);
         }
     }
 
