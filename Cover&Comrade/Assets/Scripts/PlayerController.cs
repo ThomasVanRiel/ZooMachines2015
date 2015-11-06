@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 	// PlayerMaxHealth is the player's maximum amount of health the player can have at any given time.
 	public const int PlayerMaxHealth = 3;
 
+    public int MouseID;
+
 	// Player's current health.
 	public int health {
 		get {
