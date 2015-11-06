@@ -107,6 +107,10 @@ public class InputManager : MonoBehaviour
         _mice = new RawMouse[NUM_MICE];
         _move = new Vector2[NUM_MICE];
         _scroll = new float[NUM_MICE];
+        for (int i = 0; i < NUM_MICE; ++i)
+        {
+            _move[i] = new Vector2(Camera.main.pixelWidth, Camera.main.pixelHeight)/2;
+        }
 
         // Buttons
         _prevMouse = new bool[NUM_BUTTONS][];
