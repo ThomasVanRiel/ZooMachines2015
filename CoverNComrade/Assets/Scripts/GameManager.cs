@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
 			InfoUI.SetActive(true);
-			InfoUI.GetComponent<Text>().text = string.Format("{0} is the last man standing", _gameMode.Winner());
+			InfoUI.GetComponent<Text>().text = string.Format("{0} won", _gameMode.Winner());
 		}
 	}
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
 		//		 we need to properly place the new player.
 		int nextSpawn = 0;
 		for (int i = 0; i < InputManager.AmountOfMice; i++) {
-			Transform spawnPos = Level.spawnPositions[nextSpawn++];
+			Transform spawnPos = _level.spawnPositions[nextSpawn++];
 			mouseID = i;
 #else
 		foreach (Transform spawnPos in _level.spawnPositions) {
@@ -64,11 +64,11 @@ public class GameManager : MonoBehaviour {
 			playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
 			playerObject.GetComponent<MouseInputReceiver>().ID = mouseID;
 			playerObject.name = string.Format("Player {0}", mouseID + 1);
-			
+
 			players.Add(player);
 
 #if UNITY_EDITOR_WIN
-			if (nextSpawn > Level.spawnPositions.Length) {
+			if (nextSpawn > _level.spawnPositions.Length) {
 				nextSpawn = 0;
 			}
 #endif
