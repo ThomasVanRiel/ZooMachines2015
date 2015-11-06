@@ -76,7 +76,7 @@ GameObject:
   - 4: {fileID: 453690}
   - 114: {fileID: 11425572}
   m_Layer: 0
-  m_Name: TestGun_Guntran
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975e16030a0341d47ada97c9158e55c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireMode: 2
+  FireMode: 0
   ProjectileSpawn:
   - {fileID: 477378}
   MyProjectile: {fileID: 11436408, guid: 535193be9796a3c42a46ce405ef9544a, type: 2}
@@ -266,7 +266,7 @@ Prefab:
       objectReference: {fileID: 418152, guid: 535193be9796a3c42a46ce405ef9544a, type: 2}
     - target: {fileID: 0}
       propertyPath: FireMode
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: MuzzleVelocity

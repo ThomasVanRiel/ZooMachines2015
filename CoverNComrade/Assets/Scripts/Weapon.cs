@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour 
 {
@@ -18,9 +18,11 @@ public class Weapon : MonoBehaviour
 	public Transform Shell;
 	public Transform ShellEjection;
 
+
 	private float _nextShotTime;
 	private bool _triggerReleasedSinceLastShot;
 	private int _shotsRemainingInBurst;
+    private Color _trailColor = Color.white;
 
 	void Start () 
 	{
@@ -51,6 +53,7 @@ public class Weapon : MonoBehaviour
 				Projectile newProjectile = Instantiate(MyProjectile, ProjectileSpawn[i].position, ProjectileSpawn[i].rotation) as Projectile;
 				newProjectile.SetSpeed(MuzzleVelocity);
                 newProjectile.SetDamage(DamagePerProjectile);
+                newProjectile.TrailColor = _trailColor;
 			
 				// Create bullet case ejection (for each bullet fired)
 				if (Shell != null)
@@ -72,4 +75,9 @@ public class Weapon : MonoBehaviour
 		_triggerReleasedSinceLastShot = true;
 		_shotsRemainingInBurst = BurstCount;
 	}
+
+    public void SetTrailColor(Color newColor)
+    {
+        _trailColor = newColor;
+    }
 }

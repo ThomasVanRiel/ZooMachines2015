@@ -6,6 +6,8 @@ public class WeaponController : MonoBehaviour
     public Transform WeaponHold;
     public Weapon StartingWeapon = null;
 
+    public Color PlayerColor = Color.blue;
+
     private Weapon _equippedWeapon = null;
 
     void Start()
@@ -20,12 +22,13 @@ public class WeaponController : MonoBehaviour
     {
         if (_equippedWeapon != null)
         {
-            DestroyImmediate(_equippedWeapon);
+            Destroy(_equippedWeapon.gameObject);
         }
 
+        _equippedWeapon = null;
         _equippedWeapon = Instantiate(weaponToEquip, WeaponHold.position, WeaponHold.rotation) as Weapon;
         _equippedWeapon.transform.parent = WeaponHold;
-
+        _equippedWeapon.SetTrailColor(PlayerColor);
     }
 
     public void OnTriggerHold()

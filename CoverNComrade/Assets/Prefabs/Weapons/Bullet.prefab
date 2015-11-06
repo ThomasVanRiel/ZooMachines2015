@@ -11,7 +11,7 @@ GameObject:
   - 114: {fileID: 11436408}
   - 96: {fileID: 9626762}
   m_Layer: 0
-  m_Name: TestBullet_Guntran
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,19 +133,19 @@ TrailRenderer:
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4294114815
+      rgba: 4278245631
     m_Color[1]:
       serializedVersion: 2
       rgba: 3204382950
     m_Color[2]:
       serializedVersion: 2
-      rgba: 2164260863
+      rgba: 2164195579
     m_Color[3]:
       serializedVersion: 2
-      rgba: 1308622847
+      rgba: 1308557563
     m_Color[4]:
       serializedVersion: 2
-      rgba: 16777215
+      rgba: 255
   m_MinVertexDistance: .100000001
   m_Autodestruct: 0
 --- !u!114 &11436408
@@ -212,6 +212,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Parameters.m_EndColor.rgba
       value: 16711720
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_Color[2].rgba
+      value: 2164195579
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_Color[3].rgba
+      value: 1308557563
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_Color[0].rgba
+      value: 4278245631
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Colors.m_Color[4].rgba
+      value: 255
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
