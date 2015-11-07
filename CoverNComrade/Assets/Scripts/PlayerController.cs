@@ -11,24 +11,14 @@ public class PlayerController : MonoBehaviour
     public const int PlayerMaxHealth = 3;
 
     private bool _isRunning = false;
+    public bool CanMove = false;
+    public bool CanShoot = false;
 
     private Plane _plane = new Plane(Vector3.up, Vector3.zero);
 
     private Vector3 _prevForward;
     private float _prevLeftRightDirection = 0;
     public float CursorStopDistance = 1;
-
-    //private Color _playerColor = Color.red;
-    //public Color PlayerColor
-    //{
-    //    get { return _playerColor; }
-    //    set
-    //    {
-    //        _playerColor = value;
-    //        _mat.color = _playerColor;
-    //    }
-    //}
-    //private bool _hasSetColor = false;
 
 
     // Player's current health.
@@ -114,17 +104,7 @@ public class PlayerController : MonoBehaviour
         if (Health <= 0)
             return;
 
-        //if (!_hasSetColor)
-        //{
-        //    // Set Color dynamically
-        //    if (InputManager.AmountOfMice > 0)
-        //    {
-        //        PlayerColor = HSBColor.ToColor(new HSBColor((float)_input.PlayerID / InputManager.AmountOfMice, 1, 1));
-        //    }
-        //    _hasSetColor = true;
-        //}
-
-        if (_weaponController != null)
+        if (_weaponController != null && CanShoot)
             ProcessShooting();
     }
 
@@ -140,6 +120,9 @@ public class PlayerController : MonoBehaviour
 
     void ProcessMovement()
     {
+        if (!CanMove)
+            return;
+
         //// TEST FOR JOYSTICKS        
         //Vector3 dirr = Vector3.zero;
         //int pi = GetComponent<MouseInputReceiver>().PlayerID;
@@ -261,6 +244,8 @@ public class PlayerController : MonoBehaviour
             PlayerIndicator.gameObject.SetActive(false);
             gameObject.layer = LayerMask.NameToLayer("PlayerDead");
             RagDoll.Ragdolled = true;
+            CanMove = false;
+            CanShoot = false;
         }
     }
 
