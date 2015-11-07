@@ -24,6 +24,11 @@ public class Utilities : MonoBehaviour {
     
     private Dictionary<string, string> _settings = new Dictionary<string, string>();
 
+    void Awake() {
+        DontDestroyOnLoad(this.gameObject);
+        Application.LoadLevel(Application.loadedLevel + 1);
+    }
+
     public void UpdateSettings() {
         _settings.Clear();
         XElement settingsList = XElement.Load(string.Format("{0}/{1}", Application.dataPath, "Settings.xml"));
@@ -31,6 +36,8 @@ public class Utilities : MonoBehaviour {
         foreach (var item in settingsList.Descendants()){
             _settings.Add(item.Name.ToString(), item.Value);
         }
+
+
 
     }
 
