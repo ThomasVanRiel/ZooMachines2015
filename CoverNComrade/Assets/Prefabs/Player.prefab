@@ -994,7 +994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06d92654229849c883d5db8cfaf5931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CursorStopDistance: .5
+  CursorStopDistance: 1
   Velocity: 500
   PlayerIndicator: {fileID: 11911992}
   RagDoll: {fileID: 11451912}
@@ -1698,7 +1698,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: CursorStopDistance
-      value: .5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: StartingWeapon
