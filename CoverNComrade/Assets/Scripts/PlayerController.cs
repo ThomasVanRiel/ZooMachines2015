@@ -139,23 +139,23 @@ public class PlayerController : MonoBehaviour
 
     void ProcessMovement()
     {
-        // TEST FOR JOYSTICKS        
-        Vector3 dirr = Vector3.zero;
-        int pi = GetComponent<MouseInputReceiver>().PlayerID;
-        dirr.x = Input.GetAxis(string.Format("p{0}_MoveX", pi+1));
-        dirr.y = Input.GetAxis(string.Format("p{0}_MoveY", pi+1));
-        dirr.Normalize();
-        if (dirr.magnitude > .1f)
-        {
-            Move(dirr);
-            _isRunning = true;
-        }
-        else
-        {
-            _isRunning = false;
-            _rb.velocity = Vector3.zero;
-        }
-        return;
+        //// TEST FOR JOYSTICKS        
+        //Vector3 dirr = Vector3.zero;
+        //int pi = GetComponent<MouseInputReceiver>().PlayerID;
+        //dirr.x = Input.GetAxis(string.Format("p{0}_MoveX", pi+1));
+        //dirr.y = Input.GetAxis(string.Format("p{0}_MoveY", pi+1));
+        //dirr.Normalize();
+        //if (dirr.magnitude > .1f)
+        //{
+        //    Move(dirr);
+        //    _isRunning = true;
+        //}
+        //else
+        //{
+        //    _isRunning = false;
+        //    _rb.velocity = Vector3.zero;
+        //}
+        //return;
 
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
