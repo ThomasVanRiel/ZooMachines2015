@@ -70,7 +70,7 @@ TrailRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 2100000, guid: b6117fcf4e92a8147bb738d4da98cc6f, type: 2}
+  - {fileID: 2100000, guid: cb79bf606d9d27947bfb9ef89d8ddee1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1270,7 +1270,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b6117fcf4e92a8147bb738d4da98cc6f, type: 2}
+      objectReference: {fileID: 2100000, guid: cb79bf606d9d27947bfb9ef89d8ddee1, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Parameters.startWidth
       value: .5
