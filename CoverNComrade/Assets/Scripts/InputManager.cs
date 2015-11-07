@@ -317,6 +317,19 @@ public class InputManager : MonoBehaviour
 #endif
 
     }
+
+    public static int GetMouseButtonClicked(int button)
+    {
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+        for (int i = 0; i < NUM_MICE; ++i)
+        {
+            if (_mouseDown[button][i])
+                return i;
+        }
+#endif
+
+        return -1;
+    }
 #endregion
 
     public static void SetMouseOffset(Vector2 offset, int id)

@@ -224,10 +224,6 @@ Prefab:
       propertyPath: CursorUI
       value: 
       objectReference: {fileID: 1461681001}
-    - target: {fileID: 11426922, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
-      propertyPath: Level
-      value: 
-      objectReference: {fileID: 2060148148}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
   m_IsPrefabParent: 0
@@ -551,9 +547,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!114 &2060148148 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11446082, guid: 091c0e9c672cd844398aed1ed6c169ff,
-    type: 2}
-  m_PrefabInternal: {fileID: 206177284}
-  m_Script: {fileID: 11500000, guid: c08ba0be03ba748b592291a560ebe3f6, type: 3}

@@ -937,12 +937,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea319e0f72a76490b86f47414f4da9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPrefab: {fileID: 0}
   PlayerPrefab: {fileID: 183096, guid: 2cd6315cd8d7e314f8e4bd66ea0c99fc, type: 2}
   CursorUI: {fileID: 0}
-  InfoUI: {fileID: 0}
-  Level: {fileID: 0}
+  InfoUI: {fileID: 107070}
   ModeChoice: 0
+  SpawnPoints: []
 --- !u!114 &11434648
 MonoBehaviour:
   m_ObjectHideFlags: 1
