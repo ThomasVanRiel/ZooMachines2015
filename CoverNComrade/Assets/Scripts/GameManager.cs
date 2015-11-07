@@ -134,6 +134,11 @@ public class GameManager : MonoBehaviour {
 			InProgressUI.SetActive(false);
 			GameOverUI.SetActive(true);
 
+			foreach (KeyValuePair<int, PlayerController> player in _players) {
+				player.Value.CanMove = false;
+				player.Value.CanShoot = false;
+			}
+
 			_currentState = State.GameOver;
 			_updateState = UpdateGameOver;
 			break;
@@ -154,6 +159,22 @@ public class GameManager : MonoBehaviour {
 		if (_updateState != null) {
 			_updateState();
 		}
+
+	    if (_currentState != State.GameOver )
+	    {
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.Locked;
+#endif
+            Cursor.visible = false;
+        }
+	    else
+        {
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.None;
+#endif
+            Cursor.visible = true;
+
+        }
 	}
 
 	// UpdateWaiting is the update method in Waiting state
@@ -242,4 +263,12 @@ public class GameManager : MonoBehaviour {
         _spawnPointsIndex = (++_spawnPointsIndex) % SpawnPoints.Length;
         return index;
     }
+
+	public void Restart() {
+		Application.LoadLevel(Application.loadedLevelName);
+	}
+
+	public void Quit() {
+		Application.LoadLevel("MainMenu");
+	}
 }
