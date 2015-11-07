@@ -634,7 +634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &185792
 GameObject:
   m_ObjectHideFlags: 1
@@ -1231,6 +1231,7 @@ MonoBehaviour:
   CountdownText: {fileID: 11498750}
   InProgressUI: {fileID: 125622}
   GameOverUI: {fileID: 149282}
+  InfoText: {fileID: 0}
   SpawnPoints: []
 --- !u!114 &11437336
 MonoBehaviour:
@@ -2139,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: .768627465}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
