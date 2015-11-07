@@ -15,14 +15,13 @@ public class DMMode : GameMode {
 		_timeToRespawn = 3.0f;
 	}
 
-	public void Setup(GameManager gm, int nbPlayer) {
+	public void Setup(GameManager gm, Dictionary<int, PlayerController> players) {
 		_players = new Dictionary<int, int> ();
 		_scores = new Dictionary<int, int> ();
 		_gm = gm;
-
-		for (int i = 0; i < nbPlayer; i++) {
-			_players.Add(gm.SpawnPlayer(i).GetHashCode(), i);
-			_scores.Add(i, 0);
+		foreach (KeyValuePair<int, PlayerController> entry in players) {
+			_players.Add(entry.Value.GetHashCode(), entry.Key);
+			_scores.Add(entry.Key, 0);
 		}
 	}
 
