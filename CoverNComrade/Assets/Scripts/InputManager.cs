@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
 using RawMouseDriver;
 using RawInputSharp;
 #endif
