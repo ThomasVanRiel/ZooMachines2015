@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
 
     public Vector3[] SpawnPoints;
     private int _spawnPointsIndex;
-    private List<int> _spawnPointsOrder;
+    private List<int> _spawnPointsOrder = new List<int>();
 	
 	void Start () {
 		WaitingUI.SetActive(false);

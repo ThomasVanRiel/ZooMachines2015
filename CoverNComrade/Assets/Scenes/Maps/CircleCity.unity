@@ -4356,10 +4356,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 956678645}
   m_Mesh: {fileID: 4300000, guid: 3065d4b128b219f4bb17266737c72e5a, type: 3}
---- !u!1 &962299129 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 161176, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
-  m_PrefabInternal: {fileID: 1086930199}
 --- !u!1 &965135524
 GameObject:
   m_ObjectHideFlags: 0
@@ -5140,19 +5136,19 @@ Prefab:
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: WaitingUI
       value: 
-      objectReference: {fileID: 1169831840}
+      objectReference: {fileID: 0}
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: ReadyUI
       value: 
-      objectReference: {fileID: 962299129}
+      objectReference: {fileID: 0}
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: InProgressUI
       value: 
-      objectReference: {fileID: 1371824828}
+      objectReference: {fileID: 0}
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: GameOverUI
       value: 
-      objectReference: {fileID: 1669025574}
+      objectReference: {fileID: 0}
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: Level
       value: 
@@ -5228,7 +5224,7 @@ Prefab:
     - target: {fileID: 11459328, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
       propertyPath: CountdownText
       value: 
-      objectReference: {fileID: 1097157624}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
   m_IsPrefabParent: 0
@@ -5418,12 +5414,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1093546870}
   m_Mesh: {fileID: 4300000, guid: 3065d4b128b219f4bb17266737c72e5a, type: 3}
---- !u!114 &1097157624 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11479780, guid: c4f2dc90f59a9874b84eb96606194851,
-    type: 2}
-  m_PrefabInternal: {fileID: 1086930199}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1097221085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5759,10 +5749,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.03999996, y: 5, z: 5.01000023}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!1 &1169831840 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 151456, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
-  m_PrefabInternal: {fileID: 1086930199}
 --- !u!1 &1189104176
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,10 +6826,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .400000006, y: .5, z: .5}
   m_Center: {x: -.200000003, y: 0, z: 0}
---- !u!1 &1371824828 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 161430, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
-  m_PrefabInternal: {fileID: 1086930199}
 --- !u!1 &1376105486
 GameObject:
   m_ObjectHideFlags: 0
@@ -8451,10 +8433,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.03999996, y: 5, z: 5.01000023}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!1 &1669025574 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 105360, guid: c4f2dc90f59a9874b84eb96606194851, type: 2}
-  m_PrefabInternal: {fileID: 1086930199}
 --- !u!1 &1691479825
 GameObject:
   m_ObjectHideFlags: 0
