@@ -35,6 +35,12 @@ public class GameManager : MonoBehaviour {
 		//_level = levelObject.GetComponent<LevelController>();
 		_cam = Camera.main.GetComponent<CameraHandler>();
 
+		ModeChoice = GameModeChoice.DeathMatch;
+		if (PlayerPrefs.HasKey("GameMode")) {
+			Debug.LogFormat("Got last played game mode: {0}", PlayerPrefs.GetInt("GameMode"));
+			ModeChoice = (GameModeChoice)(PlayerPrefs.GetInt("GameMode"));
+		}
+	
 		switch(ModeChoice) {
 		case GameModeChoice.LastManStanding:
 			_gameMode = new LMSMode();
