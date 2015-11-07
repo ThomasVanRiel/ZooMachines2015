@@ -34,12 +34,25 @@ public class MainMenu : MonoBehaviour {
         GameObject menu = null;
         if (_menuDictionary.TryGetValue(menuKey.ToLower(), out menu)) {
             if (_openMenu == menu) {
+                GameObject CreditsMenu;
+                if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                    if (CreditsMenu == _openMenu) {
+                        Utilities.Instance.GetMusic().ChangeAudioClip();
+                    }
+                }
+
                 CloseMenu();
                 return;
             }
             if (_openMenu != null) {
                 if (_openMenu.GetComponent<SettingsMenu>() != null) {
                     _openMenu.GetComponent<SettingsMenu>().SaveFile();
+                }
+                GameObject CreditsMenu;
+                if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                    if (CreditsMenu == _openMenu) {
+                        Utilities.Instance.GetMusic().ChangeAudioClip();
+                    }
                 }
 
                 _openMenu.transform.localScale = Vector3.zero;
@@ -53,6 +66,9 @@ public class MainMenu : MonoBehaviour {
                 camera.enabled = false;
             }
 
+            if (menuKey.ToLower() == "credits") {
+                Utilities.Instance.GetMusic().ChangeAudioClip();
+            }
         }
     }
 
@@ -71,6 +87,14 @@ public class MainMenu : MonoBehaviour {
             foreach (var camera in CamerasToDisable) {
                 camera.enabled = true;
             }
+
+            GameObject CreditsMenu;
+            if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                if (CreditsMenu == _openMenu) {
+                    Utilities.Instance.GetMusic().ChangeAudioClip();
+                }
+            }
+
         }
     }
 
