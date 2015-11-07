@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Settings>
-  <MusicVolume>1</MusicVolume>
-  <EffectsVolume>1</EffectsVolume>
-  <Language>English</Language>
+  <MusicVolume>0.3318225</MusicVolume>
+  <EffectsVolume>0.747664</EffectsVolume>
+  <Language>Francais</Language>
   <Vignette>True</Vignette>
   <Bloom>True</Bloom>
   <AntiAlliasing>True</AntiAlliasing>
