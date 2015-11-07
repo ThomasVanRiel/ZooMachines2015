@@ -11,3 +11,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/BrokenBridge.unity
   - enabled: 1
     path: Assets/Scenes/Maps/Minim.unity
+  - enabled: 1
+    path: Assets/Scenes/Maps/BrokenBridge.unity
+  - enabled: 1
+    path: Assets/Scenes/Maps/CircleCity.unity
+  - enabled: 1
+    path: Assets/Scenes/Maps/CrossyRoads.unity
