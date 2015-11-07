@@ -5,6 +5,13 @@ using System.Threading;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
+	public enum State {
+		Waiting,
+		Ready,
+		InProgess,
+		GameOver
+	};
+
 	public enum GameModeChoice {
 		LastManStanding,
 		DeathMatch
@@ -13,14 +20,23 @@ public class GameManager : MonoBehaviour {
 	//public GameObject LevelPrefab;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
-	public GameObject InfoUI;
 	public GameModeChoice ModeChoice = GameModeChoice.LastManStanding;
 
+	// UI
+	public GameObject WaitingUI;
+	public GameObject ReadyUI;
+	public Text CountdownText;
+	public GameObject InProgressUI;
+	public GameObject GameOverUI;
+
+	// Properties
 	private CameraHandler _cam;
-	private LevelController _level;
-	private Dictionary<PlayerController, int> _players;
+	private Dictionary<int, PlayerController> _players;
 	private GameMode _gameMode;
 	private int _nextSpawn;
+	private State _currentState;
+	private delegate void updateState();
+	private updateState _updateState;
 
 	public delegate void PlayerKilledDelegate(PlayerController killer, PlayerController killed);
 	public static PlayerKilledDelegate PlayerKilled;
@@ -28,16 +44,18 @@ public class GameManager : MonoBehaviour {
 	public delegate IEnumerator Command();
 
     public Vector3[] SpawnPoints;
-    private int _spawnPointsIndex;
-    private List<int> _spawnPointsOrder;
-
+	
 	void Start () {
-		InfoUI.SetActive(false);
-		//GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
-		//_level = levelObject.GetComponent<LevelController>();
+		WaitingUI.SetActive(false);
+		ReadyUI.SetActive(false);
+		InProgressUI.SetActive(false);
+		GameOverUI.SetActive(false);
+
+		ChangeState(State.Waiting);
+
 		_cam = Camera.main.GetComponent<CameraHandler>();
 
-		ModeChoice = GameModeChoice.DeathMatch;
+		// Load the last played game mode
 		if (PlayerPrefs.HasKey("GameMode")) {
 			Debug.LogFormat("Got last played game mode: {0}", PlayerPrefs.GetInt("GameMode"));
 			ModeChoice = (GameModeChoice)(PlayerPrefs.GetInt("GameMode"));
@@ -55,51 +73,104 @@ public class GameManager : MonoBehaviour {
 			_gameMode = new LMSMode();
 			break;
 		}
-		_players = new Dictionary<PlayerController, int> ();
+
+		_players = new Dictionary<int, PlayerController> ();
 		PlayerKilled += _gameMode.PlayerKilled;
-
-        //Spawn points
-        for (int i = 0; i < SpawnPoints.Length; i++)
-        {
-            _spawnPointsOrder.Add(i);
-        }
-        // random order spawnpoints
-        for (int i = 0; i < _spawnPointsOrder.Count; i++)
-        {
-            int temp = _spawnPointsOrder[i];
-            int rand = Random.Range(0, _spawnPointsOrder.Count);
-            _spawnPointsOrder[i] = _spawnPointsOrder[rand];
-            _spawnPointsOrder[rand] = temp;
-        }
-
-		StartCoroutine(Setup());
 	}
-	
+
+	void ChangeState(State state) {
+		switch (state) {
+		case State.Waiting:
+			// Wait for at least 2 players
+			WaitingUI.SetActive(true);
+
+			_currentState = State.Waiting;
+			_updateState = UpdateWaiting;
+			break;
+		case State.Ready:
+			// Start the countdown, players can still join
+			WaitingUI.SetActive(false);
+			ReadyUI.SetActive(true);
+
+			_currentState = State.Ready;
+			_updateState = UpdateReady;
+
+			// start countdown of 10 seconds, then change state to ready
+			StartCoroutine(ChangeStateAfter(State.InProgess, 10));
+			break;
+		case State.InProgess:
+			// Game in progress
+			ReadyUI.SetActive(false);
+			InProgressUI.SetActive(true);
+
+			_currentState = State.InProgess;
+			_updateState = UpdateInProgress;
+			break;
+		case State.GameOver:
+			// Game is over, designate the winner
+			InProgressUI.SetActive(false);
+			GameOverUI.SetActive(true);
+
+			_currentState = State.GameOver;
+			_updateState = UpdateGameOver;
+			break;
+		}
+	}
+
+	private IEnumerator ChangeStateAfter(State state, int n) {
+		for (int i = n; i > 0; i--) {
+			CountdownText.text = string.Format("{0}", i);
+			yield return new WaitForSeconds(1.0f);
+		}
+		
+		ChangeState(State.InProgess);
+	}
+
 	// Update is called once per frame
 	void Update () {
-		if (_gameMode != null && _gameMode.IsGameOver()) {
-			InfoUI.SetActive(true);
-			InfoUI.GetComponent<Text>().text = string.Format("Player {0} won", _gameMode.Winner() + 1);
+		if (_updateState != null) {
+			_updateState();
 		}
+	}
+
+	// UpdateWaiting is the update method in Waiting state
+	void UpdateWaiting() {
+		if (_players.Count >= 2) {
+			Debug.LogFormat("Changing to ready state");
+			ChangeState(State.Ready);
+			return;
+		}
+		Debug.LogFormat("Waiting for {0} player(s)...", 2 - _players.Count);
+
+		int newPlayer = InputManager.GetMouseButtonClicked(0);
+		if (newPlayer != -1 && !_players.ContainsKey(newPlayer)) {
+			SpawnPlayer(newPlayer);
+		}
+	}
+
+	// UpdateReady is the update method in Ready state
+	void UpdateReady() {
+		int newPlayer = InputManager.GetMouseButtonClicked(0);
+		if (newPlayer != -1 && !_players.ContainsKey(newPlayer)) {
+			SpawnPlayer(newPlayer);
+		}
+	}
+
+	// UpdateInProgress is the update method in InProgress state
+	void UpdateInProgress() {
+		if (_gameMode != null && _gameMode.IsGameOver()) {
+			// string.Format("Player {0} won", _gameMode.Winner() + 1);
+			ChangeState(State.GameOver);
+		}
+	}
+
+	// UpdateGameOver is the update method for the GameOver state
+	void UpdateGameOver() {
+		// TODO: wait for players to make their choice
 	}
 
 	void Destroy() {
 		PlayerKilled -= _gameMode.PlayerKilled;
-	}
-
-	IEnumerator Setup() {
-		while (InputManager.AmountOfMice == 0) {
-			Debug.LogWarning("no mouse detected, waiting");
-			yield return new WaitForSeconds(0.5f);
-		}
-
-		//GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-		//_level = levelObject.GetComponent<LevelController>();
-#if UNITY_EDITOR_WIN || !UNITY_EDITOR
-		_gameMode.Setup(this, InputManager.AmountOfMice);
-#else
-		_gameMode.Setup(this, _level.spawnPositions.Length);
-#endif
 	}
 
 	public PlayerController SpawnPlayer(int playerID) {
@@ -107,7 +178,7 @@ public class GameManager : MonoBehaviour {
 		//if (_nextSpawn >= _level.spawnPositions.Length)
 		//	_nextSpawn = 0;
 
-        Vector3 spawnPos = SpawnPoints[GetOrderedRandomSpawnPointIndex()];
+        Vector3 spawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
 
 		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity) as GameObject;
 		PlayerController player = playerObject.GetComponent<PlayerController>();
@@ -115,15 +186,16 @@ public class GameManager : MonoBehaviour {
 		playerObject.GetComponent<MouseInputReceiver>().PlayerID = playerID;
 		playerObject.name = string.Format("Player {0}", playerID + 1);
 
-		_players[player] = playerID;
+		_players[playerID] = player;
 
 		if (_cam != null) {
-			_cam.SetPlayerList(new List<PlayerController>(_players.Keys));
+			_cam.SetPlayerList(new List<PlayerController>(_players.Values));
 		}
 
 		return player;
 	}
 
+	// Execute executes a command in a new CoRoutine
 	public void Execute(Command cmd) {
 		StartCoroutine(cmd());
 	}
@@ -139,12 +211,5 @@ public class GameManager : MonoBehaviour {
             Gizmos.DrawLine(spawn, spawn + Vector3.up * 20);
             Gizmos.DrawSphere(spawn, 1);
         }
-    }
-
-    int GetOrderedRandomSpawnPointIndex()
-    {
-        int index = _spawnPointsOrder[_spawnPointsIndex];
-        _spawnPointsIndex = (++_spawnPointsIndex) % SpawnPoints.Length;
-        return index;
     }
 }

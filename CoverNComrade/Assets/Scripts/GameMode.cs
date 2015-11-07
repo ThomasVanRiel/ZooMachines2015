@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public interface GameMode {
 	// 
-	void Setup(GameManager gm, int nbPlayers);
+	void Setup(GameManager gm, Dictionary<int, PlayerController> players);
 
 	// PlayerKilled announces a player's death and its killer
 	void PlayerKilled(PlayerController killer, PlayerController killed);
