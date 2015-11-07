@@ -127,6 +127,56 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 091c0e9c672cd844398aed1ed6c169ff, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &244742521
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.61999989
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 23.5699997
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -9.61999989
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: .353553414
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -.612372458
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: .353553414
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .612372458
+      objectReference: {fileID: 0}
+    - target: {fileID: 405694, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018240, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100868, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+      propertyPath: m_Name
+      value: Main Camera (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e78c43186721b284cbea358717c88ba4, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &690171928
 Prefab:
   m_ObjectHideFlags: 0
@@ -237,7 +287,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1435254281
 AudioListener:
   m_ObjectHideFlags: 0
@@ -304,7 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!1 &1461681001 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 165234, guid: e944cce4584ca7643ba02cb818b3714c, type: 2}
@@ -450,7 +500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &2060148148 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 11446082, guid: 091c0e9c672cd844398aed1ed6c169ff,

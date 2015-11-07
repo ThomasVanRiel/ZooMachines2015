@@ -178,23 +178,33 @@ public class PlayerController : MonoBehaviour
         float leftRightDirection = 0;
         if (_isRunning)
         {
-            float angleDiff = Vector3.Cross(transform.forward, _prevForward).y;
+            float angleDiff = Vector3.Cross(_prevForward, new Vector3(transform.forward.x, 0, transform.forward.z)).y;
+            
+           angleDiff = Mathf.Sign(angleDiff);
 
-            if (Mathf.Abs(angleDiff) < .01f)
-                angleDiff = 0;
+            float step = .1f;
+
+            if (angleDiff > _prevLeftRightDirection)
+            {
+                leftRightDirection = _prevLeftRightDirection + step;
+                if (leftRightDirection > angleDiff)
+                    leftRightDirection = angleDiff;
+            }
             else
-                angleDiff = Mathf.Sign(angleDiff);
-
-            leftRightDirection = angleDiff;
-
+            {
+                leftRightDirection = _prevLeftRightDirection - step;
+                if (leftRightDirection < angleDiff)
+                    leftRightDirection = angleDiff;
+            }
         }
         
         _prevLeftRightDirection = leftRightDirection;
         _prevForward = transform.forward;
+        _prevForward.y = 0;
 
         _animator.SetFloat("Speed", _isRunning ? 1 : 0);
         _animator.SetBool("IsRunning", _isRunning);
-        _animator.SetFloat("LeftRightDirection", Mathf.Sign(leftRightDirection));
+        _animator.SetFloat("LeftRightDirection", leftRightDirection);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _animator.SetTrigger("Shoot");
@@ -222,7 +232,7 @@ public class PlayerController : MonoBehaviour
             if (GameManager.PlayerKilled != null)
                 GameManager.PlayerKilled(enemy, this);
             // Desaturate
-            StartCoroutine(FadeColor(2));
+            StartCoroutine(WaitAndFadeColor(1.5f, 2));
             _isRunning = false;
             _teamC.DisableTeamIndication();
             gameObject.layer = LayerMask.NameToLayer("PlayerDead");
@@ -236,8 +246,10 @@ public class PlayerController : MonoBehaviour
         return Health > 0;
     }
 
-    IEnumerator FadeColor(float t)
+    IEnumerator WaitAndFadeColor(float wait, float t)
     {
+        yield return new WaitForSeconds(wait);
+
         // Convert to HSB
         HSBColor newColor = new HSBColor(PlayerColor);
         float timeRemaining = t;
