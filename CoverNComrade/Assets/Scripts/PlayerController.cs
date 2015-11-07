@@ -12,22 +12,24 @@ public class PlayerController : MonoBehaviour
 
     private bool _isRunning = false;
 
-    private Color _playerColor = Color.red;
     private Plane _plane = new Plane(Vector3.up, Vector3.zero);
 
     private Vector3 _prevForward;
     private float _prevLeftRightDirection = 0;
-
-    public Color PlayerColor
-    {
-        get { return _playerColor; }
-        set
-        {
-            _playerColor = value;
-            _mat.color = _playerColor;
-        }
-    }
     public float CursorStopDistance = 1;
+
+    //private Color _playerColor = Color.red;
+    //public Color PlayerColor
+    //{
+    //    get { return _playerColor; }
+    //    set
+    //    {
+    //        _playerColor = value;
+    //        _mat.color = _playerColor;
+    //    }
+    //}
+    //private bool _hasSetColor = false;
+
 
     // Player's current health.
     private int _health = 1;
@@ -62,15 +64,14 @@ public class PlayerController : MonoBehaviour
     }
 
     public float Velocity = 1.0f;
-    private bool _hasSetColor = false;
 
     // Components
     private Rigidbody _rb;
     private IInputReceiver _input;
     private WeaponController _weaponController;
     private Transform _transf;
-    public Renderer MeshRender;
-    private Material _mat;
+    //public Renderer MeshRender;
+    //private Material _mat;
     private Animator _animator;
     private TeamController _teamC;
     public Projector PlayerIndicator;
@@ -83,12 +84,12 @@ public class PlayerController : MonoBehaviour
         _input = GetComponent<IInputReceiver>();
         _weaponController = GetComponent<WeaponController>();
         _transf = transform;
-        _mat = MeshRender.material;
+        //_mat = MeshRender.material;
         _animator = GetComponentInChildren<Animator>();
         _teamC = GetComponent<TeamController>();
 
         // Colorize
-        _mat.color = PlayerColor;
+        //_mat.color = PlayerColor;
 
         // 
         _prevForward = _transf.forward;
@@ -113,15 +114,15 @@ public class PlayerController : MonoBehaviour
         if (Health <= 0)
             return;
 
-        if (!_hasSetColor)
-        {
-            // Set Color dynamically
-            if (InputManager.AmountOfMice > 0)
-            {
-                PlayerColor = HSBColor.ToColor(new HSBColor((float)_input.PlayerID / InputManager.AmountOfMice, 1, 1));
-            }
-            _hasSetColor = true;
-        }
+        //if (!_hasSetColor)
+        //{
+        //    // Set Color dynamically
+        //    if (InputManager.AmountOfMice > 0)
+        //    {
+        //        PlayerColor = HSBColor.ToColor(new HSBColor((float)_input.PlayerID / InputManager.AmountOfMice, 1, 1));
+        //    }
+        //    _hasSetColor = true;
+        //}
 
         if (_weaponController != null)
             ProcessShooting();
@@ -139,23 +140,23 @@ public class PlayerController : MonoBehaviour
 
     void ProcessMovement()
     {
-        // TEST FOR JOYSTICKS        
-        Vector3 dirr = Vector3.zero;
-        int pi = GetComponent<MouseInputReceiver>().PlayerID;
-        dirr.x = Input.GetAxis(string.Format("p{0}_MoveX", pi+1));
-        dirr.y = Input.GetAxis(string.Format("p{0}_MoveY", pi+1));
-        dirr.Normalize();
-        if (dirr.magnitude > .1f)
-        {
-            Move(dirr);
-            _isRunning = true;
-        }
-        else
-        {
-            _isRunning = false;
-            _rb.velocity = Vector3.zero;
-        }
-        return;
+        //// TEST FOR JOYSTICKS        
+        //Vector3 dirr = Vector3.zero;
+        //int pi = GetComponent<MouseInputReceiver>().PlayerID;
+        //dirr.x = Input.GetAxis(string.Format("p{0}_MoveX", pi+1));
+        //dirr.y = Input.GetAxis(string.Format("p{0}_MoveY", pi+1));
+        //dirr.Normalize();
+        //if (dirr.magnitude > .1f)
+        //{
+        //    Move(dirr);
+        //    _isRunning = true;
+        //}
+        //else
+        //{
+        //    _isRunning = false;
+        //    _rb.velocity = Vector3.zero;
+        //}
+        //return;
 
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
@@ -250,9 +251,9 @@ public class PlayerController : MonoBehaviour
             if (GameManager.PlayerKilled != null)
                 GameManager.PlayerKilled(enemy, this);
             // Desaturate
-            StartCoroutine(WaitAndFadeColor(1.5f, 2));
+            _teamC.IsKilled();
             _isRunning = false;
-            _teamC.DisableTeamIndication();
+            PlayerIndicator.gameObject.SetActive(false);
             gameObject.layer = LayerMask.NameToLayer("PlayerDead");
             RagDoll.Ragdolled = true;
         }
@@ -262,25 +263,5 @@ public class PlayerController : MonoBehaviour
     public bool IsAlive()
     {
         return Health > 0;
-    }
-
-    IEnumerator WaitAndFadeColor(float wait, float t)
-    {
-        yield return new WaitForSeconds(wait);
-
-        // Convert to HSB
-        HSBColor newColor = new HSBColor(PlayerColor);
-        float timeRemaining = t;
-        while (timeRemaining > 0)
-        {
-            // Desaturate
-            newColor.s = timeRemaining / t;
-            PlayerColor = HSBColor.ToColor(newColor);
-            // Decrease time
-            timeRemaining -= Time.fixedDeltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        PlayerColor = Color.white;
-        _mat.SetInt("_EnableSeethrough", 0);
     }
 }

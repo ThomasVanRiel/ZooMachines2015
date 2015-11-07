@@ -6,28 +6,41 @@ public class TeamController : MonoBehaviour
     public static int AmountOfTeams = 3;
 
     public int CurrentTeam = 0;
-    public Color TeamColor = Color.black;
+    private Color _teamColor = Color.black;
+
+    public Color TeamColor
+    {
+        get { return _teamColor; }
+        set
+        {
+            _teamColor = value;
+            _mat.color = TeamColor;
+        }
+    }
 
     private float _oldScrollValue = 0;
     public float ScrollDifference = 1;
 
-    //public Projector PlayerIndicator;
+    public Projector PlayerIndicator;
     private Material _mat;
 
     private static bool _canSwitchTeam = true;
-    public static bool CanSwitchTeam {
+    public static bool CanSwitchTeam
+    {
         get { return _canSwitchTeam; }
-        set { _canSwitchTeam = value; } }
+        set { _canSwitchTeam = value; }
+    }
 
     // Component
     private IInputReceiver _input;
+    public MeshRenderer Renderer;
 
     // Use this for initialization
     void Start ()
     {
         _input = GetComponent<IInputReceiver>();
-        //_mat = new Material(PlayerIndicator.material);
-        //PlayerIndicator.material = _mat;
+        _mat = Renderer.material;
+        PlayerIndicator.material = _mat;
 
         UpdateColor();
     }
@@ -68,6 +81,31 @@ public class TeamController : MonoBehaviour
 
     public void DisableTeamIndication()
     {
-        //PlayerIndicator.gameObject.SetActive(false);
+        PlayerIndicator.gameObject.SetActive(false);
+    }
+    IEnumerator WaitAndFadeColor(float wait, float t)
+    {
+        yield return new WaitForSeconds(wait);
+
+        // Convert to HSB
+        HSBColor newColor = new HSBColor(TeamColor);
+        float timeRemaining = t;
+        while (timeRemaining > 0)
+        {
+            // Desaturate
+            newColor.s = timeRemaining / t;
+            TeamColor = HSBColor.ToColor(newColor);
+            // Decrease time
+            timeRemaining -= Time.fixedDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        TeamColor = Color.white;
+        _mat.SetInt("_EnableSeethrough", 0);
+    }
+
+    public void IsKilled()
+    {
+        DisableTeamIndication();
+        StartCoroutine(WaitAndFadeColor(1.5f, 2));
     }
 }

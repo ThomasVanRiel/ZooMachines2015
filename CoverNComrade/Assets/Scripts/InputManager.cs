@@ -323,7 +323,7 @@ public class InputManager : MonoBehaviour
 #if UNITY_EDITOR_WIN || !UNITY_EDITOR
         for (int i = 0; i < NUM_MICE; ++i)
         {
-            if (_mice[i].Buttons[button])
+            if (_mouseDown[button][i])
                 return i;
         }
 #endif
