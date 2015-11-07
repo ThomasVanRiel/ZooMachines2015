@@ -13,7 +13,7 @@
 		Pass
 		{
 			ZWrite Off
-			ZTest Always
+			ZTest Greater
 			Lighting Off
 
 			CGPROGRAM

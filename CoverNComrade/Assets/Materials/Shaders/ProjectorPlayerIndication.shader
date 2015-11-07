@@ -14,7 +14,7 @@ Shader "Projector/PlayerIndication"
 			ZWrite Off
 			ColorMask RGB
 			Blend DstColor Zero
-			ZTest GEqual
+			//ZTest GEqual
 
 			CGPROGRAM
 				#pragma vertex vert

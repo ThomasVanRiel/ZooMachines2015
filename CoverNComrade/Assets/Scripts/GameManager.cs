@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour {
 			ReadyUI.SetActive(false);
 			InProgressUI.SetActive(true);
 
+			_gameMode.Setup(this, _players);
 			foreach (KeyValuePair<int, PlayerController> player in _players) {
 				player.Value.CanMove = true;
 				player.Value.CanShoot = true;
