@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour {
 		LastManStanding,
 		DeathMatch
 	};
-
-	public GameObject LevelPrefab;
+	
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		}
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
 		_gameMode.Setup(this, InputManager.AmountOfMice);
 #else
 		_gameMode.Setup(this, Level.spawnPositions.Length);
