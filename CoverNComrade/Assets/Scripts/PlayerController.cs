@@ -157,29 +157,14 @@ public class PlayerController : MonoBehaviour
         float leftRightDirection = 0;
         if (_isRunning)
         {
-            var angleDiff = Mathf.Atan2(
-                Vector3.Dot(Vector3.up, Vector3.Cross(_prevForward, transform.forward)),
-                Vector3.Dot(_prevForward, transform.forward)) * Mathf.Rad2Deg;
+            float angleDiff = Vector3.Cross(transform.forward, _prevForward).y;
 
-            if (Mathf.Abs(angleDiff) < .001f)
+            if (Mathf.Abs(angleDiff) < .01f)
                 angleDiff = 0;
             else
                 angleDiff = Mathf.Sign(angleDiff);
 
-            float diff = 0.1f;
-
-            if (angleDiff > _prevLeftRightDirection)
-            {
-                leftRightDirection = _prevLeftRightDirection + diff * Time.deltaTime;
-                if (leftRightDirection > angleDiff)
-                    leftRightDirection = angleDiff;
-            }
-            if (angleDiff < _prevLeftRightDirection)
-            {
-                leftRightDirection = _prevLeftRightDirection - diff * Time.deltaTime;
-                if (leftRightDirection < angleDiff)
-                    leftRightDirection = angleDiff;
-            }
+            leftRightDirection = angleDiff;
 
         }
         
