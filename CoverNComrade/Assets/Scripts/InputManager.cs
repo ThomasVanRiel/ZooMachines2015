@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
 
     public static int AmountOfMice { get; set; }
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
     private RawMouseDriver.RawMouseDriver _mousedriver;
     private static RawMouse[] _mice;
 
@@ -108,7 +108,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void Refresh()
     {
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         // Mouse driver
         if (_mousedriver != null)
             _mousedriver.Dispose();
@@ -139,7 +139,7 @@ public class InputManager : MonoBehaviour
 
     private int CalculateAmountOfMice()
     {
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         AmountOfMice = 0;
         for (int i = 0; i < _mice.Length; i++)
         {
@@ -173,7 +173,7 @@ public class InputManager : MonoBehaviour
         if (!IsValidMouse(id))
             return Vector3.zero;
 #endif
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return new Vector3(_move[id].x + _offset[id].x, _move[id].y + _offset[id].y, 0);
 #else
         return Input.mousePosition;
@@ -192,7 +192,7 @@ public class InputManager : MonoBehaviour
         if (!IsValidMouse(id))
             return 0.0f;
 #endif
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _move[id].x + _offset[id].x;
 #else
         return Input.mousePosition.x;
@@ -211,7 +211,7 @@ public class InputManager : MonoBehaviour
         if (!IsValidMouse(id))
             return 0.0f;
 #endif
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _move[id].y + _offset[id].y;
 #else
         return Input.mousePosition.y;
@@ -230,7 +230,7 @@ public class InputManager : MonoBehaviour
         if (!IsValidMouse(id))
             return 0.0f;
 #endif
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _scroll[id];
 #else
         return Input.GetAxis("Mouse ScrollWheel");
@@ -256,7 +256,7 @@ public class InputManager : MonoBehaviour
             return false;
 #endif
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _mice[id].Buttons[button];
 #else
         return Input.GetMouseButton(button);
@@ -283,7 +283,7 @@ public class InputManager : MonoBehaviour
             return false;
 #endif
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _mouseDown[button][id];
 #else
         return Input.GetMouseButtonDown(button);
@@ -310,7 +310,7 @@ public class InputManager : MonoBehaviour
             return false;
 #endif
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         return _mouseUp[button][id];
 #else
         return Input.GetMouseButtonUp(button);
@@ -327,7 +327,7 @@ public class InputManager : MonoBehaviour
         if (!IsValidMouse(id))
             return;
 #endif
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
         _offset[id] = offset;
 #endif
     }
