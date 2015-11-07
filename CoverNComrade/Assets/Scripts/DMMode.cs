@@ -71,6 +71,9 @@ public class DMMode : GameMode {
 		yield return new WaitForSeconds(t);
 
 		Debug.LogFormat("Respawning player {0}", id);
-		_players[_gm.SpawnPlayer(id).GetHashCode()] = id;
+		PlayerController player = _gm.SpawnPlayer(id);
+		player.CanMove = true;
+		player.CanShoot = true;
+		_players[player.GetHashCode()] = id;
 	}
 }
