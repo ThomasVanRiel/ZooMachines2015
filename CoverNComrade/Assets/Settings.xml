@@ -6,4 +6,5 @@
   <Vignette>True</Vignette>
   <Bloom>True</Bloom>
   <AntiAlliasing>True</AntiAlliasing>
+  <TeamSwitching>True</TeamSwitching>
 </Settings>

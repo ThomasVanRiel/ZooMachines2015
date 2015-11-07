@@ -34,9 +34,6 @@ public class Localization : MonoBehaviour {
     void Awake() {
         DontDestroyOnLoad(this.gameObject);
 
-
-
-
         UpdateDictionary();
     }
 
@@ -63,7 +60,7 @@ public class Localization : MonoBehaviour {
         foreach (var item in list) {
             return item.Value;
         }
-        return "Error, no translation found!";
+        return string.Empty;
     }
 
     public void ChangeLanguage(string language) {
