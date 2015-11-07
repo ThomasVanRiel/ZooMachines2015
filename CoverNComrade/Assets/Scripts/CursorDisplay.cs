@@ -39,15 +39,17 @@ public class CursorDisplay : MonoBehaviour
             //_cursor.GetComponent<Image>().color = _teamController.TeamColor;
             _cursorTransform = _cursor.GetComponent<RectTransform>();
 
-            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-            _input.SetMousePositionOffset((new Vector2(pos.x, pos.y) - new Vector2(_input.GetMouseX(), _input.GetMouseY()))/_cursorCanvas.scaleFactor);
+            //_input.SetMousePositionOffset((new Vector2(pos.x, pos.y) - new Vector2(_input.GetMouseX(), _input.GetMouseY()))/_cursorCanvas.scaleFactor);
 
             _hasSpawnedCursor = true;
         }
 
         // Update position
-        if (_playerController.IsAlive() )
-            SetCursorPosition(new Vector2(_input.GetMouseX(), _input.GetMouseY()));
+        if (_playerController.IsAlive())
+        {
+            Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            SetCursorPosition(new Vector2(pos.x, pos.y) + new Vector2(_input.GetMouseX(), _input.GetMouseY()));
+        }
         // Or disable
         else
             _cursor.SetActive(false);
@@ -55,9 +57,19 @@ public class CursorDisplay : MonoBehaviour
 
     void SetCursorPosition(Vector2 pos, bool scaled = true)
     {
-        _cursorTransform.anchoredPosition = pos;
+        if (pos.x < 0)
+            pos.x = 0;
+        if (pos.y < 0)
+            pos.y = 0;
+        if (pos.x > Camera.main.pixelWidth)
+            pos.x = Camera.main.pixelWidth;
+        if (pos.y > Camera.main.pixelHeight)
+            pos.y = Camera.main.pixelHeight;
+
         if (scaled)
-            _cursorTransform.anchoredPosition /= _cursorCanvas.scaleFactor;
+            pos /= _cursorCanvas.scaleFactor;
+
+        _cursorTransform.anchoredPosition = pos;
     }
 
 }

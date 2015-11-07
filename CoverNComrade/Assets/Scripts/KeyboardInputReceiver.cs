@@ -25,10 +25,10 @@ public class KeyboardInputReceiver : MonoBehaviour, IInputReceiver
         return Input.mousePosition;
     }
 
-    public void SetMousePositionOffset(Vector2 offset)
-    {
-        // No implementation
-    }
+    //public void SetMousePositionOffset(Vector2 offset)
+    //{
+    //    // No implementation
+    //}
 
     public float GetMouseX()
     {
@@ -73,5 +73,11 @@ public class KeyboardInputReceiver : MonoBehaviour, IInputReceiver
             return Input.GetKeyUp(Button1Keys[PlayerID]);
 
         return false;
+    }
+
+    public void OffsetMousePosition(Vector3 offset)
+    {
+        // Do nothing
+        //throw new System.NotImplementedException();
     }
 }
