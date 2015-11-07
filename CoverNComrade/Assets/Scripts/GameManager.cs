@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	public Text CountdownText;
 	public GameObject InProgressUI;
 	public GameObject GameOverUI;
+	public Text InfoText;
 
 	// Properties
 	private CameraHandler _cam;
@@ -119,6 +120,11 @@ public class GameManager : MonoBehaviour {
 			ReadyUI.SetActive(false);
 			InProgressUI.SetActive(true);
 
+			foreach (KeyValuePair<int, PlayerController> player in _players) {
+				player.Value.CanMove = true;
+				player.Value.CanShoot = true;
+			}
+
 			_currentState = State.InProgess;
 			_updateState = UpdateInProgress;
 			break;
@@ -175,7 +181,7 @@ public class GameManager : MonoBehaviour {
 	// UpdateInProgress is the update method in InProgress state
 	void UpdateInProgress() {
 		if (_gameMode != null && _gameMode.IsGameOver()) {
-			// string.Format("Player {0} won", _gameMode.Winner() + 1);
+			InfoText.text = string.Format("Player {0} won", _gameMode.Winner() + 1);
 			ChangeState(State.GameOver);
 		}
 	}
