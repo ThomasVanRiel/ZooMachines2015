@@ -159,15 +159,20 @@ public class PlayerController : MonoBehaviour
         //return;
 
         // Setup Raycast
-        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
+        Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        //Debug.Log(playerPos + " " + _input.GetMousePosition());
+        Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition() + playerScreenPos);
         float hit;
         if (_plane.Raycast(ray, out hit))
         {
             Vector3 point = ray.GetPoint(hit);
+            //Debug.Log(point - new Vector3(_transf.position.x, 0, _transf.position.z));
             // Move
             Vector3 dir = point - new Vector3(_transf.position.x, 0, _transf.position.z);
             if (dir.magnitude > CursorStopDistance)
             {
+                Vector3 newPlayerScreenPos = Camera.main.WorldToScreenPoint(transform.position + (_rb.velocity * Time.fixedDeltaTime));
+                _input.OffsetMousePosition(-(new Vector2(newPlayerScreenPos.x, newPlayerScreenPos.y) - new Vector2(playerScreenPos.x, playerScreenPos.y)));
                 Move(dir);
                 _isRunning = true;
             }

@@ -11,10 +11,10 @@ public class MouseInputReceiver : MonoBehaviour, IInputReceiver
         return InputManager.GetMousePosition(PlayerID);
     }
 
-    public void SetMousePositionOffset(Vector2 offset)
-    {
-        InputManager.SetMouseOffset(offset, PlayerID);
-    }
+    //public void SetMousePositionOffset(Vector2 offset)
+    //{
+    //    InputManager.SetMouseOffset(offset, PlayerID);
+    //}
 
     public float GetMouseX()
     {
@@ -44,5 +44,10 @@ public class MouseInputReceiver : MonoBehaviour, IInputReceiver
     public bool GetMouseButtonUp(int button)
     {
         return InputManager.GetMouseButtonUp(button, PlayerID);
+    }
+
+    public void OffsetMousePosition(Vector3 offset)
+    {
+        InputManager.OffsetMousePosition(offset, PlayerID);
     }
 }
