@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour {
 
 		//GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 		//_level = levelObject.GetComponent<LevelController>();
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
 		_gameMode.Setup(this, InputManager.AmountOfMice);
 #else
 		_gameMode.Setup(this, _level.spawnPositions.Length);
