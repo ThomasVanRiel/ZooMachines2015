@@ -41,4 +41,8 @@ public class Utilities : MonoBehaviour {
         }
         return value;
     }
+
+    public MusicVolume GetMusic() {
+        return GetComponentInChildren<MusicVolume>();
+    }
 }

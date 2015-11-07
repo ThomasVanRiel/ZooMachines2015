@@ -63,6 +63,12 @@
 				</Settings_MinorSettings>
 			</Settings>
 		</SettingsMenu>
+		<EndGame>
+			<EndGame_WinMessage> won!</EndGame_WinMessage>
+			<EndGame_Stats>Useless statistics:</EndGame_Stats>
+			<EndGame_Restart>Restart</EndGame_Restart>
+			<EndGame_MainMenu>Main Menu</EndGame_MainMenu>
+		</EndGame>
 	</Language>
 	<Language language="Nederlands">
 		<MainMenu>
