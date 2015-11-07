@@ -11,10 +11,10 @@ public class MusicVolume : MonoBehaviour {
     public float VolumeMultiplier = 0.5f;
     void Start() {
         //GetComponent<AudioSource>().volume = float.Parse(Utilities.Instance.GetSetting("MusicVolume")) * VolumeMultiplier;
-        _targetVolume = float.Parse(Utilities.Instance.GetSetting("MusicVolume")) * VolumeMultiplier;
-        StopCoroutine("ChangeClip");
-        StopCoroutine("ChangeVolume");
-        StartCoroutine("ChangeVolume");
+        //_targetVolume = float.Parse(Utilities.Instance.GetSetting("MusicVolume")) * VolumeMultiplier;
+        //StopCoroutine("ChangeClip");
+        //StopCoroutine("ChangeVolume");
+        //StartCoroutine("ChangeVolume");
     }
 
     IEnumerator ChangeVolume() {

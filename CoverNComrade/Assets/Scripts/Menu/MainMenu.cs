@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour {
             _menuDictionary.Add(item.Name.ToLower(), item.Menu);
             item.Menu.transform.localScale = Vector3.zero;
         }
+
     }
 
     // Update is called once per frame

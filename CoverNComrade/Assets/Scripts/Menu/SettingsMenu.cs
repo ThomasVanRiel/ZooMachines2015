@@ -103,6 +103,8 @@ public class SettingsMenu : MonoBehaviour {
         }
 
         Utilities.Instance.UpdateSettings();
+        Utilities.Instance.GetMusic().SetVolume(float.Parse(Utilities.Instance.GetSetting("MusicVolume")));
+
     }
 
     public void LanguageChange(int index) {
