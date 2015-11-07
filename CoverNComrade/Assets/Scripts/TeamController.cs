@@ -13,6 +13,11 @@ public class TeamController : MonoBehaviour
 
     public Renderer TeamColorRenderer;
 
+    private static bool _canSwitchTeam = true;
+    public static bool CanSwitchTeam {
+        get { return _canSwitchTeam; }
+        set { _canSwitchTeam = value; } }
+
     // Component
     private IInputReceiver _input;
 
@@ -26,7 +31,11 @@ public class TeamController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
-    {
+	{
+        // Only react to scroll wheel if players can switch team.
+	    if (!CanSwitchTeam)
+	        return;
+
 	    float currentScroll = _input.GetMouseScroll();
 	    if (Mathf.Abs(_oldScrollValue - currentScroll) >= ScrollDifference)
 	    {
