@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class LMSMode : GameMode {
 	private Dictionary<PlayerController, int> _players;
 
-	public void Setup(GameManager gm, int nbPlayers) {
+	public void Setup(GameManager gm, Dictionary<int, PlayerController> players) {
 		_players = new Dictionary<PlayerController, int>();
 
-		for (int i = 0; i < nbPlayers; i++) {
-			_players.Add(gm.SpawnPlayer(i), i);
+		foreach (KeyValuePair<int, PlayerController> entry in players) {
+			_players.Add(entry.Value, entry.Key);
 		}
 	}
 
