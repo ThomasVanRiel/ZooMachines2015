@@ -251,5 +251,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         PlayerColor = Color.white;
+        _mat.SetInt("_EnableSeethrough", 0);
     }
 }

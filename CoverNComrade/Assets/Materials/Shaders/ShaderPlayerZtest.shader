@@ -4,24 +4,37 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
+		_EnableSeethrough ("See through objects", Int) = 1
 	}
 	SubShader {
 		Tags { "RenderType" = "Opaque" }
-
-
-
 		LOD 200
-		Pass 
+
+		Pass
 		{
 			ZWrite Off
 			ZTest Greater
 			Lighting Off
-			Color [_Color]
-			SetTexture[_MainTex]{
-				ConstantColor[_Color]
-				Combine texture * constant 
-			}
+
+			CGPROGRAM
+				#pragma vertex vert
+				#pragma fragment frag
+				fixed4 _Color;
+				int _EnableSeethrough;
+
+				float4 vert(float4 v:POSITION) : SV_POSITION
+				{
+					return mul(UNITY_MATRIX_MVP, v);
+				}
+				fixed4 frag() : SV_Target 
+				{
+					clip(_EnableSeethrough == 0 ? -1 : 1);
+					return _Color;
+				}
+			ENDCG
 		}
+
+
 		CGPROGRAM
 			// Physically based Standard lighting model, and enable shadows on all light types
 			#pragma surface surf Standard fullforwardshadows
