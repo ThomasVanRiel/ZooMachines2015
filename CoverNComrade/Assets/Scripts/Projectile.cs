@@ -75,16 +75,10 @@ public class Projectile : MonoBehaviour
         TrailColor = newColor;
         if (_tr == null)
             _tr = GetComponent<TrailRenderer>();
-        if (_tr != null)
-            _tr.material.color = TrailColor;
-
-        HSBColor partColor = new HSBColor(TrailColor);
-        float hue = partColor.h;
-        hue += ParticleHueOffset;
-        if (hue > 1)
-            hue -= 1;
-        partColor.h = hue;
-        _particleColor = HSBColor.ToColor(partColor);
+        if (_tr != null) {
+            _tr.material.color = newColor;
+            //_tr.material.SetColor("Color", newColor);
+        }
         TrailParticles.startColor = newColor;
         var light = GetComponent<Light>();
         if (light != null) {

@@ -85,7 +85,7 @@ public class RagdollScript : MonoBehaviour {
 
     // Use this for initialization
     void Awake() {
-        _animController = GetComponent<Animator>();
+        _animController = GetComponentInChildren<Animator>();
         SetKinematic(true);
 
         Transform[] transforms = GetComponentsInChildren<Transform>();
@@ -96,7 +96,7 @@ public class RagdollScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Y)) {
             Ragdolled = true;
             Invoke("SetAnimTrue", GetUpAfter);
         }

@@ -3483,6 +3483,10 @@ Transform:
   - {fileID: 1895723409}
   m_Father: {fileID: 1666611662}
   m_RootOrder: 16
+--- !u!1 &550763534 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 125648, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
+  m_PrefabInternal: {fileID: 759269845}
 --- !u!1 &554548071
 GameObject:
   m_ObjectHideFlags: 0
@@ -5015,7 +5019,7 @@ Prefab:
     - target: {fileID: 11426922, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
       propertyPath: InfoUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 550763534}
     - target: {fileID: 11426922, guid: 981f4fcb99afe2642aecb5a506bdc07b, type: 2}
       propertyPath: Level
       value: 
