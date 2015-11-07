@@ -14,14 +14,13 @@ public class TeamController : MonoBehaviour
         set
         {
             _teamColor = value;
-            _mat.color = TeamColor;
         }
     }
 
     private float _oldScrollValue = 0;
     public float ScrollDifference = 1;
 
-    public Projector PlayerIndicator;
+//    public Projector PlayerIndicator;
     private Material _mat;
 
     private static bool _canSwitchTeam = true;
@@ -33,14 +32,13 @@ public class TeamController : MonoBehaviour
 
     // Component
     private IInputReceiver _input;
-    public MeshRenderer Renderer;
+    public Renderer Renderer;
 
     // Use this for initialization
     void Start ()
     {
         _input = GetComponent<IInputReceiver>();
         _mat = Renderer.material;
-        PlayerIndicator.material = _mat;
 
         UpdateColor();
     }
@@ -75,15 +73,9 @@ public class TeamController : MonoBehaviour
     {
         TeamColor = HSBColor.ToColor(new HSBColor((float) CurrentTeam/AmountOfTeams, 1, 1));
         _mat.color = TeamColor;
-
-        GetComponentInChildren<SkinnedMeshRenderer>().material.color = TeamColor;
     }
-
-    public void DisableTeamIndication()
-    {
-        PlayerIndicator.gameObject.SetActive(false);
-    }
-    IEnumerator WaitAndFadeColor(float wait, float t)
+    
+    IEnumerator WaitAndFadeTeamColor(float wait, float t)
     {
         yield return new WaitForSeconds(wait);
 
@@ -105,7 +97,6 @@ public class TeamController : MonoBehaviour
 
     public void IsKilled()
     {
-        DisableTeamIndication();
-        StartCoroutine(WaitAndFadeColor(1.5f, 2));
+        StartCoroutine(WaitAndFadeTeamColor(1.5f, 2));
     }
 }
