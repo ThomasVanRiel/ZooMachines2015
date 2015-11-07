@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour {
 	public delegate IEnumerator Command();
 
     public Vector3[] SpawnPoints;
+    private int _spawnPointsIndex;
+    private List<int> _spawnPointsOrder = new List<int>();
 	
 	void Start () {
 		WaitingUI.SetActive(false);
@@ -74,6 +76,20 @@ public class GameManager : MonoBehaviour {
 			_gameMode = new LMSMode();
 			break;
 		}
+
+        //Spawn points
+        for (int i = 0; i < SpawnPoints.Length; i++)
+        {
+            _spawnPointsOrder.Add(i);
+        }
+        // random order spawnpoints
+        for (int i = 0; i < _spawnPointsOrder.Count; i++)
+        {
+            int temp = _spawnPointsOrder[i];
+            int rand = Random.Range(0, _spawnPointsOrder.Count);
+            _spawnPointsOrder[i] = _spawnPointsOrder[rand];
+            _spawnPointsOrder[rand] = temp;
+        }
 
 		_players = new Dictionary<int, PlayerController> ();
 		PlayerKilled += _gameMode.PlayerKilled;
@@ -201,7 +217,7 @@ public class GameManager : MonoBehaviour {
 		//if (_nextSpawn >= _level.spawnPositions.Length)
 		//	_nextSpawn = 0;
 
-        Vector3 spawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+        Vector3 spawnPos = SpawnPoints[GetOrderedRandomSpawnPointIndex()];
 
 		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity) as GameObject;
 		PlayerController player = playerObject.GetComponent<PlayerController>();
@@ -234,5 +250,12 @@ public class GameManager : MonoBehaviour {
             Gizmos.DrawLine(spawn, spawn + Vector3.up * 20);
             Gizmos.DrawSphere(spawn, 1);
         }
+    }
+
+    int GetOrderedRandomSpawnPointIndex()
+    {
+        int index = _spawnPointsOrder[_spawnPointsIndex];
+        _spawnPointsIndex = (++_spawnPointsIndex) % SpawnPoints.Length;
+        return index;
     }
 }
