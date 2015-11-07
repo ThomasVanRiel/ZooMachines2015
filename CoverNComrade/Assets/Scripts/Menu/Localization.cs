@@ -41,11 +41,7 @@ public class Localization : MonoBehaviour {
 
         XElement xmlDictionary;
 
-#if DEBUG
         xmlDictionary = XElement.Load(string.Format("{0}/{1}", Application.dataPath, FileName));
-#else
-        xmlDictionary = XElement.Load(string.Format("{0}/{1}", Application.dataPath, FileName));
-#endif
 
 
         foreach (var item in xmlDictionary.Elements("Language")) {
@@ -56,6 +52,7 @@ public class Localization : MonoBehaviour {
     }
 
     public string GetTranslation(string name) {
+        Debug.Log(_currentLanguage.ToLower());
         var list = _languageDictionary[_currentLanguage.ToLower()].Descendants(name);
         foreach (var item in list) {
             return item.Value;

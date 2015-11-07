@@ -19,7 +19,7 @@ public class SettingsMenu : MonoBehaviour {
 
     private List<Dropdown.OptionData> _languages = new List<Dropdown.OptionData>();
 
-    void OnEnable() {
+    void Awake() {
         foreach (var item in Settings) {
             _settingsDictionary.Add(item.Name, item.Object);
         }
