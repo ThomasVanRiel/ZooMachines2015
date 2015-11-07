@@ -15,13 +15,15 @@ public class CursorDisplay : MonoBehaviour
 
     // Components
     private IInputReceiver _input;
-    private PlayerController _controller;
+    //private TeamController _teamController;
+    private PlayerController _playerController;
 
     void Start()
     {
         // Components
         _input = GetComponent<IInputReceiver>();
-        _controller = GetComponent<PlayerController>();
+        //_teamController = GetComponent<TeamController>();
+        _playerController = GetComponent<PlayerController>();
         _cursorCanvas = CursorUI.GetComponent<Canvas>();
 
     }
@@ -34,7 +36,7 @@ public class CursorDisplay : MonoBehaviour
             _cursor = Instantiate(CursorPrefab);
             _cursor.transform.SetParent(CursorUI.transform);
             _cursor.transform.localScale = Vector3.one;
-            _cursor.GetComponent<Image>().color = _controller.PlayerColor;
+            //_cursor.GetComponent<Image>().color = _teamController.TeamColor;
             _cursorTransform = _cursor.GetComponent<RectTransform>();
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
@@ -44,7 +46,7 @@ public class CursorDisplay : MonoBehaviour
         }
 
         // Update position
-        if (_controller.IsAlive() )
+        if (_playerController.IsAlive() )
             SetCursorPosition(new Vector2(_input.GetMouseX(), _input.GetMouseY()));
         // Or disable
         else

@@ -8,11 +8,19 @@ public class PlayMenu : MonoBehaviour {
     public struct MenuPair {
         public string Name;
         public GameObject Menu;
+
+        public MenuPair(string name, GameObject menu) {
+            Name = name;
+            Menu = menu;
+        }
     }
+
+    private string _selectedLevel;
+
     public MenuPair[] Menus;
 
     private Dictionary<string, GameObject> _menuDictionary = new Dictionary<string, GameObject>();
-    private GameObject _openMenu;
+    private MenuPair _openMenu;
 
     // Use this for initialization
     void Awake() {
@@ -35,11 +43,32 @@ public class PlayMenu : MonoBehaviour {
     public void OpenMenu(string menuKey) {
         GameObject menu = null;
         if (_menuDictionary.TryGetValue(menuKey.ToLower(), out menu)) {
-            if (_openMenu != null) {
-                _openMenu.SetActive(false);
+            if (_openMenu.Menu != null) {
+                _openMenu.Menu.SetActive(false);
             }
-            _openMenu = menu;
+            _openMenu = new MenuPair(menuKey, menu);
             menu.SetActive(true);
+
+            switch (menuKey.ToLower()) {
+                case "deathmatch":
+                    PlayerPrefs.SetInt("GameMode", (int)GameManager.GameModeChoice.DeathMatch);
+                    break;
+                case "lastmanstanding":
+                    PlayerPrefs.SetInt("GameMode", (int)GameManager.GameModeChoice.LastManStanding);
+                    break;
+                default:
+                    break;
+            }
+
+            Debug.Log(PlayerPrefs.GetInt("GameMode"));
         }
+    }
+
+    public void SetLevel(string levelName) {
+        _selectedLevel = levelName;
+    }
+
+    public void StartGame() {
+        Application.LoadLevel(_selectedLevel);
     }
 }
