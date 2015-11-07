@@ -38,6 +38,10 @@ public class MainMenu : MonoBehaviour {
                 return;
             }
             if (_openMenu != null) {
+                if (_openMenu.GetComponent<SettingsMenu>() != null) {
+                    _openMenu.GetComponent<SettingsMenu>().SaveFile();
+                }
+
                 _openMenu.transform.localScale = Vector3.zero;
                 //_openMenu.SetActive(false);
             }
@@ -55,6 +59,9 @@ public class MainMenu : MonoBehaviour {
     public void CloseMenu() {
         if (_openMenu != null) {
             _openMenu.transform.localScale = Vector3.zero;
+            if (_openMenu.GetComponent<SettingsMenu>() != null) {
+                _openMenu.GetComponent<SettingsMenu>().SaveFile();
+            }
             //_openMenu.SetActive(false);
             _openMenu = null;
             CameraToBlur.enabled = false;
@@ -69,6 +76,9 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame() {
         //Debug.Log("QuitGame");
+        if (_openMenu.GetComponent<SettingsMenu>() != null) {
+            _openMenu.GetComponent<SettingsMenu>().SaveFile();
+        }
         Application.Quit();
     }
 
