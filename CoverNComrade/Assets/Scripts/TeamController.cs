@@ -89,6 +89,7 @@ public class TeamController : MonoBehaviour
             TeamColor = HSBColor.ToColor(newColor);
             // Decrease time
             timeRemaining -= Time.fixedDeltaTime;
+            UpdateColor();
             yield return new WaitForEndOfFrame();
         }
         TeamColor = Color.white;
