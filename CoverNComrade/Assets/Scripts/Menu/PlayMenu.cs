@@ -31,6 +31,8 @@ public class PlayMenu : MonoBehaviour {
         foreach (var item in _menuDictionary) {
             item.Value.SetActive(false);
         }
+        PlayerPrefs.SetInt("GameMode", (int)GameManager.GameModeChoice.DeathMatch);
+        _selectedLevel = "Minim";
 
         OpenMenu(Menus[0].Name);
     }
