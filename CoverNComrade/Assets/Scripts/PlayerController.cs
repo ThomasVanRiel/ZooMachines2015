@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 {
                     shapeScales.y = 1 + scaleSteps;
                     if (_health > 2)
-                        shapeScales.z = 1 + 2*scaleSteps;
+                        shapeScales.z = 1 + 2 * scaleSteps;
                 }
             }
             PlayerIndicator.material.SetVector("Shape Scale", shapeScales);
@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         // 
         _prevForward = _transf.forward;
-        
+
     }
 
     public void FixedUpdate()
@@ -139,6 +139,24 @@ public class PlayerController : MonoBehaviour
 
     void ProcessMovement()
     {
+        // TEST FOR JOYSTICKS        
+        Vector3 dirr = Vector3.zero;
+        int pi = GetComponent<MouseInputReceiver>().PlayerID;
+        dirr.x = Input.GetAxis(string.Format("p{0}_MoveX", pi+1));
+        dirr.y = Input.GetAxis(string.Format("p{0}_MoveY", pi+1));
+        dirr.Normalize();
+        if (dirr.magnitude > .1f)
+        {
+            Move(dirr);
+            _isRunning = true;
+        }
+        else
+        {
+            _isRunning = false;
+            _rb.velocity = Vector3.zero;
+        }
+        return;
+
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
         float hit;
@@ -179,8 +197,8 @@ public class PlayerController : MonoBehaviour
         if (_isRunning)
         {
             float angleDiff = Vector3.Cross(_prevForward, new Vector3(transform.forward.x, 0, transform.forward.z)).y;
-            
-           angleDiff = Mathf.Sign(angleDiff);
+
+            angleDiff = Mathf.Sign(angleDiff);
 
             float step = .1f;
 
@@ -197,7 +215,7 @@ public class PlayerController : MonoBehaviour
                     leftRightDirection = angleDiff;
             }
         }
-        
+
         _prevLeftRightDirection = leftRightDirection;
         _prevForward = transform.forward;
         _prevForward.y = 0;
@@ -226,7 +244,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         Health -= dmg;
-        
+
         if (Health == 0)
         {
             if (GameManager.PlayerKilled != null)
