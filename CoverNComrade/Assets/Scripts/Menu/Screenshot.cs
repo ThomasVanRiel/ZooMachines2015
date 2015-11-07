@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Screenshot : MonoBehaviour {
 
-    private int _index = 0;
-
     // Use this for initialization
     void Awake() {
         DontDestroyOnLoad(this.gameObject);

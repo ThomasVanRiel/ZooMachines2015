@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour {
     void Awake() {
         foreach (var item in Menus) {
             _menuDictionary.Add(item.Name.ToLower(), item.Menu);
+            item.Menu.transform.localScale = Vector3.zero;
         }
     }
 
@@ -37,10 +38,12 @@ public class MainMenu : MonoBehaviour {
                 return;
             }
             if (_openMenu != null) {
-                _openMenu.SetActive(false);
+                _openMenu.transform.localScale = Vector3.zero;
+                //_openMenu.SetActive(false);
             }
             _openMenu = menu;
-            menu.SetActive(true);
+            _openMenu.transform.localScale = Vector3.one;
+            //menu.SetActive(true);
             CameraToBlur.enabled = true;
             foreach (var camera in CamerasToDisable) {
                 camera.enabled = false;
@@ -51,7 +54,8 @@ public class MainMenu : MonoBehaviour {
 
     public void CloseMenu() {
         if (_openMenu != null) {
-            _openMenu.SetActive(false);
+            _openMenu.transform.localScale = Vector3.zero;
+            //_openMenu.SetActive(false);
             _openMenu = null;
             CameraToBlur.enabled = false;
             foreach (var item in CamerasToDisable) {
