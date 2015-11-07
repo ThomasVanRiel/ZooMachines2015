@@ -134,6 +134,11 @@ public class GameManager : MonoBehaviour {
 			InProgressUI.SetActive(false);
 			GameOverUI.SetActive(true);
 
+			foreach (KeyValuePair<int, PlayerController> player in _players) {
+				player.Value.CanMove = false;
+				player.Value.CanShoot = false;
+			}
+
 			_currentState = State.GameOver;
 			_updateState = UpdateGameOver;
 			break;
