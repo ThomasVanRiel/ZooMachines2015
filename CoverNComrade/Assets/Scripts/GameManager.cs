@@ -138,6 +138,22 @@ public class GameManager : MonoBehaviour {
 		if (_updateState != null) {
 			_updateState();
 		}
+
+	    if (_currentState != State.GameOver )
+	    {
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.Locked;
+#endif
+            Cursor.visible = false;
+        }
+	    else
+        {
+#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.None;
+#endif
+            Cursor.visible = true;
+
+        }
 	}
 
 	// UpdateWaiting is the update method in Waiting state
