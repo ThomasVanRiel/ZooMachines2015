@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(TrailRenderer))]
 public class Projectile : MonoBehaviour
 {
     public LayerMask CollisionMask;
@@ -86,7 +85,11 @@ public class Projectile : MonoBehaviour
             hue -= 1;
         partColor.h = hue;
         _particleColor = HSBColor.ToColor(partColor);
-        TrailParticles.startColor = _particleColor;
+        TrailParticles.startColor = newColor;
+        var light = GetComponent<Light>();
+        if (light != null) {
+            light.color = newColor;
+        }
     }
 
     void CheckCollisions(float moveDistance)

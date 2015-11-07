@@ -76,9 +76,7 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame() {
         //Debug.Log("QuitGame");
-        if (_openMenu.GetComponent<SettingsMenu>() != null) {
-            _openMenu.GetComponent<SettingsMenu>().SaveFile();
-        }
+        CloseMenu();
         Application.Quit();
     }
 
