@@ -142,7 +142,8 @@ public class Projectile : MonoBehaviour
                 Destroy(p, 3);
                 scr.TakeDamage(_damage, _owner);
 
-                Destroy(gameObject);
+                //Destroy(gameObject);
+                gameObject.SetActive(false);
                 return;
             }
 

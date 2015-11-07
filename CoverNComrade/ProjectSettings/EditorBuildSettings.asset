@@ -8,6 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Scenes/Maps/Broken_Bridge.unity
+    path: Assets/Scenes/Maps/BrokenBridge.unity
   - enabled: 1
     path: Assets/Scenes/Maps/Minim.unity
