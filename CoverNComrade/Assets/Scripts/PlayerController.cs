@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning = false;
 
     private Color _playerColor = Color.red;
+    private Plane _plane = new Plane(Vector3.up, Vector3.zero);
 
     private Vector3 _prevForward;
     private float _prevLeftRightDirection = 0;
@@ -73,6 +74,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private TeamController _teamC;
     public Projector PlayerIndicator;
+    public RagdollScript RagDoll;
 
     public void Start()
     {
@@ -139,11 +141,12 @@ public class PlayerController : MonoBehaviour
     {
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        float hit;
+        if (_plane.Raycast(ray, out hit))
         {
+            Vector3 point = ray.GetPoint(hit);
             // Move
-            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
+            Vector3 dir = point - new Vector3(_transf.position.x, 0, _transf.position.z);
             if (dir.magnitude > CursorStopDistance)
             {
                 Move(dir);
@@ -168,6 +171,9 @@ public class PlayerController : MonoBehaviour
 
     void ProcessAnimations()
     {
+        if (Health < 1)
+            return;
+
         // Pre calc
         float leftRightDirection = 0;
         if (_isRunning)
@@ -220,6 +226,7 @@ public class PlayerController : MonoBehaviour
             _isRunning = false;
             _teamC.DisableTeamIndication();
             gameObject.layer = LayerMask.NameToLayer("PlayerDead");
+            RagDoll.Ragdolled = true;
         }
     }
 
