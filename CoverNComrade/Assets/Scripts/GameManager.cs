@@ -9,14 +9,15 @@ public class GameManager : MonoBehaviour {
 		LastManStanding,
 		DeathMatch
 	};
-	
+
+	//public GameObject LevelPrefab;
 	public GameObject PlayerPrefab; // the player prefab to spawn
 	public GameObject CursorUI;
 	public GameObject InfoUI;
-	public LevelController Level;
 	public GameModeChoice ModeChoice = GameModeChoice.LastManStanding;
 
 	private CameraHandler _cam;
+	private LevelController _level;
 	private Dictionary<PlayerController, int> _players;
 	private GameMode _gameMode;
 	private int _nextSpawn;
@@ -26,8 +27,12 @@ public class GameManager : MonoBehaviour {
 
 	public delegate IEnumerator Command();
 
+    public Vector3[] SpawnPoints;
+
 	void Start () {
 		InfoUI.SetActive(false);
+		//GameObject levelObject = Instantiate(LevelPrefab) as GameObject;
+		//_level = levelObject.GetComponent<LevelController>();
 		_cam = Camera.main.GetComponent<CameraHandler>();
 
 		switch(ModeChoice) {
@@ -66,19 +71,23 @@ public class GameManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.5f);
 		}
 
-#if UNITY_EDITOR_WIN || !UNITY_EDITOR
+		//GameObject levelObject = Instantiate(LevelPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+		//_level = levelObject.GetComponent<LevelController>();
+#if UNITY_EDITOR_WIN
 		_gameMode.Setup(this, InputManager.AmountOfMice);
 #else
-		_gameMode.Setup(this, Level.spawnPositions.Length);
+		_gameMode.Setup(this, _level.spawnPositions.Length);
 #endif
 	}
 
 	public PlayerController SpawnPlayer(int playerID) {
-		Transform spawnPos = Level.spawnPositions[_nextSpawn++];
-		if (_nextSpawn >= Level.spawnPositions.Length)
-			_nextSpawn = 0;
+		//Transform spawnPos = _level.spawnPositions[_nextSpawn++];
+		//if (_nextSpawn >= _level.spawnPositions.Length)
+		//	_nextSpawn = 0;
 
-		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos.position, spawnPos.rotation) as GameObject;
+        Vector3 spawnPos = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+
+		GameObject playerObject = GameObject.Instantiate(PlayerPrefab, spawnPos, Quaternion.identity) as GameObject;
 		PlayerController player = playerObject.GetComponent<PlayerController>();
 		playerObject.GetComponent<CursorDisplay>().CursorUI = CursorUI;
 		playerObject.GetComponent<MouseInputReceiver>().PlayerID = playerID;
@@ -96,4 +105,17 @@ public class GameManager : MonoBehaviour {
 	public void Execute(Command cmd) {
 		StartCoroutine(cmd());
 	}
+
+    void OnDrawGizmosSelected()
+    {
+        if (SpawnPoints.Length <= 0)
+            return;
+
+        Gizmos.color = Color.magenta;
+        foreach (var spawn in SpawnPoints)
+        {
+            Gizmos.DrawLine(spawn, spawn + Vector3.up * 20);
+            Gizmos.DrawSphere(spawn, 1);
+        }
+    }
 }
