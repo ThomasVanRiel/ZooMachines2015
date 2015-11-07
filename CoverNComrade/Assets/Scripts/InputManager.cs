@@ -155,6 +155,7 @@ public class InputManager : MonoBehaviour
 #else
         AmountOfMice = 1;
 #endif
+        //AmountOfMice = 1;
         return AmountOfMice;
     }
 
@@ -194,7 +195,7 @@ public class InputManager : MonoBehaviour
 #if UNITY_EDITOR_WIN
         return _move[id].x + _offset[id].x;
 #else
-        return Input.GetAxis("Mouse X");
+        return Input.mousePosition.x;
 #endif
     }
 
@@ -213,7 +214,7 @@ public class InputManager : MonoBehaviour
 #if UNITY_EDITOR_WIN
         return _move[id].y + _offset[id].y;
 #else
-        return Input.GetAxis("Mouse Y");
+        return Input.mousePosition.y;
 #endif
     }
 

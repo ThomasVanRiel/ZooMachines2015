@@ -31,11 +31,8 @@ public class Localization : MonoBehaviour {
 
     private Dictionary<string, XElement> _languageDictionary = new Dictionary<string, XElement>();
 
-    void Awake() {
+    void Start() {
         DontDestroyOnLoad(this.gameObject);
-
-
-
 
         UpdateDictionary();
     }
@@ -44,11 +41,7 @@ public class Localization : MonoBehaviour {
 
         XElement xmlDictionary;
 
-#if DEBUG
         xmlDictionary = XElement.Load(string.Format("{0}/{1}", Application.dataPath, FileName));
-#else
-        xmlDictionary = XElement.Load(string.Format("{0}/{1}", Application.dataPath, FileName));
-#endif
 
 
         foreach (var item in xmlDictionary.Elements("Language")) {
@@ -63,7 +56,7 @@ public class Localization : MonoBehaviour {
         foreach (var item in list) {
             return item.Value;
         }
-        return "Error, no translation found!";
+        return string.Empty;
     }
 
     public void ChangeLanguage(string language) {

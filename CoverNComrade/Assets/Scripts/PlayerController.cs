@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning = false;
 
     private Color _playerColor = Color.red;
+    private Plane _plane = new Plane(Vector3.up, Vector3.zero);
 
     private Vector3 _prevForward;
     private float _prevLeftRightDirection = 0;
@@ -43,6 +44,20 @@ public class PlayerController : MonoBehaviour
 
             if (_health < 0) _health = 0;
             else if (_health > PlayerMaxHealth) _health = PlayerMaxHealth;
+
+            Vector4 shapeScales = Vector4.zero;
+            float scaleSteps = .3f;
+            if (_health > 0)
+            {
+                shapeScales.x = 1;
+                if (_health > 1)
+                {
+                    shapeScales.y = 1 + scaleSteps;
+                    if (_health > 2)
+                        shapeScales.z = 1 + 2*scaleSteps;
+                }
+            }
+            PlayerIndicator.material.SetVector("Shape Scale", shapeScales);
         }
     }
 
@@ -58,6 +73,8 @@ public class PlayerController : MonoBehaviour
     private Material _mat;
     private Animator _animator;
     private TeamController _teamC;
+    public Projector PlayerIndicator;
+    public RagdollScript RagDoll;
 
     public void Start()
     {
@@ -124,11 +141,12 @@ public class PlayerController : MonoBehaviour
     {
         // Setup Raycast
         Ray ray = Camera.main.ScreenPointToRay(_input.GetMousePosition());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        float hit;
+        if (_plane.Raycast(ray, out hit))
         {
+            Vector3 point = ray.GetPoint(hit);
             // Move
-            Vector3 dir = new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(_transf.position.x, 0, _transf.position.z);
+            Vector3 dir = point - new Vector3(_transf.position.x, 0, _transf.position.z);
             if (dir.magnitude > CursorStopDistance)
             {
                 Move(dir);
@@ -153,42 +171,40 @@ public class PlayerController : MonoBehaviour
 
     void ProcessAnimations()
     {
+        if (Health < 1)
+            return;
+
         // Pre calc
         float leftRightDirection = 0;
         if (_isRunning)
         {
-            var angleDiff = Mathf.Atan2(
-                Vector3.Dot(Vector3.up, Vector3.Cross(_prevForward, transform.forward)),
-                Vector3.Dot(_prevForward, transform.forward)) * Mathf.Rad2Deg;
+            float angleDiff = Vector3.Cross(_prevForward, new Vector3(transform.forward.x, 0, transform.forward.z)).y;
+            
+           angleDiff = Mathf.Sign(angleDiff);
 
-            if (Mathf.Abs(angleDiff) < .001f)
-                angleDiff = 0;
-            else
-                angleDiff = Mathf.Sign(angleDiff);
-
-            float diff = 0.1f;
+            float step = .1f;
 
             if (angleDiff > _prevLeftRightDirection)
             {
-                leftRightDirection = _prevLeftRightDirection + diff * Time.deltaTime;
+                leftRightDirection = _prevLeftRightDirection + step;
                 if (leftRightDirection > angleDiff)
                     leftRightDirection = angleDiff;
             }
-            if (angleDiff < _prevLeftRightDirection)
+            else
             {
-                leftRightDirection = _prevLeftRightDirection - diff * Time.deltaTime;
+                leftRightDirection = _prevLeftRightDirection - step;
                 if (leftRightDirection < angleDiff)
                     leftRightDirection = angleDiff;
             }
-
         }
         
         _prevLeftRightDirection = leftRightDirection;
         _prevForward = transform.forward;
+        _prevForward.y = 0;
 
         _animator.SetFloat("Speed", _isRunning ? 1 : 0);
         _animator.SetBool("IsRunning", _isRunning);
-        _animator.SetFloat("LeftRightDirection", Mathf.Sign(leftRightDirection));
+        _animator.SetFloat("LeftRightDirection", leftRightDirection);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             _animator.SetTrigger("Shoot");
@@ -210,19 +226,17 @@ public class PlayerController : MonoBehaviour
             return;
 
         Health -= dmg;
-
-        // TODO: sets the killer to the one who shot the bullet,
-        //		 not needed right now as we don't need this in LMS mode.
+        
         if (Health == 0)
         {
             if (GameManager.PlayerKilled != null)
                 GameManager.PlayerKilled(enemy, this);
             // Desaturate
-            StartCoroutine(FadeColor(2));
+            StartCoroutine(WaitAndFadeColor(1.5f, 2));
             _isRunning = false;
-            // TODO: Disable team indicator
             _teamC.DisableTeamIndication();
-
+            gameObject.layer = LayerMask.NameToLayer("PlayerDead");
+            RagDoll.Ragdolled = true;
         }
     }
 
@@ -232,8 +246,10 @@ public class PlayerController : MonoBehaviour
         return Health > 0;
     }
 
-    IEnumerator FadeColor(float t)
+    IEnumerator WaitAndFadeColor(float wait, float t)
     {
+        yield return new WaitForSeconds(wait);
+
         // Convert to HSB
         HSBColor newColor = new HSBColor(PlayerColor);
         float timeRemaining = t;
@@ -247,5 +263,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         PlayerColor = Color.white;
+        _mat.SetInt("_EnableSeethrough", 0);
     }
 }

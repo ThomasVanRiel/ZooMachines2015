@@ -1,23 +1,21 @@
 fileFormatVersion: 2
-guid: 3e963dcb900ad504d99ec84eec16a4df
-timeCreated: 1446791760
+guid: 20debc8709ce42347a696a05a259037b
+timeCreated: 1446890133
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: B_Stump
-    100002: B_Tree
-    100004: Box001
-    100006: //RootNode
-    400000: B_Stump
-    400002: B_Tree
-    400004: Box001
-    400006: //RootNode
-    4300000: Box001
-    9500000: //RootNode
-    13700000: Box001
+    100000: Plan
+    100002: symetrie
+    100004: //RootNode
+    400000: Plan
+    400002: symetrie
+    400004: //RootNode
+    2300000: Plan
+    3300000: Plan
+    4300000: Plan
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -74,7 +72,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

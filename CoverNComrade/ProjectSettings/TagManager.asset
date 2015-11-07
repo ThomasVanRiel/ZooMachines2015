@@ -19,8 +19,8 @@ TagManager:
   - IgnorePlayer
   - BlockOnlyPlayer
   - Floor
-  - 
-  - 
+  - PlayerDead
+  - PlayerRagdoll
   - 
   - 
   - 

@@ -8,7 +8,8 @@ public class CursorDisplay : MonoBehaviour
     public GameObject CursorPrefab;
     public GameObject CursorUI;
     private Canvas _cursorCanvas;
-    private RectTransform _cursor;
+    private RectTransform _cursorTransform;
+    private GameObject _cursor;
 
     private bool _hasSpawnedCursor = false;
 
@@ -30,11 +31,11 @@ public class CursorDisplay : MonoBehaviour
         if (!_hasSpawnedCursor)
         {
             // Cursor
-            GameObject cursor = Instantiate(CursorPrefab);
-            cursor.transform.SetParent(CursorUI.transform);
-            cursor.transform.localScale = Vector3.one;
-            cursor.GetComponent<Image>().color = _controller.PlayerColor;
-            _cursor = cursor.GetComponent<RectTransform>();
+            _cursor = Instantiate(CursorPrefab);
+            _cursor.transform.SetParent(CursorUI.transform);
+            _cursor.transform.localScale = Vector3.one;
+            _cursor.GetComponent<Image>().color = _controller.PlayerColor;
+            _cursorTransform = _cursor.GetComponent<RectTransform>();
 
             Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
             _input.SetMousePositionOffset((new Vector2(pos.x, pos.y) - new Vector2(_input.GetMouseX(), _input.GetMouseY()))/_cursorCanvas.scaleFactor);
@@ -43,14 +44,18 @@ public class CursorDisplay : MonoBehaviour
         }
 
         // Update position
-        SetCursorPosition(new Vector2(_input.GetMouseX(), _input.GetMouseY()));
+        if (_controller.IsAlive() )
+            SetCursorPosition(new Vector2(_input.GetMouseX(), _input.GetMouseY()));
+        // Or disable
+        else
+            _cursor.SetActive(false);
     }
 
     void SetCursorPosition(Vector2 pos, bool scaled = true)
     {
-        _cursor.anchoredPosition = pos;
+        _cursorTransform.anchoredPosition = pos;
         if (scaled)
-            _cursor.anchoredPosition /= _cursorCanvas.scaleFactor;
+            _cursorTransform.anchoredPosition /= _cursorCanvas.scaleFactor;
     }
 
 }

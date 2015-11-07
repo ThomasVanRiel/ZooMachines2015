@@ -21,6 +21,7 @@ public class MainMenu : MonoBehaviour {
     void Awake() {
         foreach (var item in Menus) {
             _menuDictionary.Add(item.Name.ToLower(), item.Menu);
+            item.Menu.transform.localScale = Vector3.zero;
         }
     }
 
@@ -33,25 +34,51 @@ public class MainMenu : MonoBehaviour {
         GameObject menu = null;
         if (_menuDictionary.TryGetValue(menuKey.ToLower(), out menu)) {
             if (_openMenu == menu) {
+                GameObject CreditsMenu;
+                if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                    if (CreditsMenu == _openMenu) {
+                        Utilities.Instance.GetMusic().ChangeAudioClip();
+                    }
+                }
+
                 CloseMenu();
                 return;
             }
             if (_openMenu != null) {
-                _openMenu.SetActive(false);
+                if (_openMenu.GetComponent<SettingsMenu>() != null) {
+                    _openMenu.GetComponent<SettingsMenu>().SaveFile();
+                }
+                GameObject CreditsMenu;
+                if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                    if (CreditsMenu == _openMenu) {
+                        Utilities.Instance.GetMusic().ChangeAudioClip();
+                    }
+                }
+
+                _openMenu.transform.localScale = Vector3.zero;
+                //_openMenu.SetActive(false);
             }
             _openMenu = menu;
-            menu.SetActive(true);
+            _openMenu.transform.localScale = Vector3.one;
+            //menu.SetActive(true);
             CameraToBlur.enabled = true;
             foreach (var camera in CamerasToDisable) {
                 camera.enabled = false;
             }
 
+            if (menuKey.ToLower() == "credits") {
+                Utilities.Instance.GetMusic().ChangeAudioClip();
+            }
         }
     }
 
     public void CloseMenu() {
         if (_openMenu != null) {
-            _openMenu.SetActive(false);
+            _openMenu.transform.localScale = Vector3.zero;
+            if (_openMenu.GetComponent<SettingsMenu>() != null) {
+                _openMenu.GetComponent<SettingsMenu>().SaveFile();
+            }
+            //_openMenu.SetActive(false);
             _openMenu = null;
             CameraToBlur.enabled = false;
             foreach (var item in CamerasToDisable) {
@@ -60,11 +87,20 @@ public class MainMenu : MonoBehaviour {
             foreach (var camera in CamerasToDisable) {
                 camera.enabled = true;
             }
+
+            GameObject CreditsMenu;
+            if (_menuDictionary.TryGetValue("credits", out CreditsMenu)) {
+                if (CreditsMenu == _openMenu) {
+                    Utilities.Instance.GetMusic().ChangeAudioClip();
+                }
+            }
+
         }
     }
 
     public void QuitGame() {
         //Debug.Log("QuitGame");
+        CloseMenu();
         Application.Quit();
     }
 

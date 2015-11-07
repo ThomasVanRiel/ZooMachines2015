@@ -11,7 +11,13 @@ public class TeamController : MonoBehaviour
     private float _oldScrollValue = 0;
     public float ScrollDifference = 1;
 
-    public Renderer TeamColorRenderer;
+    public Projector PlayerIndicator;
+    private Material _mat;
+
+    private static bool _canSwitchTeam = true;
+    public static bool CanSwitchTeam {
+        get { return _canSwitchTeam; }
+        set { _canSwitchTeam = value; } }
 
     // Component
     private IInputReceiver _input;
@@ -20,13 +26,19 @@ public class TeamController : MonoBehaviour
     void Start ()
     {
         _input = GetComponent<IInputReceiver>();
+        _mat = new Material(PlayerIndicator.material);
+        PlayerIndicator.material = _mat;
 
         UpdateColor();
     }
 	
 	// Update is called once per frame
 	void Update ()
-    {
+	{
+        // Only react to scroll wheel if players can switch team.
+	    if (!CanSwitchTeam)
+	        return;
+
 	    float currentScroll = _input.GetMouseScroll();
 	    if (Mathf.Abs(_oldScrollValue - currentScroll) >= ScrollDifference)
 	    {
@@ -49,11 +61,11 @@ public class TeamController : MonoBehaviour
     void UpdateColor()
     {
         TeamColor = HSBColor.ToColor(new HSBColor((float) CurrentTeam/AmountOfTeams, 1, 1));
-        TeamColorRenderer.material.color = TeamColor;
+        _mat.color = TeamColor;
     }
 
     public void DisableTeamIndication()
     {
-        TeamColorRenderer.gameObject.SetActive(false);
+        PlayerIndicator.gameObject.SetActive(false);
     }
 }
