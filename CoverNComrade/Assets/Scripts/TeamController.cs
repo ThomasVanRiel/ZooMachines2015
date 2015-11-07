@@ -11,7 +11,8 @@ public class TeamController : MonoBehaviour
     private float _oldScrollValue = 0;
     public float ScrollDifference = 1;
 
-    public Renderer TeamColorRenderer;
+    public Projector PlayerIndicator;
+    private Material _mat;
 
     private static bool _canSwitchTeam = true;
     public static bool CanSwitchTeam {
@@ -25,6 +26,8 @@ public class TeamController : MonoBehaviour
     void Start ()
     {
         _input = GetComponent<IInputReceiver>();
+        _mat = new Material(PlayerIndicator.material);
+        PlayerIndicator.material = _mat;
 
         UpdateColor();
     }
@@ -58,11 +61,11 @@ public class TeamController : MonoBehaviour
     void UpdateColor()
     {
         TeamColor = HSBColor.ToColor(new HSBColor((float) CurrentTeam/AmountOfTeams, 1, 1));
-        TeamColorRenderer.material.color = TeamColor;
+        _mat.color = TeamColor;
     }
 
     public void DisableTeamIndication()
     {
-        TeamColorRenderer.gameObject.SetActive(false);
+        PlayerIndicator.gameObject.SetActive(false);
     }
 }

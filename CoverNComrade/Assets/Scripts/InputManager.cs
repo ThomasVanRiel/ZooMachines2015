@@ -155,7 +155,7 @@ public class InputManager : MonoBehaviour
 #else
         AmountOfMice = 1;
 #endif
-        AmountOfMice = 1;
+        //AmountOfMice = 1;
         return AmountOfMice;
     }
 

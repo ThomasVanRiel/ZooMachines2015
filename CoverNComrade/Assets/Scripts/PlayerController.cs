@@ -43,6 +43,20 @@ public class PlayerController : MonoBehaviour
 
             if (_health < 0) _health = 0;
             else if (_health > PlayerMaxHealth) _health = PlayerMaxHealth;
+
+            Vector4 shapeScales = Vector4.zero;
+            float scaleSteps = .3f;
+            if (_health > 0)
+            {
+                shapeScales.x = 1;
+                if (_health > 1)
+                {
+                    shapeScales.y = 1 + scaleSteps;
+                    if (_health > 2)
+                        shapeScales.z = 1 + 2*scaleSteps;
+                }
+            }
+            PlayerIndicator.material.SetVector("Shape Scale", shapeScales);
         }
     }
 
@@ -58,6 +72,7 @@ public class PlayerController : MonoBehaviour
     private Material _mat;
     private Animator _animator;
     private TeamController _teamC;
+    public Projector PlayerIndicator;
 
     public void Start()
     {
