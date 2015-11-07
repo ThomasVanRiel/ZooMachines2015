@@ -31,6 +31,7 @@ public class Utilities : MonoBehaviour {
         foreach (var item in settingsList.Descendants()){
             _settings.Add(item.Name.ToString(), item.Value);
         }
+
     }
 
     public string GetSetting(string settingName) {

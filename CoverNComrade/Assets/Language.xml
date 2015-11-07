@@ -52,7 +52,7 @@
 			<SettingsMenu_Title>Settings</SettingsMenu_Title>
 			<Settings>
 				<Settings_MusicVolume>Music Volume</Settings_MusicVolume>
-				<Settings_EffectsVolume>Music Volume</Settings_EffectsVolume>
+				<Settings_EffectsVolume>Effects Volume</Settings_EffectsVolume>
 				<Settings_Language>Language</Settings_Language>
 				<Settings_MinorSettings>
 					<Settings_Vignette>Vignette</Settings_Vignette>
@@ -252,6 +252,70 @@
 					<Settings_AA>4nt1-4L14s1n'</Settings_AA>
 					<Settings_TeamSwitch>T34m sw1tch1n'</Settings_TeamSwitch>
 					<Settings_Colorblind>C0L0rbL1nd m0d3</Settings_Colorblind>
+				</Settings_MinorSettings>
+			</Settings>
+		</SettingsMenu>
+	</Language>
+	<Language language="Canadian, eh">
+		<MainMenu>
+	  		<MainMenu_QuickPlay>Quick Play, eh</MainMenu_QuickPlay>
+	  		<MainMenu_Play>Play, eh</MainMenu_Play>
+	  		<MainMenu_Settings>Settings, eh</MainMenu_Settings>
+	  		<MainMenu_Credits>Aboot, eh</MainMenu_Credits>
+	  		<MainMenu_Quit>Quit, eh</MainMenu_Quit>
+		</MainMenu>
+		<PlayMenu>
+			<PlayMenu_Title>Play, eh</PlayMenu_Title>
+			<GameModes>
+				<LastManStanding>
+					<LastManStanding_Title>Last man standing, eh</LastManStanding_Title>
+					<LastManStanding_Info>The only way to win is to kill all other players, there are no respawns on death.</LastManStanding_Info>
+				</LastManStanding>
+				<MostKills>
+					<MostKills_Title>Most Kills, eh</MostKills_Title>
+					<MostKills_Info>Placeholder text, eh!</MostKills_Info>
+				</MostKills>
+				<LeastDeaths>
+					<LeastDeaths_Title>Least Deaths, eh</LeastDeaths_Title>
+					<LeastDeaths_Info>Placeholder text, eh!</LeastDeaths_Info>
+				</LeastDeaths>
+				<BattleRoyale>
+					<BattleRoyale_Title>Battle Royale, eh</BattleRoyale_Title>
+					<BattleRoyale_Info>Placeholder text, eh!</BattleRoyale_Info>
+				</BattleRoyale>
+				<KingOfTheHill>
+					<KingOfTheHill_Title>King of the Hill, eh</KingOfTheHill_Title>
+					<KingOfTheHill_Info>Placeholder text, eh!</KingOfTheHill_Info>
+				</KingOfTheHill>
+				<Team>
+					<Team_Title>Team, eh</Team_Title>
+					<Team_Info>Placeholder text, eh!</Team_Info>
+				</Team>
+				<Boss>
+					<Boss_Title>Boss, eh</Boss_Title>
+					<Boss_Info>Placeholder text, eh!</Boss_Info>
+				</Boss>
+				<ControlPoint>
+					<ControlPoint_Title>Controlpoints, eh</ControlPoint_Title>
+					<ControlPoint_Info>Placeholder text, eh!</ControlPoint_Info>
+				</ControlPoint>
+			</GameModes>
+			<Levels>
+	
+			</Levels>
+		</PlayMenu>
+		<SettingsMenu>
+			<SettingsMenu_Title>Settings, eh</SettingsMenu_Title>
+			<Settings>
+				<Settings_MusicVolume>Music Volume, eh</Settings_MusicVolume>
+				<Settings_EffectsVolume>Effects Volume, eh</Settings_EffectsVolume>
+				<Settings_Language>Language, eh</Settings_Language>
+				<Settings_MinorSettings>
+					<Settings_Vignette>Vignette, eh</Settings_Vignette>
+					<Settings_Bloom>Bloom, eh</Settings_Bloom>
+					<Settings_AA>Anti-aliasing, eh</Settings_AA>
+					<Settings_TeamSwitch>Team switching, eh</Settings_TeamSwitch>
+					<Settings_Colorblind>Colorblind mode, eh</Settings_Colorblind>
 				</Settings_MinorSettings>
 			</Settings>
 		</SettingsMenu>

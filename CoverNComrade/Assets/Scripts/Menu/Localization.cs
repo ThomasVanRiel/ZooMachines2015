@@ -31,7 +31,7 @@ public class Localization : MonoBehaviour {
 
     private Dictionary<string, XElement> _languageDictionary = new Dictionary<string, XElement>();
 
-    void Awake() {
+    void Start() {
         DontDestroyOnLoad(this.gameObject);
 
         UpdateDictionary();
@@ -52,7 +52,6 @@ public class Localization : MonoBehaviour {
     }
 
     public string GetTranslation(string name) {
-        Debug.Log(_currentLanguage.ToLower());
         var list = _languageDictionary[_currentLanguage.ToLower()].Descendants(name);
         foreach (var item in list) {
             return item.Value;
