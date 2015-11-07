@@ -263,4 +263,12 @@ public class GameManager : MonoBehaviour {
         _spawnPointsIndex = (++_spawnPointsIndex) % SpawnPoints.Length;
         return index;
     }
+
+	public void Restart() {
+		Application.LoadLevel(Application.loadedLevelName);
+	}
+
+	public void Quit() {
+		Application.LoadLevel("MainMenu");
+	}
 }
